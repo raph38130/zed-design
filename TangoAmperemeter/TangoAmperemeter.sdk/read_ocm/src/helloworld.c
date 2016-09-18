@@ -1,0 +1,47 @@
+/*
+ * Copyright (c) 2012 Xilinx, Inc.  All rights reserved.
+ *
+ * Xilinx, Inc.
+ * XILINX IS PROVIDING THIS DESIGN, CODE, OR INFORMATION "AS IS" AS A
+ * COURTESY TO YOU.  BY PROVIDING THIS DESIGN, CODE, OR INFORMATION AS
+ * ONE POSSIBLE   IMPLEMENTATION OF THIS FEATURE, APPLICATION OR
+ * STANDARD, XILINX IS MAKING NO REPRESENTATION THAT THIS IMPLEMENTATION
+ * IS FREE FROM ANY CLAIMS OF INFRINGEMENT, AND YOU ARE RESPONSIBLE
+ * FOR OBTAINING ANY RIGHTS YOU MAY REQUIRE FOR YOUR IMPLEMENTATION.
+ * XILINX EXPRESSLY DISCLAIMS ANY WARRANTY WHATSOEVER WITH RESPECT TO
+ * THE ADEQUACY OF THE IMPLEMENTATION, INCLUDING BUT NOT LIMITED TO
+ * ANY WARRANTIES OR REPRESENTATIONS THAT THIS IMPLEMENTATION IS FREE
+ * FROM CLAIMS OF INFRINGEMENT, IMPLIED WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ */
+
+/*
+ * OCM READ linux app
+ */
+#include <stdio.h>
+#include <fcntl.h> //open
+#include <unistd.h> //close
+#include <sys/mman.h> //mmap
+
+#define OCM_SIZE 1*1024
+#define OCM_LOC 0xFFFF0000
+
+int main() {
+	printf("reading ocm V0.2\n\r");
+	printf("ocm: 256 KB @ 0x%x\n", OCM_LOC);
+
+	int memf = open("/dev/mem", O_RDWR | O_SYNC);
+	if (memf < 0) {
+		printf("mem error\n\r");
+	}
+	void* ocm = mmap(NULL, OCM_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, memf,
+			OCM_LOC);
+	if (ocm == MAP_FAILED) {
+		printf("mmpa error\n\r");
+	}
+	while (1) {
+		printf("temp=%f\n", *((float*) ocm));
+		sleep(1);
+	}
+}
