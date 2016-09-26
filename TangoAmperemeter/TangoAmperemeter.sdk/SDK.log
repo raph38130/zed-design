@@ -3760,3 +3760,18 @@ con
 20:05:08 INFO  : Reading in cores from local repositories: 
 		 /home/raph/zynq-tango/device-tree-xlnx
 20:05:08 INFO  : Cleaning BSP projects in the workspace.
+16:13:28 INFO  : Launching XSDB server: xsdb -n -interactive /home/raph/zed-design/TangoAmperemeter/TangoAmperemeter.sdk/temp_xsdb_launch_script.tcl
+16:13:30 INFO  : XSDB server has started successfully.
+16:13:31 INFO  : Restoring local repository preferences: 
+		 /home/raph/zynq-tango/device-tree-xlnx
+16:13:31 INFO  : Processing command line option -hwspec /home/raph/zed-design/TangoAmperemeter/TangoAmperemeter.sdk/design_1_wrapper.hdf.
+16:13:39 INFO  : BSP Project P/device_tree_bsp_0 has been successfully migrated.
+16:15:34 INFO  : Invoking Bootgen: bootgen -image boot.bif -arch zynq -o /home/raph/zynq-tango/ztango/BOOT.bin
+16:15:35 INFO  : Bootgen command execution is done.
+16:23:39 INFO  : Launching XSDB server: xsdb -n -interactive /home/raph/zed-design/TangoAmperemeter/TangoAmperemeter.sdk/temp_xsdb_launch_script.tcl
+16:23:40 INFO  : XSDB server has started successfully.
+16:23:45 INFO  : Restoring local repository preferences: 
+		 /home/raph/zynq-tango/device-tree-xlnx
+16:23:45 INFO  : Processing command line option -hwspec /home/raph/zed-design/TangoAmperemeter/TangoAmperemeter.sdk/design_1_wrapper.hdf.
+16:23:45 INFO  : Checking for hwspec changes in the project design_1_wrapper_hw_platform_1.
+16:23:50 INFO  : BSP Project P/device_tree_bsp_0 has been successfully migrated.

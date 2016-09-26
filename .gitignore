@@ -1,6 +1,5 @@
 *.log
 *~
-*.xpr
 webtalk/
 *.elf
 .metadata/
