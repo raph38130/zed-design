@@ -93,7 +93,8 @@ int main() {
 	char 	s[32];
 	float 	TempData,
 			*p, 	//pointer in OCM for inter core message passing
-			offset_H=50.0,offset_L=49.0;
+			offset_H=50.0,offset_L=48.0;
+	int     interlock;
 	u32 	TempRawData;
 	int 	xStatus;
 	XGpio 	GpioOutput;
@@ -101,6 +102,8 @@ int main() {
 	XAdcPs SysMonInst;
 
 
+	//interlock state
+	interlock=1;
 	//leds
 	XGpio_Initialize(&GpioOutput, XPAR_AXI_GPIO_0_DEVICE_ID);
 	XGpio_SetDataDirection(&GpioOutput, 2, 0x00);
@@ -111,6 +114,7 @@ int main() {
 
 	//p : tempdata
 	//p+1 : sum
+	//p+2 : interlock state
 	*(p+1)=0.0;
 
 	//XADC init
@@ -121,19 +125,25 @@ int main() {
 
 	//blank oled
 	clear();
-	print_message("Xadc/Tango 1.7", 0);
+	print_message("Xadc/Tango 1.8", 0);
 
 	while (1) {
 		//Read the on-chip Temperature Data
 		TempRawData = XAdcPs_GetAdcData(&SysMonInst, XADCPS_CH_TEMP);
 		TempData = XAdcPs_RawToTemperature(TempRawData);
 		//serial port debug
-		printf("\r\nThe Current Temperature is %0d.%03d Centigrades.\r\n", (int) (TempData), SysMonFractionToInt(TempData));
+		//printf("\r\nThe Current Temperature is %0d.%03d Centigrades.\r\n", (int) (TempData), SysMonFractionToInt(TempData));
 		//toggle interlock
-		if (TempData>offset_H)
+		if ((interlock == 0) && (TempData>offset_H) ) {
+			interlock=1;
+			*(p+2)=1.0;
 			XGpio_DiscreteWrite(&GpioOutput, 2, 0x1);
-		if (TempData<offset_L)
+		}
+		if ((interlock==1) && (TempData<offset_L)) {
+			interlock=0;
+			*(p+2)=0.0;
 			XGpio_DiscreteWrite(&GpioOutput, 2, 0x0);
+		}
 		//display temperature onto oled
 		sprintf(s, "temp %f", TempData);
 		init_oled();

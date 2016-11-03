@@ -3782,3 +3782,30 @@ con
 16:58:30 INFO  : Processing command line option -hwspec /home/raph/zed-design/TangoAmperemeter/TangoAmperemeter.sdk/design_1_wrapper.hdf.
 16:58:30 INFO  : Checking for hwspec changes in the project design_1_wrapper_hw_platform_1.
 16:58:37 INFO  : BSP Project P/device_tree_bsp_0 has been successfully migrated.
+<<<<<<< HEAD
+=======
+04:35:16 INFO  : Launching XSDB server: xsdb -n -interactive /home/raph/zed-design/TangoAmperemeter/TangoAmperemeter.sdk/temp_xsdb_launch_script.tcl
+04:35:18 INFO  : XSDB server has started successfully.
+04:35:19 INFO  : Restoring local repository preferences: 
+		 /home/raph/zynq-tango/device-tree-xlnx
+04:35:19 INFO  : Processing command line option -hwspec /home/raph/zed-design/TangoAmperemeter/TangoAmperemeter.sdk/design_1_wrapper.hdf.
+04:35:19 INFO  : Checking for hwspec changes in the project design_1_wrapper_hw_platform_1.
+04:35:31 INFO  : BSP Project P/device_tree_bsp_0 has been successfully migrated.
+07:59:50 INFO  : Launching XSDB server: xsdb -n -interactive /home/raph/zed-design/TangoAmperemeter/TangoAmperemeter.sdk/temp_xsdb_launch_script.tcl
+07:59:52 INFO  : XSDB server has started successfully.
+07:59:53 INFO  : Restoring local repository preferences: 
+		 /home/raph/zynq-tango/device-tree-xlnx
+07:59:53 INFO  : Processing command line option -hwspec /home/raph/zed-design/TangoAmperemeter/TangoAmperemeter.sdk/design_1_wrapper.hdf.
+07:59:54 INFO  : Checking for hwspec changes in the project design_1_wrapper_hw_platform_1.
+08:00:04 INFO  : BSP Project P/device_tree_bsp_0 has been successfully migrated.
+>>>>>>> refs/remotes/origin/master
+16:05:11 INFO  : Registering command handlers for SDK TCF services
+16:05:12 INFO  : Launching XSCT server: xsct -n -interactive /home/raph/zed-design/TangoAmperemeter/TangoAmperemeter.sdk/temp_xsdb_launch_script.tcl
+16:05:13 INFO  : XSCT server has started successfully.
+16:05:13 INFO  : Successfully done setting XSCT server connection channel  
+16:05:13 INFO  : Successfully done setting SDK workspace  
+16:05:13 INFO  : Restoring local repository preferences: 
+		 /home/raph/zynq-tango/device-tree-xlnx
+16:05:13 INFO  : Processing command line option -hwspec /home/raph/zed-design/TangoAmperemeter/TangoAmperemeter.sdk/design_1_wrapper.hdf.
+16:05:13 INFO  : Checking for hwspec changes in the project design_1_wrapper_hw_platform_1.
+16:05:19 INFO  : BSP Project P/device_tree_bsp_0 has been successfully migrated.
