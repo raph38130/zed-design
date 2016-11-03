@@ -1,0 +1,7 @@
+//arch = zynq; split = false; format = BIN
+the_ROM_image:
+{
+	[bootloader]/home/raph/zed-design/hdmi/hdmi.sdk/fsbl/Debug/fsbl.elf
+	/home/raph/zed-design/hdmi/hdmi.sdk/system_top_hw_platform_0/system_top.bit
+	/home/raph/zynq-tango/ztango/tmp-glibc/deploy/images/zedboard-zynq7/u-boot.elf
+}
