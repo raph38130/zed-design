@@ -35,7 +35,7 @@ BEGIN DRIVER
  PARAMETER DRIVER_NAME = axi_vdma
  PARAMETER HW_INSTANCE = axi_hdmi_dma
  PARAMETER interrupt-parent = intc
- PARAMETER interrupts = 0 29 4
+ PARAMETER interrupts = 0 58 4
  PARAMETER reg = 0x43000000 0x10000
  PARAMETER xlnx,flush-fsync = 1
  PARAMETER xlnx,num-fstores = 3
@@ -50,17 +50,9 @@ END
 
 BEGIN DRIVER
  PARAMETER DRIVER_NAME = axi_iic
- PARAMETER HW_INSTANCE = axi_iic_fmc
- PARAMETER interrupt-parent = intc
- PARAMETER interrupts = 0 33 4
- PARAMETER reg = 0x41620000 0x1000
-END
-
-BEGIN DRIVER
- PARAMETER DRIVER_NAME = axi_iic
  PARAMETER HW_INSTANCE = axi_iic_main
  PARAMETER interrupt-parent = intc
- PARAMETER interrupts = 0 30 4
+ PARAMETER interrupts = 0 59 4
  PARAMETER reg = 0x41600000 0x1000
 END
 

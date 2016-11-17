@@ -330,18 +330,10 @@
 /******************************************************************/
 
 /* Definitions for driver IIC */
-#define XPAR_XIIC_NUM_INSTANCES 2
-
-/* Definitions for peripheral AXI_IIC_FMC */
-#define XPAR_AXI_IIC_FMC_DEVICE_ID 0
-#define XPAR_AXI_IIC_FMC_BASEADDR 0x41620000
-#define XPAR_AXI_IIC_FMC_HIGHADDR 0x41620FFF
-#define XPAR_AXI_IIC_FMC_TEN_BIT_ADR 0
-#define XPAR_AXI_IIC_FMC_GPO_WIDTH 1
-
+#define XPAR_XIIC_NUM_INSTANCES 1
 
 /* Definitions for peripheral AXI_IIC_MAIN */
-#define XPAR_AXI_IIC_MAIN_DEVICE_ID 1
+#define XPAR_AXI_IIC_MAIN_DEVICE_ID 0
 #define XPAR_AXI_IIC_MAIN_BASEADDR 0x41600000
 #define XPAR_AXI_IIC_MAIN_HIGHADDR 0x41600FFF
 #define XPAR_AXI_IIC_MAIN_TEN_BIT_ADR 0
@@ -350,19 +342,12 @@
 
 /******************************************************************/
 
-/* Canonical definitions for peripheral AXI_IIC_FMC */
-#define XPAR_IIC_0_DEVICE_ID XPAR_AXI_IIC_FMC_DEVICE_ID
-#define XPAR_IIC_0_BASEADDR 0x41620000
-#define XPAR_IIC_0_HIGHADDR 0x41620FFF
+/* Canonical definitions for peripheral AXI_IIC_MAIN */
+#define XPAR_IIC_0_DEVICE_ID XPAR_AXI_IIC_MAIN_DEVICE_ID
+#define XPAR_IIC_0_BASEADDR 0x41600000
+#define XPAR_IIC_0_HIGHADDR 0x41600FFF
 #define XPAR_IIC_0_TEN_BIT_ADR 0
 #define XPAR_IIC_0_GPO_WIDTH 1
-
-/* Canonical definitions for peripheral AXI_IIC_MAIN */
-#define XPAR_IIC_1_DEVICE_ID XPAR_AXI_IIC_MAIN_DEVICE_ID
-#define XPAR_IIC_1_BASEADDR 0x41600000
-#define XPAR_IIC_1_HIGHADDR 0x41600FFF
-#define XPAR_IIC_1_TEN_BIT_ADR 0
-#define XPAR_IIC_1_GPO_WIDTH 1
 
 
 /******************************************************************/
@@ -391,22 +376,8 @@
 /******************************************************************/
 
 /* Definitions for Fabric interrupts connected to ps7_scugic_0 */
-#define XPAR_FABRIC_SYSTEM_PS_INTR_00_INTR -1
-#define XPAR_FABRIC_SYSTEM_PS_INTR_01_INTR -1
-#define XPAR_FABRIC_SYSTEM_PS_INTR_02_INTR -1
-#define XPAR_FABRIC_SYSTEM_PS_INTR_03_INTR -1
-#define XPAR_FABRIC_SYSTEM_PS_INTR_04_INTR -1
-#define XPAR_FABRIC_SYSTEM_PS_INTR_05_INTR -1
-#define XPAR_FABRIC_SYSTEM_PS_INTR_06_INTR -1
-#define XPAR_FABRIC_SYSTEM_PS_INTR_07_INTR -1
-#define XPAR_FABRIC_SYSTEM_PS_INTR_08_INTR -1
-#define XPAR_FABRIC_SYSTEM_PS_INTR_09_INTR -1
-#define XPAR_FABRIC_SYSTEM_PS_INTR_10_INTR -1
-#define XPAR_FABRIC_AXI_IIC_FMC_IIC2INTC_IRPT_INTR 65
-#define XPAR_FABRIC_SYSTEM_PS_INTR_12_INTR -1
-#define XPAR_FABRIC_SYSTEM_PS_INTR_13_INTR -1
-#define XPAR_FABRIC_AXI_IIC_MAIN_IIC2INTC_IRPT_INTR 62
-#define XPAR_FABRIC_AXI_HDMI_DMA_MM2S_INTROUT_INTR 61
+#define XPAR_FABRIC_AXI_IIC_MAIN_IIC2INTC_IRPT_INTR 91
+#define XPAR_FABRIC_AXI_HDMI_DMA_MM2S_INTROUT_INTR 90
 
 /******************************************************************/
 
