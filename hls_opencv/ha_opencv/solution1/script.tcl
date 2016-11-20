@@ -5,8 +5,8 @@
 ############################################################
 open_project ha_opencv
 set_top image_filter
-add_files ha_opencv/top.h
 add_files ha_opencv/top.cpp
+add_files ha_opencv/top.h
 open_solution "solution1"
 set_part {xc7z020clg484-1} -tool vivado
 create_clock -period 10 -name default

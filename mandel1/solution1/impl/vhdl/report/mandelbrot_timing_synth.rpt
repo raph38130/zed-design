@@ -1,0 +1,87 @@
+Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
+| Date         : Sat Nov 19 22:40:05 2016
+| Host         : iaea-gft running 64-bit Ubuntu 16.04.1 LTS
+| Command      : report_timing -file ./report/mandelbrot_timing_synth.rpt
+| Design       : mandelbrot
+| Device       : 7z020-clg484
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             1.063ns  (required time - arrival time)
+  Source:                 mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/CHAIN_GEN[15].CARRYS_DEL.NEED_DEL.CARRYS_FD/C
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/DSP/CARRYIN
+                            (rising edge-triggered cell DSP48E1 clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        7.555ns  (logic 2.857ns (37.817%)  route 4.698ns (62.183%))
+  Logic Levels:           11  (CARRY4=3 LUT2=1 LUT3=1 LUT4=2 LUT6=2 MUXF7=1 MUXF8=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=1827, unset)         0.973     0.973    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/aclk
+                         FDRE                                         r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/CHAIN_GEN[15].CARRYS_DEL.NEED_DEL.CARRYS_FD/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.362     1.335 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/CHAIN_GEN[15].CARRYS_DEL.NEED_DEL.CARRYS_FD/Q
+                         net (fo=1, unplaced)         0.741     2.076    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/a_gt_b_top
+                         LUT3 (Prop_lut3_I0_O)        0.295     2.371 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/CHAIN_GEN[0].C_MUX.CARRY_MUX_i_3__0/O
+                         net (fo=110, unplaced)       0.551     2.922    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/b_largest
+                         LUT6 (Prop_lut6_I3_O)        0.124     3.046 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/CHAIN_GEN[1].C_MUX.CARRY_MUX_i_3__0/O
+                         net (fo=3, unplaced)         0.920     3.966    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/ALIGN_BLK/sml_shift_mux[4]
+                         LUT4 (Prop_lut4_I1_O)        0.124     4.090 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/CHAIN_GEN[1].C_MUX.CARRY_MUX_i_1__0/O
+                         net (fo=1, unplaced)         0.000     4.090    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/opt_has_pipe.first_q_reg[49][1]
+                         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533     4.623 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/CHAIN_GEN[0].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=2, unplaced)         0.009     4.632    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/CARRYS_OUT[3]
+                         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     4.749 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/CHAIN_GEN[4].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=2, unplaced)         0.000     4.749    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/CARRYS_OUT[7]
+                         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.252     5.001 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/CHAIN_GEN[8].C_MUX.CARRY_MUX_CARRY4/CO[2]
+                         net (fo=1, unplaced)         0.452     5.453    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/CARRYS_OUT[10]
+                         LUT4 (Prop_lut4_I3_O)        0.310     5.763 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/MUX_LOOP[2].OTHER_LEVELS.DO_CHUNKS[0].LUT6_STRUCT_MUX.MUX1_i_3/O
+                         net (fo=1, unplaced)         0.902     6.665    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/p_15_out__0
+                         LUT6 (Prop_lut6_I0_O)        0.124     6.789 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/MUX_LOOP[2].OTHER_LEVELS.DO_CHUNKS[0].LUT6_STRUCT_MUX.MUX1_i_1/O
+                         net (fo=1, unplaced)         0.000     6.789    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/zero_det_unreg[1]_0[2]
+                         MUXF7 (Prop_muxf7_I0_O)      0.209     6.998 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/MUX_LOOP[2].OTHER_LEVELS.DO_CHUNKS[0].LUT6_STRUCT_MUX.MUX1/O
+                         net (fo=1, unplaced)         0.000     6.998    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/mux0_1
+                         MUXF8 (Prop_muxf8_I1_O)      0.088     7.086 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/MUX_LOOP[2].OTHER_LEVELS.DO_CHUNKS[0].LUT6_STRUCT_MUX.MUX2/O
+                         net (fo=2, unplaced)         0.323     7.409    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/SUB_DELAY/i_pipe/zeros_add
+                         LUT2 (Prop_lut2_I1_O)        0.319     7.728 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/SUB_DELAY/i_pipe/DSP_i_1__0/O
+                         net (fo=1, unplaced)         0.800     8.528    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/opt_has_pipe.first_q_reg[0]_1
+                         DSP48E1                                      r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/DSP/CARRYIN
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)    10.000    10.000 r  
+                                                      0.000    10.000 r  ap_clk (IN)
+                         net (fo=1827, unset)         0.924    10.924    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/aclk
+                         DSP48E1                                      r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/DSP/CLK
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+                         DSP48E1 (Setup_dsp48e1_CLK_CARRYIN)
+                                                     -1.298     9.591    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/DSP
+  -------------------------------------------------------------------
+                         required time                          9.591    
+                         arrival time                          -8.528    
+  -------------------------------------------------------------------
+                         slack                                  1.063    
+
+
+
+

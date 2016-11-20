@@ -1,0 +1,321 @@
+Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
+| Date         : Sat Nov 19 22:41:11 2016
+| Host         : iaea-gft running 64-bit Ubuntu 16.04.1 LTS
+| Command      : report_timing_summary -file ./report/mandelbrot_timing_routed.rpt
+| Design       : mandelbrot
+| Device       : 7z020-clg484
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+------------------------------------------------------------------------------------
+
+Timing Summary Report
+
+------------------------------------------------------------------------------------------------
+| Timer Settings
+| --------------
+------------------------------------------------------------------------------------------------
+
+  Enable Multi Corner Analysis               :  Yes
+  Enable Pessimism Removal                   :  Yes
+  Pessimism Removal Resolution               :  Nearest Common Node
+  Enable Input Delay Default Clock           :  No
+  Enable Preset / Clear Arcs                 :  No
+  Disable Flight Delays                      :  No
+  Ignore I/O Paths                           :  No
+  Timing Early Launch at Borrowing Latches   :  false
+
+  Corner  Analyze    Analyze    
+  Name    Max Paths  Min Paths  
+  ------  ---------  ---------  
+  Slow    Yes        Yes        
+  Fast    Yes        Yes        
+
+
+
+check_timing report
+
+Table of Contents
+-----------------
+1. checking no_clock
+2. checking constant_clock
+3. checking pulse_width_clock
+4. checking unconstrained_internal_endpoints
+5. checking no_input_delay
+6. checking no_output_delay
+7. checking multiple_clock
+8. checking generated_clocks
+9. checking loops
+10. checking partial_input_delay
+11. checking partial_output_delay
+12. checking latch_loops
+
+1. checking no_clock
+--------------------
+ There are 0 register/latch pins with no clock.
+
+
+2. checking constant_clock
+--------------------------
+ There are 0 register/latch pins with constant_clock.
+
+
+3. checking pulse_width_clock
+-----------------------------
+ There are 0 register/latch pins which need pulse_width check
+
+
+4. checking unconstrained_internal_endpoints
+--------------------------------------------
+ There are 0 pins that are not constrained for maximum delay.
+
+ There are 0 pins that are not constrained for maximum delay due to constant clock.
+
+
+5. checking no_input_delay
+--------------------------
+ There are 132 input ports with no input delay specified. (HIGH)
+
+ There are 0 input ports with no input delay but user has a false path constraint.
+
+
+6. checking no_output_delay
+---------------------------
+ There are 13 ports with no output delay specified. (HIGH)
+
+ There are 0 ports with no output delay but user has a false path constraint
+
+ There are 0 ports with no output delay but with a timing clock defined on it or propagating through it
+
+
+7. checking multiple_clock
+--------------------------
+ There are 0 register/latch pins with multiple clocks.
+
+
+8. checking generated_clocks
+----------------------------
+ There are 0 generated clocks that are not connected to a clock source.
+
+
+9. checking loops
+-----------------
+ There are 0 combinational loops in the design.
+
+
+10. checking partial_input_delay
+--------------------------------
+ There are 0 input ports with partial input delay specified.
+
+
+11. checking partial_output_delay
+---------------------------------
+ There are 0 ports with partial output delay specified.
+
+
+12. checking latch_loops
+------------------------
+ There are 0 combinational latch loops in the design through latch input
+
+
+
+------------------------------------------------------------------------------------------------
+| Design Timing Summary
+| ---------------------
+------------------------------------------------------------------------------------------------
+
+    WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+    -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+      0.706        0.000                      0                 3687        0.031        0.000                      0                 3687        4.020        0.000                       0                  1787  
+
+
+All user specified timing constraints are met.
+
+
+------------------------------------------------------------------------------------------------
+| Clock Summary
+| -------------
+------------------------------------------------------------------------------------------------
+
+Clock   Waveform(ns)       Period(ns)      Frequency(MHz)
+-----   ------------       ----------      --------------
+ap_clk  {0.000 5.000}      10.000          100.000         
+
+
+------------------------------------------------------------------------------------------------
+| Intra Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+-----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+ap_clk              0.706        0.000                      0                 3687        0.031        0.000                      0                 3687        4.020        0.000                       0                  1787  
+
+
+------------------------------------------------------------------------------------------------
+| Inter Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| Other Path Groups Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group    From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    ----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| Timing Details
+| --------------
+------------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------------------------------
+From Clock:  ap_clk
+  To Clock:  ap_clk
+
+Setup :            0  Failing Endpoints,  Worst Slack        0.706ns,  Total Violation        0.000ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.031ns,  Total Violation        0.000ns
+PW    :            0  Failing Endpoints,  Worst Slack        4.020ns,  Total Violation        0.000ns
+---------------------------------------------------------------------------------------------------
+
+
+Max Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             0.706ns  (required time - arrival time)
+  Source:                 mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/CHAIN_GEN[15].CARRYS_DEL.NEED_DEL.CARRYS_FD/C
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/DSP/CARRYIN
+                            (rising edge-triggered cell DSP48E1 clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        7.914ns  (logic 2.536ns (32.045%)  route 5.378ns (67.955%))
+  Logic Levels:           10  (CARRY4=2 LUT2=1 LUT3=1 LUT4=2 LUT6=2 MUXF7=1 MUXF8=1)
+  Clock Path Skew:        -0.046ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.587ns = ( 11.587 - 10.000 ) 
+    Source Clock Delay      (SCD):    1.748ns
+    Clock Pessimism Removal (CPR):    0.115ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=1803, unset)         1.748     1.748    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/aclk
+    SLICE_X31Y49         FDRE                                         r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/CHAIN_GEN[15].CARRYS_DEL.NEED_DEL.CARRYS_FD/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X31Y49         FDRE (Prop_fdre_C_Q)         0.456     2.204 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/CHAIN_GEN[15].CARRYS_DEL.NEED_DEL.CARRYS_FD/Q
+                         net (fo=1, routed)           0.667     2.871    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/a_gt_b_top
+    SLICE_X30Y48         LUT3 (Prop_lut3_I0_O)        0.124     2.995 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/CHAIN_GEN[0].C_MUX.CARRY_MUX_i_3__0/O
+                         net (fo=110, routed)         1.058     4.053    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/b_largest
+    SLICE_X30Y42         LUT6 (Prop_lut6_I3_O)        0.124     4.177 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/CHAIN_GEN[2].C_MUX.CARRY_MUX_i_2/O
+                         net (fo=2, routed)           0.980     5.157    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/ALIGN_BLK/sml_shift_mux[9]
+    SLICE_X26Y43         LUT4 (Prop_lut4_I0_O)        0.124     5.281 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/CHAIN_GEN[2].C_MUX.CARRY_MUX_i_1__0/O
+                         net (fo=1, routed)           0.000     5.281    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/opt_has_pipe.first_q_reg[49][2]
+    SLICE_X26Y43         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.380     5.661 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/CHAIN_GEN[0].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=2, routed)           0.000     5.661    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/CARRYS_OUT[3]
+    SLICE_X26Y44         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.229     5.890 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/CHAIN_GEN[4].C_MUX.CARRY_MUX_CARRY4/CO[2]
+                         net (fo=1, routed)           0.674     6.564    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/CARRYS_OUT[6]
+    SLICE_X23Y44         LUT4 (Prop_lut4_I3_O)        0.310     6.874 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/MUX_LOOP[2].OTHER_LEVELS.DO_CHUNKS[0].LUT6_STRUCT_MUX.MUX0_i_12/O
+                         net (fo=1, routed)           0.862     7.736    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/p_27_out__0
+    SLICE_X24Y44         LUT6 (Prop_lut6_I0_O)        0.124     7.860 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/MUX_LOOP[2].OTHER_LEVELS.DO_CHUNKS[0].LUT6_STRUCT_MUX.MUX0_i_3/O
+                         net (fo=1, routed)           0.000     7.860    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/zero_det_unreg[1]_0[1]
+    SLICE_X24Y44         MUXF7 (Prop_muxf7_I1_O)      0.245     8.105 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/MUX_LOOP[2].OTHER_LEVELS.DO_CHUNKS[0].LUT6_STRUCT_MUX.MUX0/O
+                         net (fo=1, routed)           0.000     8.105    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/mux0_0
+    SLICE_X24Y44         MUXF8 (Prop_muxf8_I0_O)      0.104     8.209 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/MUX_LOOP[2].OTHER_LEVELS.DO_CHUNKS[0].LUT6_STRUCT_MUX.MUX2/O
+                         net (fo=2, routed)           0.749     8.958    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/SUB_DELAY/i_pipe/zeros_add
+    SLICE_X32Y48         LUT2 (Prop_lut2_I1_O)        0.316     9.274 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/SUB_DELAY/i_pipe/DSP_i_1__0/O
+                         net (fo=1, routed)           0.388     9.662    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/opt_has_pipe.first_q_reg[0]_1
+    DSP48_X2Y19          DSP48E1                                      r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/DSP/CARRYIN
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)    10.000    10.000 r  
+                                                      0.000    10.000 r  ap_clk (IN)
+                         net (fo=1803, unset)         1.587    11.587    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/aclk
+    DSP48_X2Y19          DSP48E1                                      r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/DSP/CLK
+                         clock pessimism              0.115    11.702    
+                         clock uncertainty           -0.035    11.666    
+    DSP48_X2Y19          DSP48E1 (Setup_dsp48e1_CLK_CARRYIN)
+                                                     -1.298    10.368    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/DSP
+  -------------------------------------------------------------------
+                         required time                         10.368    
+                         arrival time                          -9.662    
+  -------------------------------------------------------------------
+                         slack                                  0.706    
+
+
+
+
+
+Min Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             0.031ns  (arrival time - required time)
+  Source:                 mandelbrot_dmul_6cud_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/OP/RESULT_REG.NORMAL.exp_op_reg[8]/C
+                            (rising edge-triggered cell FDSE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            tmp_5_reg_236_reg[60]/D
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (ap_clk rise@0.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        0.355ns  (logic 0.141ns (39.697%)  route 0.214ns (60.303%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.258ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.825ns
+    Source Clock Delay      (SCD):    0.562ns
+    Clock Pessimism Removal (CPR):    0.005ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=1803, unset)         0.562     0.562    mandelbrot_dmul_6cud_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/OP/aclk
+    SLICE_X47Y47         FDSE                                         r  mandelbrot_dmul_6cud_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/OP/RESULT_REG.NORMAL.exp_op_reg[8]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X47Y47         FDSE (Prop_fdse_C_Q)         0.141     0.703 r  mandelbrot_dmul_6cud_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/OP/RESULT_REG.NORMAL.exp_op_reg[8]/Q
+                         net (fo=1, routed)           0.214     0.917    grp_fu_126_p2[60]
+    SLICE_X52Y48         FDRE                                         r  tmp_5_reg_236_reg[60]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=1803, unset)         0.825     0.825    ap_clk
+    SLICE_X52Y48         FDRE                                         r  tmp_5_reg_236_reg[60]/C
+                         clock pessimism             -0.005     0.820    
+    SLICE_X52Y48         FDRE (Hold_fdre_C_D)         0.066     0.886    tmp_5_reg_236_reg[60]
+  -------------------------------------------------------------------
+                         required time                         -0.886    
+                         arrival time                           0.917    
+  -------------------------------------------------------------------
+                         slack                                  0.031    
+
+
+
+
+
+Pulse Width Checks
+--------------------------------------------------------------------------------------
+Clock Name:         ap_clk
+Waveform(ns):       { 0.000 5.000 }
+Period(ns):         10.000
+Sources:            { ap_clk }
+
+Check Type        Corner  Lib Pin      Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location      Pin
+Min Period        n/a     DSP48E1/CLK  n/a            4.275         10.000      5.725      DSP48_X2Y9    mandelbrot_dmul_6cud_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/MULT/DSP48E1_SPD_DBL_VARIANT.FIX_MULT/DSP5/DSP/CLK
+Low Pulse Width   Fast    SRL16E/CLK   n/a            0.980         5.000       4.020      SLICE_X50Y40  ap_CS_fsm_reg[9]_srl2___ap_CS_fsm_reg_r_0/CLK
+High Pulse Width  Slow    SRL16E/CLK   n/a            0.980         5.000       4.020      SLICE_X46Y35  ap_CS_fsm_reg[21]_srl3___ap_CS_fsm_reg_r_1/CLK
+
+
+

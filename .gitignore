@@ -179,6 +179,5 @@ _xmsgs/
 !*.sdk/
 *.hw/
 *.cache/
-*.srcs/
 *.runs/
 
