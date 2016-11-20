@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="top.cpp" path="/home/raph/zed-design/hls_opencv/ha_opencv/top.cpp"/>
+    <originFiles name="top.h" path="/home/raph/zed-design/hls_opencv/ha_opencv/top.h"/>
+  </source>
+  <testbench/>
+</autopilotfilemapping:AutoPilotFileMapping>
