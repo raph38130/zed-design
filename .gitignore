@@ -4,6 +4,7 @@ webtalk/
 *.elf
 .metadata/
 vivado.*
+*.ip_user_files
 *.dtb
 *.lock
 *.pydevproject
