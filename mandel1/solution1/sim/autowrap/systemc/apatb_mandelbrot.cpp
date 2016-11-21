@@ -89,13 +89,13 @@ class INTER_TCL_FILE {
 		const char* mName;
 };
 
-extern "C" unsigned char mandelbrot (
-double cx,
-double cy);
+extern int mandelbrot (
+int cx,
+int cy);
 
-extern "C" unsigned char AESL_WRAP_mandelbrot (
-double cx,
-double cy)
+int AESL_WRAP_mandelbrot (
+int cx,
+int cy)
 {
 	refine_signal_handler();
 	fstream wrapc_switch_file_token;
@@ -109,7 +109,7 @@ double cy)
 		string AESL_num;
 		static AESL_FILE_HANDLER aesl_fh;
 
-		unsigned char AESL_return;
+		int AESL_return;
 
 		// output port post check: "ap_return"
 		aesl_fh.read(AUTOTB_TVOUT_PC_ap_return, AESL_token); // [[transaction]]
@@ -123,7 +123,7 @@ double cy)
 		{
 			aesl_fh.read(AUTOTB_TVOUT_PC_ap_return, AESL_token); // data
 
-			sc_bv<8> ap_return_pc_buffer;
+			sc_bv<32> ap_return_pc_buffer;
 			int i = 0;
 
 			while (AESL_token != "[[/transaction]]")
@@ -192,31 +192,31 @@ double cy)
 			{
 				// RTL Name: ap_return
 				{
-					// bitslice(7, 0)
+					// bitslice(31, 0)
 					// {
-						// celement: return(7, 0)
+						// celement: return(31, 0)
 						// {
-							sc_lv<8> return_lv0_0_1_0;
+							sc_lv<32> return_lv0_0_1_0;
 						// }
 					// }
 
-					// bitslice(7, 0)
+					// bitslice(31, 0)
 					{
-						// celement: return(7, 0)
+						// celement: return(31, 0)
 						{
 							// carray: (0) => (1) @ (0)
 							{
 								if (&(AESL_return) != NULL) // check the null address if the c port is array or others
 								{
-									return_lv0_0_1_0.range(7, 0) = sc_bv<8>(ap_return_pc_buffer.range(7, 0));
+									return_lv0_0_1_0.range(31, 0) = sc_bv<32>(ap_return_pc_buffer.range(31, 0));
 								}
 							}
 						}
 					}
 
-					// bitslice(7, 0)
+					// bitslice(31, 0)
 					{
-						// celement: return(7, 0)
+						// celement: return(31, 0)
 						{
 							// carray: (0) => (1) @ (0)
 							{
@@ -268,13 +268,13 @@ double cy)
 		sprintf(tvin_cx, "[[transaction]] %d\n", AESL_transaction);
 		aesl_fh.write(AUTOTB_TVIN_cx, tvin_cx);
 
-		sc_bv<64> cx_tvin_wrapc_buffer;
+		sc_bv<32> cx_tvin_wrapc_buffer;
 
 		// RTL Name: cx
 		{
-			// bitslice(63, 0)
+			// bitslice(31, 0)
 			{
-				// celement: cx(63, 0)
+				// celement: cx(31, 0)
 				{
 					// carray: (0) => (0) @ (0)
 					{
@@ -283,12 +283,12 @@ double cy)
 						// sub_1st_elem          : 
 						// ori_name_1st_elem     : cx
 						// regulate_c_name       : cx
-						// input_type_conversion : *(long long*)&cx
+						// input_type_conversion : cx
 						if (&(cx) != NULL) // check the null address if the c port is array or others
 						{
-							sc_lv<64> cx_tmp_mem;
-							cx_tmp_mem = *(long long*)&cx;
-							cx_tvin_wrapc_buffer.range(63, 0) = cx_tmp_mem.range(63, 0);
+							sc_lv<32> cx_tmp_mem;
+							cx_tmp_mem = cx;
+							cx_tvin_wrapc_buffer.range(31, 0) = cx_tmp_mem.range(31, 0);
 						}
 					}
 				}
@@ -310,13 +310,13 @@ double cy)
 		sprintf(tvin_cy, "[[transaction]] %d\n", AESL_transaction);
 		aesl_fh.write(AUTOTB_TVIN_cy, tvin_cy);
 
-		sc_bv<64> cy_tvin_wrapc_buffer;
+		sc_bv<32> cy_tvin_wrapc_buffer;
 
 		// RTL Name: cy
 		{
-			// bitslice(63, 0)
+			// bitslice(31, 0)
 			{
-				// celement: cy(63, 0)
+				// celement: cy(31, 0)
 				{
 					// carray: (0) => (0) @ (0)
 					{
@@ -325,12 +325,12 @@ double cy)
 						// sub_1st_elem          : 
 						// ori_name_1st_elem     : cy
 						// regulate_c_name       : cy
-						// input_type_conversion : *(long long*)&cy
+						// input_type_conversion : cy
 						if (&(cy) != NULL) // check the null address if the c port is array or others
 						{
-							sc_lv<64> cy_tmp_mem;
-							cy_tmp_mem = *(long long*)&cy;
-							cy_tvin_wrapc_buffer.range(63, 0) = cy_tmp_mem.range(63, 0);
+							sc_lv<32> cy_tmp_mem;
+							cy_tmp_mem = cy;
+							cy_tvin_wrapc_buffer.range(31, 0) = cy_tmp_mem.range(31, 0);
 						}
 					}
 				}
@@ -351,7 +351,7 @@ double cy)
 // [call_c_dut] ---------->
 
 		CodeState = CALL_C_DUT;
-		unsigned char AESL_return = mandelbrot(cx, cy);
+		int AESL_return = mandelbrot(cx, cy);
 
 		CodeState = DUMP_OUTPUTS;
 
@@ -359,13 +359,13 @@ double cy)
 		sprintf(tvout_ap_return, "[[transaction]] %d\n", AESL_transaction);
 		aesl_fh.write(AUTOTB_TVOUT_ap_return, tvout_ap_return);
 
-		sc_bv<8> ap_return_tvout_wrapc_buffer;
+		sc_bv<32> ap_return_tvout_wrapc_buffer;
 
 		// RTL Name: ap_return
 		{
-			// bitslice(7, 0)
+			// bitslice(31, 0)
 			{
-				// celement: return(7, 0)
+				// celement: return(31, 0)
 				{
 					// carray: (0) => (1) @ (0)
 					{
@@ -377,9 +377,9 @@ double cy)
 						// input_type_conversion : AESL_return
 						if (&(AESL_return) != NULL) // check the null address if the c port is array or others
 						{
-							sc_lv<8> return_tmp_mem;
+							sc_lv<32> return_tmp_mem;
 							return_tmp_mem = AESL_return;
-							ap_return_tvout_wrapc_buffer.range(7, 0) = return_tmp_mem.range(7, 0);
+							ap_return_tvout_wrapc_buffer.range(31, 0) = return_tmp_mem.range(31, 0);
 						}
 					}
 				}

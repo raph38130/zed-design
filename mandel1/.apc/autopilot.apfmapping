@@ -4,7 +4,8 @@
     <originFiles name="top.cpp" path="/home/raph/zed-design/mandel1/solution1/top.cpp"/>
   </source>
   <testbench>
-    <originFiles name="tb_mandel.c" path="/home/raph/zed-design/mandel1/solution1/tb_mandel.c"/>
     <originFiles name="tb.h" path="/home/raph/zed-design/mandel1/solution1/tb.h"/>
+    <originFiles name="top.cpp" path="/home/raph/zed-design/mandel1/solution1/top.cpp"/>
+    <originFiles name="tb_mandel.cpp" path="/home/raph/zed-design/mandel1/solution1/tb_mandel.cpp"/>
   </testbench>
 </autopilotfilemapping:AutoPilotFileMapping>

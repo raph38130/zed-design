@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'mandelbrot'
 ================================================================
-* Date:           Sat Nov 19 22:38:00 2016
+* Date:           Mon Nov 21 10:07:40 2016
 
 * Version:        2016.3 (Build 1682563 on Mon Oct 10 19:41:59 MDT 2016)
 * Project:        mandel1
@@ -20,7 +20,7 @@
     +--------+-------+----------+------------+
     |  Clock | Target| Estimated| Uncertainty|
     +--------+-------+----------+------------+
-    |ap_clk  |  10.00|      8.23|        1.25|
+    |ap_clk  |  10.00|      9.40|        1.25|
     +--------+-------+----------+------------+
 
 + Latency (clock cycles): 
@@ -29,7 +29,7 @@
     |   Latency  |  Interval  | Pipeline|
     | min |  max | min |  max |   Type  |
     +-----+------+-----+------+---------+
-    |   31|  7455|   32|  7456|   none  |
+    |   77|  7501|   78|  7502|   none  |
     +-----+------+-----+------+---------+
 
     + Detail: 
@@ -54,33 +54,39 @@
 |       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
 +-----------------+---------+-------+--------+-------+
 |DSP              |        -|      -|       -|      -|
-|Expression       |        -|      -|       0|     34|
+|Expression       |        -|      -|       0|     33|
 |FIFO             |        -|      -|       -|      -|
-|Instance         |        -|     36|    1526|   3352|
+|Instance         |        0|     39|    9361|  13339|
 |Memory           |        -|      -|       -|      -|
-|Multiplexer      |        -|      -|       -|    555|
-|Register         |        -|      -|     698|      -|
+|Multiplexer      |        -|      -|       -|    691|
+|Register         |        -|      -|     992|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        0|     36|    2224|   3941|
+|Total            |        0|     39|   10353|  14063|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
-|Utilization (%)  |        0|     16|       2|      7|
+|Utilization (%)  |        0|     17|       9|     26|
 +-----------------+---------+-------+--------+-------+
 
 + Detail: 
     * Instance: 
-    +-------------------------+----------------------+---------+-------+-----+------+
-    |         Instance        |        Module        | BRAM_18K| DSP48E|  FF |  LUT |
-    +-------------------------+----------------------+---------+-------+-----+------+
-    |mandelbrot_dadddsbkb_U1  |mandelbrot_dadddsbkb  |        0|      3|  445|  1149|
-    |mandelbrot_dcmp_6dEe_U5  |mandelbrot_dcmp_6dEe  |        0|      0|  130|   469|
-    |mandelbrot_dmul_6cud_U2  |mandelbrot_dmul_6cud  |        0|     11|  317|   578|
-    |mandelbrot_dmul_6cud_U3  |mandelbrot_dmul_6cud  |        0|     11|  317|   578|
-    |mandelbrot_dmul_6cud_U4  |mandelbrot_dmul_6cud  |        0|     11|  317|   578|
-    +-------------------------+----------------------+---------+-------+-----+------+
-    |Total                    |                      |        0|     36| 1526|  3352|
-    +-------------------------+----------------------+---------+-------+-----+------+
+    +-----------------------------+---------------------------+---------+-------+------+------+
+    |           Instance          |           Module          | BRAM_18K| DSP48E|  FF  |  LUT |
+    +-----------------------------+---------------------------+---------+-------+------+------+
+    |mandelbrot_AXILiteS_s_axi_U  |mandelbrot_AXILiteS_s_axi  |        0|      0|   144|   232|
+    |mandelbrot_dadd_6cud_U2      |mandelbrot_dadd_6cud       |        0|      3|   445|  1149|
+    |mandelbrot_dadddsbkb_U1      |mandelbrot_dadddsbkb       |        0|      3|   445|  1149|
+    |mandelbrot_dcmp_6fYi_U8      |mandelbrot_dcmp_6fYi       |        0|      0|   130|   469|
+    |mandelbrot_ddiv_6eOg_U6      |mandelbrot_ddiv_6eOg       |        0|      0|  3211|  3658|
+    |mandelbrot_ddiv_6eOg_U7      |mandelbrot_ddiv_6eOg       |        0|      0|  3211|  3658|
+    |mandelbrot_dmul_6dEe_U3      |mandelbrot_dmul_6dEe       |        0|     11|   317|   578|
+    |mandelbrot_dmul_6dEe_U4      |mandelbrot_dmul_6dEe       |        0|     11|   317|   578|
+    |mandelbrot_dmul_6dEe_U5      |mandelbrot_dmul_6dEe       |        0|     11|   317|   578|
+    |mandelbrot_sitodpg8j_U9      |mandelbrot_sitodpg8j       |        0|      0|   412|   645|
+    |mandelbrot_sitodpg8j_U10     |mandelbrot_sitodpg8j       |        0|      0|   412|   645|
+    +-----------------------------+---------------------------+---------+-------+------+------+
+    |Total                        |                           |        0|     39|  9361| 13339|
+    +-----------------------------+---------------------------+---------+-------+------+------+
 
     * DSP48: 
     N/A
@@ -95,59 +101,59 @@
     +------------------+----------+-------+---+----+------------+------------+
     |   Variable Name  | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
     +------------------+----------+-------+---+----+------------+------------+
-    |i_1_fu_164_p2     |     +    |      0|  0|   9|           9|           1|
-    |tmp_12_fu_205_p2  |    and   |      0|  0|   1|           1|           1|
-    |notlhs_fu_187_p2  |   icmp   |      0|  0|   4|          11|           2|
-    |notrhs_fu_193_p2  |   icmp   |      0|  0|  18|          52|           1|
-    |ap_condition_110  |    or    |      0|  0|   1|           1|           1|
-    |tmp_10_fu_199_p2  |    or    |      0|  0|   1|           1|           1|
+    |i_1_fu_191_p2     |     +    |      0|  0|   9|           9|           1|
+    |tmp_18_fu_232_p2  |    and   |      0|  0|   1|           1|           1|
+    |notlhs_fu_214_p2  |   icmp   |      0|  0|   4|          11|           2|
+    |notrhs_fu_220_p2  |   icmp   |      0|  0|  18|          52|           1|
+    |tmp_16_fu_226_p2  |    or    |      0|  0|   1|           1|           1|
     +------------------+----------+-------+---+----+------------+------------+
-    |Total             |          |      0|  0|  34|          75|           7|
+    |Total             |          |      0|  0|  33|          74|           6|
     +------------------+----------+-------+---+----+------------+------------+
 
     * Multiplexer: 
-    +-------------------+----+-----------+-----+-----------+
-    |        Name       | LUT| Input Size| Bits| Total Bits|
-    +-------------------+----+-----------+-----+-----------+
-    |ap_NS_fsm          |  30|         32|    1|         32|
-    |cx_blk_n           |   1|          2|    1|          2|
-    |cy_blk_n           |   1|          2|    1|          2|
-    |grp_fu_110_opcode  |   2|          3|    2|          6|
-    |grp_fu_110_p0      |  64|          3|   64|        192|
-    |grp_fu_110_p1      |  64|          4|   64|        256|
-    |grp_fu_114_p0      |  64|          4|   64|        256|
-    |grp_fu_114_p1      |  64|          4|   64|        256|
-    |grp_fu_120_p0      |  64|          3|   64|        192|
-    |grp_fu_120_p1      |  64|          3|   64|        192|
-    |i_reg_78           |   9|          2|    9|         18|
-    |t_reg_90           |  64|          2|   64|        128|
-    |y_reg_100          |  64|          2|   64|        128|
-    +-------------------+----+-----------+-----+-----------+
-    |Total              | 555|         66|  526|       1660|
-    +-------------------+----+-----------+-----+-----------+
+    +-------------------+-----+-----------+-----+-----------+
+    |        Name       | LUT | Input Size| Bits| Total Bits|
+    +-------------------+-----+-----------+-----+-----------+
+    |ap_NS_fsm          |  168|         78|    1|         78|
+    |grp_fu_110_opcode  |    2|          3|    2|          6|
+    |grp_fu_110_p0      |   64|          3|   64|        192|
+    |grp_fu_110_p1      |   64|          5|   64|        320|
+    |grp_fu_120_p0      |   64|          5|   64|        320|
+    |grp_fu_120_p1      |   64|          5|   64|        320|
+    |grp_fu_125_p0      |   64|          4|   64|        256|
+    |grp_fu_125_p1      |   64|          4|   64|        256|
+    |i_reg_98           |    9|          2|    9|         18|
+    |t_reg_74           |   64|          2|   64|        128|
+    |y_reg_86           |   64|          2|   64|        128|
+    +-------------------+-----+-----------+-----+-----------+
+    |Total              |  691|        113|  524|       2022|
+    +-------------------+-----+-----------+-----+-----------+
 
     * Register: 
-    +-----------------+----+----+-----+-----------+
-    |       Name      | FF | LUT| Bits| Const Bits|
-    +-----------------+----+----+-----+-----------+
-    |ap_CS_fsm        |  31|   0|   31|          0|
-    |ap_return        |   8|   0|    8|          0|
-    |cx_read_reg_221  |  64|   0|   64|          0|
-    |cy_read_reg_215  |  64|   0|   64|          0|
-    |i_1_reg_231      |   9|   0|    9|          0|
-    |i_reg_78         |   9|   0|    9|          0|
-    |reg_138          |  64|   0|   64|          0|
-    |reg_143          |  64|   0|   64|          0|
-    |reg_148          |  64|   0|   64|          0|
-    |t_reg_90         |  64|   0|   64|          0|
-    |tmp_5_reg_236    |  64|   0|   64|          0|
-    |tmp_reg_227      |   1|   0|    1|          0|
-    |tmp_s_reg_248    |  64|   0|   64|          0|
-    |y_1_reg_241      |  64|   0|   64|          0|
-    |y_reg_100        |  64|   0|   64|          0|
-    +-----------------+----+----+-----+-----------+
-    |Total            | 698|   0|  698|          0|
-    +-----------------+----+----+-----+-----------+
+    +----------------+----+----+-----+-----------+
+    |      Name      | FF | LUT| Bits| Const Bits|
+    +----------------+----+----+-----+-----------+
+    |ap_CS_fsm       |  77|   0|   77|          0|
+    |dcx_reg_272     |  64|   0|   64|          0|
+    |dcy_reg_277     |  64|   0|   64|          0|
+    |i_1_reg_286     |   9|   0|    9|          0|
+    |i_reg_98        |   9|   0|    9|          0|
+    |reg_164         |  64|   0|   64|          0|
+    |reg_169         |  64|   0|   64|          0|
+    |reg_175         |  64|   0|   64|          0|
+    |t_reg_74        |  64|   0|   64|          0|
+    |tmp_13_reg_303  |  64|   0|   64|          0|
+    |tmp_1_reg_262   |  64|   0|   64|          0|
+    |tmp_3_reg_257   |  64|   0|   64|          0|
+    |tmp_4_reg_267   |  64|   0|   64|          0|
+    |tmp_6_reg_282   |   1|   0|    1|          0|
+    |tmp_reg_252     |  64|   0|   64|          0|
+    |tmp_s_reg_291   |  64|   0|   64|          0|
+    |y_1_reg_296     |  64|   0|   64|          0|
+    |y_reg_86        |  64|   0|   64|          0|
+    +----------------+----+----+-----+-----------+
+    |Total           | 992|   0|  992|          0|
+    +----------------+----+----+-----+-----------+
 
 
 
@@ -155,21 +161,28 @@
 == Interface
 ================================================================
 * Summary: 
-+-----------+-----+-----+------------+--------------+--------------+
-| RTL Ports | Dir | Bits|  Protocol  | Source Object|    C Type    |
-+-----------+-----+-----+------------+--------------+--------------+
-|ap_clk     |  in |    1| ap_ctrl_hs |  mandelbrot  | return value |
-|ap_rst     |  in |    1| ap_ctrl_hs |  mandelbrot  | return value |
-|ap_start   |  in |    1| ap_ctrl_hs |  mandelbrot  | return value |
-|ap_done    | out |    1| ap_ctrl_hs |  mandelbrot  | return value |
-|ap_idle    | out |    1| ap_ctrl_hs |  mandelbrot  | return value |
-|ap_ready   | out |    1| ap_ctrl_hs |  mandelbrot  | return value |
-|ap_return  | out |    8| ap_ctrl_hs |  mandelbrot  | return value |
-|cx         |  in |   64|    ap_hs   |      cx      |    scalar    |
-|cx_ap_vld  |  in |    1|    ap_hs   |      cx      |    scalar    |
-|cx_ap_ack  | out |    1|    ap_hs   |      cx      |    scalar    |
-|cy         |  in |   64|    ap_hs   |      cy      |    scalar    |
-|cy_ap_vld  |  in |    1|    ap_hs   |      cy      |    scalar    |
-|cy_ap_ack  | out |    1|    ap_hs   |      cy      |    scalar    |
-+-----------+-----+-----+------------+--------------+--------------+
++------------------------+-----+-----+------------+--------------+--------------+
+|        RTL Ports       | Dir | Bits|  Protocol  | Source Object|    C Type    |
++------------------------+-----+-----+------------+--------------+--------------+
+|s_axi_AXILiteS_AWVALID  |  in |    1|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_AWREADY  | out |    1|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_AWADDR   |  in |    6|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_WVALID   |  in |    1|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_WREADY   | out |    1|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_WDATA    |  in |   32|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_WSTRB    |  in |    4|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_ARVALID  |  in |    1|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_ARREADY  | out |    1|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_ARADDR   |  in |    6|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_RVALID   | out |    1|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_RREADY   |  in |    1|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_RDATA    | out |   32|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_RRESP    | out |    2|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_BVALID   | out |    1|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_BREADY   |  in |    1|    s_axi   |   AXILiteS   |    scalar    |
+|s_axi_AXILiteS_BRESP    | out |    2|    s_axi   |   AXILiteS   |    scalar    |
+|ap_clk                  |  in |    1| ap_ctrl_hs |  mandelbrot  | return value |
+|ap_rst_n                |  in |    1| ap_ctrl_hs |  mandelbrot  | return value |
+|interrupt               | out |    1| ap_ctrl_hs |  mandelbrot  | return value |
++------------------------+-----+-----+------------+--------------+--------------+
 

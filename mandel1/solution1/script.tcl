@@ -7,7 +7,8 @@ open_project mandel1
 set_top mandelbrot
 add_files mandel1/solution1/top.cpp
 add_files -tb mandel1/solution1/tb.h
-add_files -tb mandel1/solution1/tb_mandel.c
+add_files -tb mandel1/solution1/tb_mandel.cpp
+add_files -tb mandel1/solution1/top.cpp
 open_solution "solution1"
 set_part {xc7z020clg484-1} -tool vivado
 create_clock -period 10 -name default

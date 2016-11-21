@@ -161,11 +161,14 @@ proc create_root_design { parentCell } {
 
   # Create ports
 
+  # Create instance: add_0, and set properties
+  set add_0 [ create_bd_cell -type ip -vlnv xilinx.com:hls:add:1.0 add_0 ]
+
   # Create instance: axi_gpio_0, and set properties
   set axi_gpio_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 axi_gpio_0 ]
   set_property -dict [ list \
 CONFIG.C_ALL_OUTPUTS_2 {1} \
-CONFIG.C_DOUT_DEFAULT_2 {0x000000aa} \
+CONFIG.C_DOUT_DEFAULT_2 {0x00000018} \
 CONFIG.C_GPIO2_WIDTH {8} \
 CONFIG.C_GPIO_WIDTH {8} \
 CONFIG.C_IS_DUAL {1} \
@@ -180,12 +183,7 @@ CONFIG.USE_BOARD_FLOW {true} \
   set_property -dict [ list \
 CONFIG.NUM_READ_OUTSTANDING {1} \
 CONFIG.NUM_WRITE_OUTSTANDING {1} \
- ] [get_bd_intf_pins /mandelbrot_0/S_AXI_SLV0]
-
-  set_property -dict [ list \
-CONFIG.NUM_READ_OUTSTANDING {1} \
-CONFIG.NUM_WRITE_OUTSTANDING {1} \
- ] [get_bd_intf_pins /mandelbrot_0/S_AXI_SLV1]
+ ] [get_bd_intf_pins /mandelbrot_0/s_axi_AXILiteS]
 
   # Create instance: proc_sys_reset_0, and set properties
   set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
@@ -1463,8 +1461,11 @@ CONFIG.PCW_WDT_WDT_IO.VALUE_SRC {DEFAULT} \
   # Create instance: ps7_0_axi_periph, and set properties
   set ps7_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 ps7_0_axi_periph ]
   set_property -dict [ list \
-CONFIG.NUM_MI {3} \
+CONFIG.NUM_MI {5} \
  ] $ps7_0_axi_periph
+
+  # Create instance: xlconcat_0, and set properties
+  set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0 ]
 
   # Create interface connections
   connect_bd_intf_net -intf_net axi_gpio_0_GPIO [get_bd_intf_ports sws_8bits] [get_bd_intf_pins axi_gpio_0/GPIO]
@@ -1473,20 +1474,22 @@ CONFIG.NUM_MI {3} \
   connect_bd_intf_net -intf_net processing_system7_0_FIXED_IO [get_bd_intf_ports FIXED_IO] [get_bd_intf_pins processing_system7_0/FIXED_IO]
   connect_bd_intf_net -intf_net processing_system7_0_M_AXI_GP0 [get_bd_intf_pins processing_system7_0/M_AXI_GP0] [get_bd_intf_pins ps7_0_axi_periph/S00_AXI]
   connect_bd_intf_net -intf_net ps7_0_axi_periph_M00_AXI [get_bd_intf_pins axi_gpio_0/S_AXI] [get_bd_intf_pins ps7_0_axi_periph/M00_AXI]
-  connect_bd_intf_net -intf_net ps7_0_axi_periph_M01_AXI [get_bd_intf_pins mandelbrot_0/S_AXI_SLV0] [get_bd_intf_pins ps7_0_axi_periph/M01_AXI]
-  connect_bd_intf_net -intf_net ps7_0_axi_periph_M02_AXI [get_bd_intf_pins mandelbrot_0/S_AXI_SLV1] [get_bd_intf_pins ps7_0_axi_periph/M02_AXI]
+  connect_bd_intf_net -intf_net ps7_0_axi_periph_M01_AXI [get_bd_intf_pins mandelbrot_0/s_axi_AXILiteS] [get_bd_intf_pins ps7_0_axi_periph/M01_AXI]
+  connect_bd_intf_net -intf_net ps7_0_axi_periph_M03_AXI [get_bd_intf_pins add_0/s_axi_AXILiteS] [get_bd_intf_pins ps7_0_axi_periph/M03_AXI]
 
   # Create port connections
-  connect_bd_net -net mandelbrot_0_interrupt [get_bd_pins mandelbrot_0/interrupt] [get_bd_pins processing_system7_0/IRQ_F2P]
+  connect_bd_net -net add_0_interrupt [get_bd_pins add_0/interrupt] [get_bd_pins xlconcat_0/In1]
+  connect_bd_net -net mandelbrot_0_interrupt [get_bd_pins mandelbrot_0/interrupt] [get_bd_pins xlconcat_0/In0]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins ps7_0_axi_periph/ARESETN]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins mandelbrot_0/aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins ps7_0_axi_periph/M00_ARESETN] [get_bd_pins ps7_0_axi_periph/M01_ARESETN] [get_bd_pins ps7_0_axi_periph/M02_ARESETN] [get_bd_pins ps7_0_axi_periph/S00_ARESETN]
-  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins mandelbrot_0/aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/M02_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins add_0/ap_rst_n] [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins mandelbrot_0/ap_rst_n] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins ps7_0_axi_periph/M00_ARESETN] [get_bd_pins ps7_0_axi_periph/M01_ARESETN] [get_bd_pins ps7_0_axi_periph/M02_ARESETN] [get_bd_pins ps7_0_axi_periph/M03_ARESETN] [get_bd_pins ps7_0_axi_periph/M04_ARESETN] [get_bd_pins ps7_0_axi_periph/S00_ARESETN]
+  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins add_0/ap_clk] [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins mandelbrot_0/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/M02_ACLK] [get_bd_pins ps7_0_axi_periph/M03_ACLK] [get_bd_pins ps7_0_axi_periph/M04_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK]
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins processing_system7_0/FCLK_RESET0_N]
+  connect_bd_net -net xlconcat_0_dout [get_bd_pins processing_system7_0/IRQ_F2P] [get_bd_pins xlconcat_0/dout]
 
   # Create address segments
+  create_bd_addr_seg -range 0x00010000 -offset 0x43C20000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs add_0/s_axi_AXILiteS/Reg] SEG_add_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x41200000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_gpio_0/S_AXI/Reg] SEG_axi_gpio_0_Reg
-  create_bd_addr_seg -range 0x00010000 -offset 0x43C00000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs mandelbrot_0/S_AXI_SLV0/Reg] SEG_mandelbrot_0_Reg
-  create_bd_addr_seg -range 0x00010000 -offset 0x43C10000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs mandelbrot_0/S_AXI_SLV1/Reg] SEG_mandelbrot_0_Reg1
+  create_bd_addr_seg -range 0x00010000 -offset 0x43C00000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs mandelbrot_0/s_axi_AXILiteS/Reg] SEG_mandelbrot_0_Reg
 
   # Perform GUI Layout
   regenerate_bd_layout -layout_string {
@@ -1496,25 +1499,29 @@ preplace port DDR -pg 1 -y 300 -defaultsOSRD
 preplace port leds_8bits -pg 1 -y 70 -defaultsOSRD
 preplace port sws_8bits -pg 1 -y 50 -defaultsOSRD
 preplace port FIXED_IO -pg 1 -y 320 -defaultsOSRD
-preplace inst mandelbrot_0 -pg 1 -lvl 3 -y 210 -defaultsOSRD
-preplace inst proc_sys_reset_0 -pg 1 -lvl 1 -y 150 -defaultsOSRD
-preplace inst axi_gpio_0 -pg 1 -lvl 3 -y 20 -defaultsOSRD
+preplace inst mandelbrot_0 -pg 1 -lvl 3 -y 150 -defaultsOSRD
+preplace inst add_0 -pg 1 -lvl 3 -y 420 -defaultsOSRD
+preplace inst xlconcat_0 -pg 1 -lvl 1 -y 490 -defaultsOSRD
+preplace inst proc_sys_reset_0 -pg 1 -lvl 1 -y 120 -defaultsOSRD
+preplace inst axi_gpio_0 -pg 1 -lvl 3 -y 30 -defaultsOSRD
 preplace inst ps7_0_axi_periph -pg 1 -lvl 2 -y 150 -defaultsOSRD
-preplace inst processing_system7_0 -pg 1 -lvl 1 -y 380 -defaultsOSRD
-preplace netloc ps7_0_axi_periph_M02_AXI 1 2 1 730
-preplace netloc processing_system7_0_DDR 1 1 3 N 330 NJ 330 1060J
-preplace netloc processing_system7_0_M_AXI_GP0 1 1 1 430
-preplace netloc mandelbrot_0_interrupt 1 0 4 -10 -40 NJ -40 770J 90 1070
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 2 10 60 390
-preplace netloc ps7_0_axi_periph_M01_AXI 1 2 1 750
-preplace netloc proc_sys_reset_0_interconnect_aresetn 1 1 1 400
-preplace netloc axi_gpio_0_GPIO2 1 3 1 1060J
-preplace netloc processing_system7_0_FIXED_IO 1 1 3 NJ 350 NJ 350 1070J
-preplace netloc axi_gpio_0_GPIO 1 3 1 1070J
-preplace netloc proc_sys_reset_0_peripheral_aresetn 1 1 2 410 -10 740
-preplace netloc processing_system7_0_FCLK_CLK0 1 0 3 0 50 420 410 760
+preplace inst processing_system7_0 -pg 1 -lvl 1 -y 320 -defaultsOSRD
+preplace netloc processing_system7_0_DDR 1 1 3 410 350 NJ 350 1120J
+preplace netloc processing_system7_0_M_AXI_GP0 1 1 1 440
+preplace netloc mandelbrot_0_interrupt 1 0 4 -10 430 NJ 430 740J 500 1110
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 2 -10 30 400
+preplace netloc ps7_0_axi_periph_M03_AXI 1 2 1 750
+preplace netloc add_0_interrupt 1 0 4 -20 420 NJ 420 750J 490 1100
+preplace netloc ps7_0_axi_periph_M01_AXI 1 2 1 N
+preplace netloc proc_sys_reset_0_interconnect_aresetn 1 1 1 450
+preplace netloc xlconcat_0_dout 1 0 2 -10 220 390
+preplace netloc axi_gpio_0_GPIO2 1 3 1 1100J
+preplace netloc processing_system7_0_FIXED_IO 1 1 3 420J 360 770J 320 NJ
+preplace netloc axi_gpio_0_GPIO 1 3 1 1110J
+preplace netloc proc_sys_reset_0_peripheral_aresetn 1 1 2 460 440 760
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 3 -20 -50 430 -50 780
 preplace netloc ps7_0_axi_periph_M00_AXI 1 2 1 750
-levelinfo -pg 1 -30 200 590 920 1090 -top -50 -bot 510
+levelinfo -pg 1 -40 200 600 950 1150 -top -170 -bot 550
 ",
 }
 

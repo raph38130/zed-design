@@ -1,4 +1,8 @@
 mandelbrot_dadddsbkb
-mandelbrot_dmul_6cud
-mandelbrot_dcmp_6dEe
+mandelbrot_dadd_6cud
+mandelbrot_dmul_6dEe
+mandelbrot_ddiv_6eOg
+mandelbrot_dcmp_6fYi
+mandelbrot_sitodpg8j
+mandelbrot_AXILiteS_s_axi
 mandelbrot

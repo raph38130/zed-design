@@ -1,3 +1,3 @@
 
 
-extern unsigned char mandelbrot(double cx, double cy) ;
+extern int mandelbrot(int cx, int cy) ;

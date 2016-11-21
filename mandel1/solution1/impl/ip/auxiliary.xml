@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xd:acceleratorMap xmlns:xd="http://www.xilinx.com/xidane" xd:functionName="mandelbrot" xd:componentRef="mandelbrot" xd:initiationInterval="7456" xd:clockPeriod="10.000000" xd:sequential="true" xd:hostMachine="64" xd:reset="control">
-  <xd:returnValue xd:interfaceRef="S_AXI_SLV1" xd:busTypeRef="axilite" xd:offset="0x10" xd:dataWidth="8"/>
-  <xd:controlReg xd:name="control" xd:interfaceRef="S_AXI_SLV1" xd:busTypeRef="axilite" xd:type="generic_axi_lite" xd:offset="0x0"/>
-  <xd:arg xd:name="cx" xd:originalName="cx" xd:direction="in" xd:interfaceRef="S_AXI_SLV0" xd:busTypeRef="axilite" xd:offset="0x14" xd:handshakeRef="ap_hs" xd:dataWidth="64"/>
-  <xd:arg xd:name="cy" xd:originalName="cy" xd:direction="in" xd:interfaceRef="S_AXI_SLV0" xd:busTypeRef="axilite" xd:offset="0x20" xd:handshakeRef="ap_hs" xd:dataWidth="64"/>
-  <xd:latencyEstimates xd:best-case="31" xd:worst-case="7455" xd:average-case="3729"/>
-  <xd:resourceEstimates xd:LUT="3941" xd:FF="2224" xd:BRAM="0" xd:DSP="36"/>
+<xd:acceleratorMap xmlns:xd="http://www.xilinx.com/xidane" xd:functionName="mandelbrot" xd:componentRef="mandelbrot" xd:initiationInterval="7502" xd:clockPeriod="10.000000" xd:sequential="true" xd:hostMachine="64" xd:reset="control">
+  <xd:returnValue xd:interfaceRef="s_axi_AXILiteS" xd:busTypeRef="axilite" xd:offset="0x10" xd:statusOffset="0x14" xd:dataWidth="32"/>
+  <xd:controlReg xd:name="control" xd:interfaceRef="s_axi_AXILiteS" xd:busTypeRef="axilite" xd:type="generic_axi_lite" xd:offset="0x0"/>
+  <xd:arg xd:name="cx" xd:originalName="cx" xd:direction="in" xd:interfaceRef="s_axi_AXILiteS" xd:busTypeRef="axilite" xd:offset="0x18" xd:handshakeRef="ap_none" xd:dataWidth="32"/>
+  <xd:arg xd:name="cy" xd:originalName="cy" xd:direction="in" xd:interfaceRef="s_axi_AXILiteS" xd:busTypeRef="axilite" xd:offset="0x20" xd:handshakeRef="ap_none" xd:dataWidth="32"/>
+  <xd:latencyEstimates xd:best-case="77" xd:worst-case="7501" xd:average-case="3775"/>
+  <xd:resourceEstimates xd:LUT="14063" xd:FF="10353" xd:BRAM="0" xd:DSP="39"/>
 </xd:acceleratorMap>

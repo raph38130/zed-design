@@ -1,0 +1,49 @@
+#pragma line 1 "/home/raph/zed-design/mandel1/solution1/tb_mandel.cpp"
+#pragma line 1 "<built-in>"
+#pragma line 1 "<command-line>"
+#pragma line 1 "/home/raph/zed-design/mandel1/solution1/tb_mandel.cpp"
+#pragma line 1 "/home/raph/zed-design/mandel1/solution1/tb.h" 1
+#pragma empty_line
+#pragma empty_line
+extern int mandelbrot(int cx, int cy) ;
+#pragma line 2 "/home/raph/zed-design/mandel1/solution1/tb_mandel.cpp" 2
+#pragma empty_line
+#pragma empty_line
+#pragma empty_line
+
+#ifndef HLS_FASTSIM
+#pragma line 5 "/home/raph/zed-design/mandel1/solution1/tb_mandel.cpp"
+
+#ifndef HLS_FASTSIM
+#include "apatb_mandelbrot.h"
+#endif
+
+#pragma line 5 "/home/raph/zed-design/mandel1/solution1/tb_mandel.cpp"
+int main()
+{
+#pragma empty_line
+#pragma empty_line
+#pragma empty_line
+#pragma empty_line
+ return 
+#ifndef HLS_FASTSIM
+#define mandelbrot AESL_WRAP_mandelbrot
+#endif
+
+#pragma line 11 "/home/raph/zed-design/mandel1/solution1/tb_mandel.cpp"
+
+#ifndef HLS_FASTSIM
+#define mandelbrot AESL_WRAP_mandelbrot
+#endif
+
+#pragma line 11 "/home/raph/zed-design/mandel1/solution1/tb_mandel.cpp"
+mandelbrot
+#undef mandelbrot
+#pragma line 11 "/home/raph/zed-design/mandel1/solution1/tb_mandel.cpp"
+
+#undef mandelbrot
+#pragma line 11 "/home/raph/zed-design/mandel1/solution1/tb_mandel.cpp"
+(00,0);
+}
+#endif
+#pragma line 12 "/home/raph/zed-design/mandel1/solution1/tb_mandel.cpp"

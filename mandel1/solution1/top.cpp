@@ -1,25 +1,21 @@
-#include "ap_fixed.h"
+int mandelbrot(int cx, int cy) {
+#pragma HLS INTERFACE s_axilite port=cy
+#pragma HLS INTERFACE s_axilite port=cx
+#pragma HLS INTERFACE s_axilite port=return
 
+const double X1 = 1.0, Y1 = 1.0, X2 =-2.0, Y2 = -1.0;
+const int Width=640, Height=480;
 
+double x=0.0,y=0.0,
+dcx = (double)cx / Width  * (X1 - X2) + X2,
+dcy = (double)cy / Height * (Y2 - Y1) + Y1;
 
-unsigned char mandelbrot(double cx, double cy) {
-
-#pragma AP interface ap_hs port=cx
-#pragma AP interface ap_hs port=cy
-#pragma AP interface ap_ctrl_hs port=return register
-#pragma AP resource core=AXI4LiteS metadata="-bus_bundle slv0" variable=cx
-#pragma AP resource core=AXI4LiteS metadata="-bus_bundle slv0" variable=cy
-#pragma AP resource core=AXI4LiteS metadata="-bus_bundle slv1" variable=return
-
-  int i = 0;
-  double x = cx, y = cy;
-
-  for(i = 0; i < 256; i++) {
+int i=0;
+for(i = 0; i < 256; i++) {
     double t = x;
-    x = x*x-y*y+cx;
-    y = 2*t*y+cy;
-    if(x*x+y*y > 4.0) break;
+    x = x*x - y*y + dcx;
+    y = 2*t*y + dcy;
+    if ((x*x+y*y) > 4.0) break;
    }
-
-  return i;
+return i;
 }

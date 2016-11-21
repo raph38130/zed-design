@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vivado HLS Report for 'mandelbrot'" level="0">
-<item name = "Date">Sat Nov 19 22:38:00 2016
+<item name = "Date">Mon Nov 21 10:07:40 2016
 </item>
 <item name = "Version">2016.3 (Build 1682563 on Mon Oct 10 19:41:59 MDT 2016)</item>
 <item name = "Project">mandel1</item>
@@ -15,14 +15,14 @@
 <section name = "" level="1">
 <item name = "Target clock period (ns)">10.00</item>
 <item name = "Clock uncertainty (ns)">1.25</item>
-<item name = "Estimated clock period (ns)">8.23</item>
+<item name = "Estimated clock period (ns)">9.40</item>
 </section>
 </item>
 <item name = "Latency (clock cycles)">
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="6">, min, max, min, max, Type</keys>
-<column name="">31, 7455, 32, 7456, none</column>
+<column name="">77, 7501, 78, 7502, none</column>
 </table>
 </item>
 <item name = "Detail">
@@ -46,25 +46,31 @@
 <item name = "Summary"><table name="" hasTotal="1">
 <keys size="5">Name, BRAM_18K, DSP48E, FF, LUT</keys>
 <column name="DSP">-, -, -, -</column>
-<column name="Expression">-, -, 0, 34</column>
+<column name="Expression">-, -, 0, 33</column>
 <column name="FIFO">-, -, -, -</column>
-<column name="Instance">-, 36, 1526, 3352</column>
+<column name="Instance">0, 39, 9361, 13339</column>
 <column name="Memory">-, -, -, -</column>
-<column name="Multiplexer">-, -, -, 555</column>
-<column name="Register">-, -, 698, -</column>
+<column name="Multiplexer">-, -, -, 691</column>
+<column name="Register">-, -, 992, -</column>
 <specialColumn name="Available">280, 220, 106400, 53200</specialColumn>
-<specialColumn name="Utilization (%)">0, 16, 2, 7</specialColumn>
+<specialColumn name="Utilization (%)">0, 17, 9, 26</specialColumn>
 </table>
 </item>
 <item name = "Detail">
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="1">
 <keys size="6">Instance, Module, BRAM_18K, DSP48E, FF, LUT</keys>
+<column name="mandelbrot_AXILiteS_s_axi_U">mandelbrot_AXILiteS_s_axi, 0, 0, 144, 232</column>
+<column name="mandelbrot_dadd_6cud_U2">mandelbrot_dadd_6cud, 0, 3, 445, 1149</column>
 <column name="mandelbrot_dadddsbkb_U1">mandelbrot_dadddsbkb, 0, 3, 445, 1149</column>
-<column name="mandelbrot_dcmp_6dEe_U5">mandelbrot_dcmp_6dEe, 0, 0, 130, 469</column>
-<column name="mandelbrot_dmul_6cud_U2">mandelbrot_dmul_6cud, 0, 11, 317, 578</column>
-<column name="mandelbrot_dmul_6cud_U3">mandelbrot_dmul_6cud, 0, 11, 317, 578</column>
-<column name="mandelbrot_dmul_6cud_U4">mandelbrot_dmul_6cud, 0, 11, 317, 578</column>
+<column name="mandelbrot_dcmp_6fYi_U8">mandelbrot_dcmp_6fYi, 0, 0, 130, 469</column>
+<column name="mandelbrot_ddiv_6eOg_U6">mandelbrot_ddiv_6eOg, 0, 0, 3211, 3658</column>
+<column name="mandelbrot_ddiv_6eOg_U7">mandelbrot_ddiv_6eOg, 0, 0, 3211, 3658</column>
+<column name="mandelbrot_dmul_6dEe_U3">mandelbrot_dmul_6dEe, 0, 11, 317, 578</column>
+<column name="mandelbrot_dmul_6dEe_U4">mandelbrot_dmul_6dEe, 0, 11, 317, 578</column>
+<column name="mandelbrot_dmul_6dEe_U5">mandelbrot_dmul_6dEe, 0, 11, 317, 578</column>
+<column name="mandelbrot_sitodpg8j_U9">mandelbrot_sitodpg8j, 0, 0, 412, 645</column>
+<column name="mandelbrot_sitodpg8j_U10">mandelbrot_sitodpg8j, 0, 0, 412, 645</column>
 </table>
 </item>
 <item name = "DSP48"><table name="" hasTotal="0">
@@ -81,48 +87,48 @@
 </item>
 <item name = "Expression"><table name="" hasTotal="1">
 <keys size="7">Variable Name, Operation, DSP48E, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
-<column name="i_1_fu_164_p2">+, 0, 0, 9, 9, 1</column>
-<column name="tmp_12_fu_205_p2">and, 0, 0, 1, 1, 1</column>
-<column name="notlhs_fu_187_p2">icmp, 0, 0, 4, 11, 2</column>
-<column name="notrhs_fu_193_p2">icmp, 0, 0, 18, 52, 1</column>
-<column name="ap_condition_110">or, 0, 0, 1, 1, 1</column>
-<column name="tmp_10_fu_199_p2">or, 0, 0, 1, 1, 1</column>
+<column name="i_1_fu_191_p2">+, 0, 0, 9, 9, 1</column>
+<column name="tmp_18_fu_232_p2">and, 0, 0, 1, 1, 1</column>
+<column name="notlhs_fu_214_p2">icmp, 0, 0, 4, 11, 2</column>
+<column name="notrhs_fu_220_p2">icmp, 0, 0, 18, 52, 1</column>
+<column name="tmp_16_fu_226_p2">or, 0, 0, 1, 1, 1</column>
 </table>
 </item>
 <item name = "Multiplexer"><table name="" hasTotal="1">
 <keys size="5">Name, LUT, Input Size, Bits, Total Bits</keys>
-<column name="ap_NS_fsm">30, 32, 1, 32</column>
-<column name="cx_blk_n">1, 2, 1, 2</column>
-<column name="cy_blk_n">1, 2, 1, 2</column>
+<column name="ap_NS_fsm">168, 78, 1, 78</column>
 <column name="grp_fu_110_opcode">2, 3, 2, 6</column>
 <column name="grp_fu_110_p0">64, 3, 64, 192</column>
-<column name="grp_fu_110_p1">64, 4, 64, 256</column>
-<column name="grp_fu_114_p0">64, 4, 64, 256</column>
-<column name="grp_fu_114_p1">64, 4, 64, 256</column>
-<column name="grp_fu_120_p0">64, 3, 64, 192</column>
-<column name="grp_fu_120_p1">64, 3, 64, 192</column>
-<column name="i_reg_78">9, 2, 9, 18</column>
-<column name="t_reg_90">64, 2, 64, 128</column>
-<column name="y_reg_100">64, 2, 64, 128</column>
+<column name="grp_fu_110_p1">64, 5, 64, 320</column>
+<column name="grp_fu_120_p0">64, 5, 64, 320</column>
+<column name="grp_fu_120_p1">64, 5, 64, 320</column>
+<column name="grp_fu_125_p0">64, 4, 64, 256</column>
+<column name="grp_fu_125_p1">64, 4, 64, 256</column>
+<column name="i_reg_98">9, 2, 9, 18</column>
+<column name="t_reg_74">64, 2, 64, 128</column>
+<column name="y_reg_86">64, 2, 64, 128</column>
 </table>
 </item>
 <item name = "Register"><table name="" hasTotal="1">
 <keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
-<column name="ap_CS_fsm">31, 0, 31, 0</column>
-<column name="ap_return">8, 0, 8, 0</column>
-<column name="cx_read_reg_221">64, 0, 64, 0</column>
-<column name="cy_read_reg_215">64, 0, 64, 0</column>
-<column name="i_1_reg_231">9, 0, 9, 0</column>
-<column name="i_reg_78">9, 0, 9, 0</column>
-<column name="reg_138">64, 0, 64, 0</column>
-<column name="reg_143">64, 0, 64, 0</column>
-<column name="reg_148">64, 0, 64, 0</column>
-<column name="t_reg_90">64, 0, 64, 0</column>
-<column name="tmp_5_reg_236">64, 0, 64, 0</column>
-<column name="tmp_reg_227">1, 0, 1, 0</column>
-<column name="tmp_s_reg_248">64, 0, 64, 0</column>
-<column name="y_1_reg_241">64, 0, 64, 0</column>
-<column name="y_reg_100">64, 0, 64, 0</column>
+<column name="ap_CS_fsm">77, 0, 77, 0</column>
+<column name="dcx_reg_272">64, 0, 64, 0</column>
+<column name="dcy_reg_277">64, 0, 64, 0</column>
+<column name="i_1_reg_286">9, 0, 9, 0</column>
+<column name="i_reg_98">9, 0, 9, 0</column>
+<column name="reg_164">64, 0, 64, 0</column>
+<column name="reg_169">64, 0, 64, 0</column>
+<column name="reg_175">64, 0, 64, 0</column>
+<column name="t_reg_74">64, 0, 64, 0</column>
+<column name="tmp_13_reg_303">64, 0, 64, 0</column>
+<column name="tmp_1_reg_262">64, 0, 64, 0</column>
+<column name="tmp_3_reg_257">64, 0, 64, 0</column>
+<column name="tmp_4_reg_267">64, 0, 64, 0</column>
+<column name="tmp_6_reg_282">1, 0, 1, 0</column>
+<column name="tmp_reg_252">64, 0, 64, 0</column>
+<column name="tmp_s_reg_291">64, 0, 64, 0</column>
+<column name="y_1_reg_296">64, 0, 64, 0</column>
+<column name="y_reg_86">64, 0, 64, 0</column>
 </table>
 </item>
 </section>
@@ -132,28 +138,35 @@
 <section name = "Interface" level="0">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="6">RTL Ports, Dir, Bits, Protocol, Source Object, C Type</keys>
+<column name="s_axi_AXILiteS_AWVALID">in, 1, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_AWREADY">out, 1, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_AWADDR">in, 6, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_WVALID">in, 1, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_WREADY">out, 1, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_WDATA">in, 32, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_WSTRB">in, 4, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_ARVALID">in, 1, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_ARREADY">out, 1, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_ARADDR">in, 6, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_RVALID">out, 1, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_RREADY">in, 1, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_RDATA">out, 32, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_RRESP">out, 2, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_BVALID">out, 1, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_BREADY">in, 1, s_axi, AXILiteS, scalar</column>
+<column name="s_axi_AXILiteS_BRESP">out, 2, s_axi, AXILiteS, scalar</column>
 <column name="ap_clk">in, 1, ap_ctrl_hs, mandelbrot, return value</column>
-<column name="ap_rst">in, 1, ap_ctrl_hs, mandelbrot, return value</column>
-<column name="ap_start">in, 1, ap_ctrl_hs, mandelbrot, return value</column>
-<column name="ap_done">out, 1, ap_ctrl_hs, mandelbrot, return value</column>
-<column name="ap_idle">out, 1, ap_ctrl_hs, mandelbrot, return value</column>
-<column name="ap_ready">out, 1, ap_ctrl_hs, mandelbrot, return value</column>
-<column name="ap_return">out, 8, ap_ctrl_hs, mandelbrot, return value</column>
-<column name="cx">in, 64, ap_hs, cx, scalar</column>
-<column name="cx_ap_vld">in, 1, ap_hs, cx, scalar</column>
-<column name="cx_ap_ack">out, 1, ap_hs, cx, scalar</column>
-<column name="cy">in, 64, ap_hs, cy, scalar</column>
-<column name="cy_ap_vld">in, 1, ap_hs, cy, scalar</column>
-<column name="cy_ap_ack">out, 1, ap_hs, cy, scalar</column>
+<column name="ap_rst_n">in, 1, ap_ctrl_hs, mandelbrot, return value</column>
+<column name="interrupt">out, 1, ap_ctrl_hs, mandelbrot, return value</column>
 </table>
 </item>
 </section>
 
 <section name = "Critical Path" level="0">
-<item name = "Max Delay">8.23</item>
+<item name = "Max Delay">9.40</item>
 <item name = "Critical Path Table"><table name="Critical Path Table" hasTotal="0">
 <keys size="15">Name, Operator, Delay, Accumulated Delay, Store Source, Resource, Core, Interface, Type, Port, Array, Scope, Pointer, Callee, Phi Node</keys>
-<column name="'tmp_3', mandel1/solution1/top.cpp:19">dsub, 8.23, 8.23, -, -, -, -, -, -, -, -, -, -, -</column>
+<column name="'dcx', mandel1/solution1/top.cpp:11">dadd, 9.40, 9.40, -, -, -, -, -, -, -, -, -, -, -</column>
 </table>
 </item>
 </section>

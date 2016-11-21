@@ -15,7 +15,7 @@ set NbRWValue 0
 set intNbAccess 0
 set NewDSPMapping 1
 set HasDSPModule 0
-set ResetLevelFlag 1
+set ResetLevelFlag 0
 set ResetStyle "control"
 set ResetSyncFlag 1
 set ResetRegisterFlag 0
@@ -44,12 +44,12 @@ set TargetInfo "xc7z020:clg484:-1"
 set SourceFiles {sc {} c top.cpp}
 set SourceFlags {sc {} c {{}}}
 set DirectiveFile {/home/raph/zed-design/mandel1/solution1/solution1.directive}
-set TBFiles {verilog {tb_mandel.c tb.h} bc {tb_mandel.c tb.h} sc {tb_mandel.c tb.h} vhdl {tb_mandel.c tb.h} c {} cas {tb_mandel.c tb.h}}
+set TBFiles {verilog {top.cpp tb_mandel.cpp tb.h} bc {top.cpp tb_mandel.cpp tb.h} vhdl {top.cpp tb_mandel.cpp tb.h} sc {top.cpp tb_mandel.cpp tb.h} cas {top.cpp tb_mandel.cpp tb.h} c {}}
 set SpecLanguage "C"
 set TVInFiles {bc {} c {} sc {} cas {} vhdl {} verilog {}}
 set TVOutFiles {bc {} c {} sc {} cas {} vhdl {} verilog {}}
-set TBTops {verilog {} bc {} sc {} vhdl {} c {} cas {}}
-set TBInstNames {verilog {} bc {} sc {} vhdl {} c {} cas {}}
+set TBTops {verilog {} bc {} vhdl {} sc {} cas {} c {}}
+set TBInstNames {verilog {} bc {} vhdl {} sc {} cas {} c {}}
 set XDCFiles {}
 set ExtraGlobalOptions {"area_timing" 1 "clock_gate" 1 "impl_flow" map "power_gate" 0}
 set PlatformFiles {{DefaultPlatform {xilinx/zynq/zynq xilinx/zynq/zynq_fpv6}}}

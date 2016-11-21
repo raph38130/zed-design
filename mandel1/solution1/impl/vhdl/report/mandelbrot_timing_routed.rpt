@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
-| Date         : Sat Nov 19 22:41:11 2016
+| Date         : Mon Nov 21 10:14:10 2016
 | Host         : iaea-gft running 64-bit Ubuntu 16.04.1 LTS
 | Command      : report_timing_summary -file ./report/mandelbrot_timing_routed.rpt
 | Design       : mandelbrot
@@ -74,14 +74,14 @@ Table of Contents
 
 5. checking no_input_delay
 --------------------------
- There are 132 input ports with no input delay specified. (HIGH)
+ There are 54 input ports with no input delay specified. (HIGH)
 
  There are 0 input ports with no input delay but user has a false path constraint.
 
 
 6. checking no_output_delay
 ---------------------------
- There are 13 ports with no output delay specified. (HIGH)
+ There are 38 ports with no output delay specified. (HIGH)
 
  There are 0 ports with no output delay but user has a false path constraint
 
@@ -126,7 +126,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-      0.706        0.000                      0                 3687        0.031        0.000                      0                 3687        4.020        0.000                       0                  1787  
+      0.538        0.000                      0                 9275        0.036        0.000                      0                 9275        4.020        0.000                       0                  6454  
 
 
 All user specified timing constraints are met.
@@ -149,7 +149,7 @@ ap_clk  {0.000 5.000}      10.000          100.000
 
 Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
 -----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-ap_clk              0.706        0.000                      0                 3687        0.031        0.000                      0                 3687        4.020        0.000                       0                  1787  
+ap_clk              0.538        0.000                      0                 9275        0.036        0.000                      0                 9275        4.020        0.000                       0                  6454  
 
 
 ------------------------------------------------------------------------------------------------
@@ -180,28 +180,28 @@ Path Group    From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing 
 From Clock:  ap_clk
   To Clock:  ap_clk
 
-Setup :            0  Failing Endpoints,  Worst Slack        0.706ns,  Total Violation        0.000ns
-Hold  :            0  Failing Endpoints,  Worst Slack        0.031ns,  Total Violation        0.000ns
+Setup :            0  Failing Endpoints,  Worst Slack        0.538ns,  Total Violation        0.000ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.036ns,  Total Violation        0.000ns
 PW    :            0  Failing Endpoints,  Worst Slack        4.020ns,  Total Violation        0.000ns
 ---------------------------------------------------------------------------------------------------
 
 
 Max Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             0.706ns  (required time - arrival time)
-  Source:                 mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/CHAIN_GEN[15].CARRYS_DEL.NEED_DEL.CARRYS_FD/C
+Slack (MET) :             0.538ns  (required time - arrival time)
+  Source:                 mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[51].ADDSUB/ADDSUB/Q_DEL/i_pipe/opt_has_pipe.first_q_reg[53]/C
                             (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/DSP/CARRYIN
-                            (rising edge-triggered cell DSP48E1 clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/Q_DEL/i_pipe/opt_has_pipe.first_q_reg[45]/D
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             ap_clk
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
-  Data Path Delay:        7.914ns  (logic 2.536ns (32.045%)  route 5.378ns (67.955%))
-  Logic Levels:           10  (CARRY4=2 LUT2=1 LUT3=1 LUT4=2 LUT6=2 MUXF7=1 MUXF8=1)
-  Clock Path Skew:        -0.046ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    1.587ns = ( 11.587 - 10.000 ) 
-    Source Clock Delay      (SCD):    1.748ns
-    Clock Pessimism Removal (CPR):    0.115ns
+  Data Path Delay:        9.256ns  (logic 5.041ns (54.464%)  route 4.215ns (45.536%))
+  Logic Levels:           26  (CARRY4=25 LUT2=1)
+  Clock Path Skew:        -0.280ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.537ns = ( 11.537 - 10.000 ) 
+    Source Clock Delay      (SCD):    1.831ns
+    Clock Pessimism Removal (CPR):    0.014ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
     Total Input Jitter      (TIJ):    0.000ns
@@ -212,49 +212,103 @@ Slack (MET) :             0.706ns  (required time - arrival time)
   -------------------------------------------------------------------    -------------------
                          (clock ap_clk rise edge)     0.000     0.000 r  
                                                       0.000     0.000 r  ap_clk (IN)
-                         net (fo=1803, unset)         1.748     1.748    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/aclk
-    SLICE_X31Y49         FDRE                                         r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/CHAIN_GEN[15].CARRYS_DEL.NEED_DEL.CARRYS_FD/C
+                         net (fo=6472, unset)         1.831     1.831    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[51].ADDSUB/ADDSUB/Q_DEL/i_pipe/aclk
+    SLICE_X51Y101        FDRE                                         r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[51].ADDSUB/ADDSUB/Q_DEL/i_pipe/opt_has_pipe.first_q_reg[53]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X31Y49         FDRE (Prop_fdre_C_Q)         0.456     2.204 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/CHAIN_GEN[15].CARRYS_DEL.NEED_DEL.CARRYS_FD/Q
-                         net (fo=1, routed)           0.667     2.871    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/a_gt_b_top
-    SLICE_X30Y48         LUT3 (Prop_lut3_I0_O)        0.124     2.995 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/NUMB_CMP/FAST_CMP.CMP_TOP/C_CHAIN/CHAIN_GEN[0].C_MUX.CARRY_MUX_i_3__0/O
-                         net (fo=110, routed)         1.058     4.053    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/b_largest
-    SLICE_X30Y42         LUT6 (Prop_lut6_I3_O)        0.124     4.177 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/CHAIN_GEN[2].C_MUX.CARRY_MUX_i_2/O
-                         net (fo=2, routed)           0.980     5.157    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/ALIGN_BLK/sml_shift_mux[9]
-    SLICE_X26Y43         LUT4 (Prop_lut4_I0_O)        0.124     5.281 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/CHAIN_GEN[2].C_MUX.CARRY_MUX_i_1__0/O
-                         net (fo=1, routed)           0.000     5.281    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/opt_has_pipe.first_q_reg[49][2]
-    SLICE_X26Y43         CARRY4 (Prop_carry4_S[2]_CO[3])
-                                                      0.380     5.661 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/CHAIN_GEN[0].C_MUX.CARRY_MUX_CARRY4/CO[3]
-                         net (fo=2, routed)           0.000     5.661    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/CARRYS_OUT[3]
-    SLICE_X26Y44         CARRY4 (Prop_carry4_CI_CO[2])
-                                                      0.229     5.890 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/EQ_ZERO/CARRY_ZERO_DET/CHAIN_GEN[4].C_MUX.CARRY_MUX_CARRY4/CO[2]
-                         net (fo=1, routed)           0.674     6.564    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/CARRYS_OUT[6]
-    SLICE_X23Y44         LUT4 (Prop_lut4_I3_O)        0.310     6.874 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/MUX_LOOP[2].OTHER_LEVELS.DO_CHUNKS[0].LUT6_STRUCT_MUX.MUX0_i_12/O
-                         net (fo=1, routed)           0.862     7.736    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/p_27_out__0
-    SLICE_X24Y44         LUT6 (Prop_lut6_I0_O)        0.124     7.860 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/A_IP_DELAY/i_pipe/MUX_LOOP[2].OTHER_LEVELS.DO_CHUNKS[0].LUT6_STRUCT_MUX.MUX0_i_3/O
-                         net (fo=1, routed)           0.000     7.860    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/zero_det_unreg[1]_0[1]
-    SLICE_X24Y44         MUXF7 (Prop_muxf7_I1_O)      0.245     8.105 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/MUX_LOOP[2].OTHER_LEVELS.DO_CHUNKS[0].LUT6_STRUCT_MUX.MUX0/O
-                         net (fo=1, routed)           0.000     8.105    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/mux0_0
-    SLICE_X24Y44         MUXF8 (Prop_muxf8_I0_O)      0.104     8.209 f  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/ALIGN_SHIFT/ALIGN_Z_D/MUX_LOOP[2].OTHER_LEVELS.DO_CHUNKS[0].LUT6_STRUCT_MUX.MUX2/O
-                         net (fo=2, routed)           0.749     8.958    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/SUB_DELAY/i_pipe/zeros_add
-    SLICE_X32Y48         LUT2 (Prop_lut2_I1_O)        0.316     9.274 r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/EXP/SUB_DELAY/i_pipe/DSP_i_1__0/O
-                         net (fo=1, routed)           0.388     9.662    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/opt_has_pipe.first_q_reg[0]_1
-    DSP48_X2Y19          DSP48E1                                      r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/DSP/CARRYIN
+    SLICE_X51Y101        FDRE (Prop_fdre_C_Q)         0.456     2.287 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[51].ADDSUB/ADDSUB/Q_DEL/i_pipe/opt_has_pipe.first_q_reg[53]/Q
+                         net (fo=56, routed)          2.244     4.531    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[51].ADDSUB/ADDSUB/Q_DEL/i_pipe/first_q[53]
+    SLICE_X53Y89         LUT2 (Prop_lut2_I0_O)        0.124     4.655 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[51].ADDSUB/ADDSUB/Q_DEL/i_pipe/CHAIN_GEN[5].C_MUX.CARRY_MUX_i_1__50/O
+                         net (fo=1, routed)           0.000     4.655    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/A[5]
+    SLICE_X53Y89         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     5.205 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[4].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     5.205    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[7].C_MUX.CARRY_MUX_n_2
+    SLICE_X53Y90         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     5.319 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[8].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     5.319    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[11].C_MUX.CARRY_MUX_n_2
+    SLICE_X53Y91         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     5.433 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[12].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     5.433    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[15].C_MUX.CARRY_MUX_n_2
+    SLICE_X53Y92         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     5.547 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[16].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     5.547    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[19].C_MUX.CARRY_MUX_n_2
+    SLICE_X53Y93         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     5.661 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[20].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     5.661    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[23].C_MUX.CARRY_MUX_n_2
+    SLICE_X53Y94         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     5.775 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[24].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     5.775    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[27].C_MUX.CARRY_MUX_n_2
+    SLICE_X53Y95         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     5.889 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[28].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     5.889    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[31].C_MUX.CARRY_MUX_n_2
+    SLICE_X53Y96         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     6.003 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[32].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     6.003    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[35].C_MUX.CARRY_MUX_n_2
+    SLICE_X53Y97         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     6.117 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[36].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     6.117    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[39].C_MUX.CARRY_MUX_n_2
+    SLICE_X53Y98         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     6.231 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[40].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     6.231    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[43].C_MUX.CARRY_MUX_n_2
+    SLICE_X53Y99         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     6.345 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[44].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.001     6.345    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[47].C_MUX.CARRY_MUX_n_2
+    SLICE_X53Y100        CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     6.459 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[48].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     6.459    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[51].C_MUX.CARRY_MUX_n_2
+    SLICE_X53Y101        CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.348     6.807 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[52].ADDSUB/ADDSUB/CHAIN_GEN[52].C_MUX.CARRY_MUX_CARRY4/O[1]
+                         net (fo=56, routed)          1.970     8.778    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/a_xor_b_sub_0[0]
+    SLICE_X58Y88         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.816     9.594 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[0].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     9.594    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[3].C_MUX.CARRY_MUX_n_2
+    SLICE_X58Y89         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     9.711 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[4].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     9.711    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[7].C_MUX.CARRY_MUX_n_2
+    SLICE_X58Y90         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     9.828 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[8].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     9.828    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[11].C_MUX.CARRY_MUX_n_2
+    SLICE_X58Y91         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117     9.945 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[12].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000     9.945    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[15].C_MUX.CARRY_MUX_n_2
+    SLICE_X58Y92         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    10.062 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[16].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000    10.062    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[19].C_MUX.CARRY_MUX_n_2
+    SLICE_X58Y93         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    10.179 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[20].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000    10.179    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[23].C_MUX.CARRY_MUX_n_2
+    SLICE_X58Y94         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    10.296 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[24].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000    10.296    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[27].C_MUX.CARRY_MUX_n_2
+    SLICE_X58Y95         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    10.413 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[28].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000    10.413    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[31].C_MUX.CARRY_MUX_n_2
+    SLICE_X58Y96         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    10.530 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[32].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000    10.530    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[35].C_MUX.CARRY_MUX_n_2
+    SLICE_X58Y97         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    10.647 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[36].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000    10.647    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[39].C_MUX.CARRY_MUX_n_2
+    SLICE_X58Y98         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    10.764 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[40].C_MUX.CARRY_MUX_CARRY4/CO[3]
+                         net (fo=1, routed)           0.000    10.764    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[43].C_MUX.CARRY_MUX_n_2
+    SLICE_X58Y99         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.323    11.087 r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/CHAIN_GEN[44].C_MUX.CARRY_MUX_CARRY4/O[1]
+                         net (fo=1, routed)           0.000    11.087    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/Q_DEL/i_pipe/D[45]
+    SLICE_X58Y99         FDRE                                         r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/Q_DEL/i_pipe/opt_has_pipe.first_q_reg[45]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock ap_clk rise edge)    10.000    10.000 r  
                                                       0.000    10.000 r  ap_clk (IN)
-                         net (fo=1803, unset)         1.587    11.587    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/aclk
-    DSP48_X2Y19          DSP48E1                                      r  mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/DSP/CLK
-                         clock pessimism              0.115    11.702    
-                         clock uncertainty           -0.035    11.666    
-    DSP48_X2Y19          DSP48E1 (Setup_dsp48e1_CLK_CARRYIN)
-                                                     -1.298    10.368    mandelbrot_dadddsbkb_U1/mandelbrot_ap_dadddsub_3_full_dsp_64_u/U0/i_synth/ADDSUB_OP.ADDSUB/SPEED_OP.LOGIC.OP/ALIGN_BLK/FRAC_ADDSUB/DSP_ADD.FRAC_ADDSUB/DSP48E1_ADD.DSP48E1_ADD/DSP
+                         net (fo=6472, unset)         1.537    11.537    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/Q_DEL/i_pipe/aclk
+    SLICE_X58Y99         FDRE                                         r  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/Q_DEL/i_pipe/opt_has_pipe.first_q_reg[45]/C
+                         clock pessimism              0.014    11.551    
+                         clock uncertainty           -0.035    11.516    
+    SLICE_X58Y99         FDRE (Setup_fdre_C_D)        0.109    11.625    mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].ADDSUB/ADDSUB/Q_DEL/i_pipe/opt_has_pipe.first_q_reg[45]
   -------------------------------------------------------------------
-                         required time                         10.368    
-                         arrival time                          -9.662    
+                         required time                         11.625    
+                         arrival time                         -11.087    
   -------------------------------------------------------------------
-                         slack                                  0.706    
+                         slack                                  0.538    
 
 
 
@@ -262,44 +316,45 @@ Slack (MET) :             0.706ns  (required time - arrival time)
 
 Min Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             0.031ns  (arrival time - required time)
-  Source:                 mandelbrot_dmul_6cud_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/OP/RESULT_REG.NORMAL.exp_op_reg[8]/C
-                            (rising edge-triggered cell FDSE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            tmp_5_reg_236_reg[60]/D
+Slack (MET) :             0.036ns  (arrival time - required time)
+  Source:                 mandelbrot_dmul_6dEe_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/EXP/IP_SIGN_DELAY/i_pipe/opt_has_pipe.first_q_reg[0]/C
                             (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            mandelbrot_dmul_6dEe_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/EXP/IP_SIGN_DELAY/i_pipe/opt_has_pipe.i_pipe[3].pipe_reg[3][0]_srl2/D
+                            (rising edge-triggered cell SRL16E clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             ap_clk
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (ap_clk rise@0.000ns - ap_clk rise@0.000ns)
-  Data Path Delay:        0.355ns  (logic 0.141ns (39.697%)  route 0.214ns (60.303%))
+  Data Path Delay:        0.396ns  (logic 0.164ns (41.449%)  route 0.232ns (58.551%))
   Logic Levels:           0  
-  Clock Path Skew:        0.258ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    0.825ns
-    Source Clock Delay      (SCD):    0.562ns
-    Clock Pessimism Removal (CPR):    0.005ns
+  Clock Path Skew:        0.266ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.896ns
+    Source Clock Delay      (SCD):    0.622ns
+    Clock Pessimism Removal (CPR):    0.008ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
                          (clock ap_clk rise edge)     0.000     0.000 r  
                                                       0.000     0.000 r  ap_clk (IN)
-                         net (fo=1803, unset)         0.562     0.562    mandelbrot_dmul_6cud_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/OP/aclk
-    SLICE_X47Y47         FDSE                                         r  mandelbrot_dmul_6cud_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/OP/RESULT_REG.NORMAL.exp_op_reg[8]/C
+                         net (fo=6472, unset)         0.622     0.622    mandelbrot_dmul_6dEe_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/EXP/IP_SIGN_DELAY/i_pipe/aclk
+    SLICE_X50Y123        FDRE                                         r  mandelbrot_dmul_6dEe_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/EXP/IP_SIGN_DELAY/i_pipe/opt_has_pipe.first_q_reg[0]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X47Y47         FDSE (Prop_fdse_C_Q)         0.141     0.703 r  mandelbrot_dmul_6cud_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/OP/RESULT_REG.NORMAL.exp_op_reg[8]/Q
-                         net (fo=1, routed)           0.214     0.917    grp_fu_126_p2[60]
-    SLICE_X52Y48         FDRE                                         r  tmp_5_reg_236_reg[60]/D
+    SLICE_X50Y123        FDRE (Prop_fdre_C_Q)         0.164     0.786 r  mandelbrot_dmul_6dEe_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/EXP/IP_SIGN_DELAY/i_pipe/opt_has_pipe.first_q_reg[0]/Q
+                         net (fo=1, routed)           0.232     1.018    mandelbrot_dmul_6dEe_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/EXP/IP_SIGN_DELAY/i_pipe/first_q
+    SLICE_X46Y122        SRL16E                                       r  mandelbrot_dmul_6dEe_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/EXP/IP_SIGN_DELAY/i_pipe/opt_has_pipe.i_pipe[3].pipe_reg[3][0]_srl2/D
   -------------------------------------------------------------------    -------------------
 
                          (clock ap_clk rise edge)     0.000     0.000 r  
                                                       0.000     0.000 r  ap_clk (IN)
-                         net (fo=1803, unset)         0.825     0.825    ap_clk
-    SLICE_X52Y48         FDRE                                         r  tmp_5_reg_236_reg[60]/C
-                         clock pessimism             -0.005     0.820    
-    SLICE_X52Y48         FDRE (Hold_fdre_C_D)         0.066     0.886    tmp_5_reg_236_reg[60]
+                         net (fo=6472, unset)         0.896     0.896    mandelbrot_dmul_6dEe_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/EXP/IP_SIGN_DELAY/i_pipe/aclk
+    SLICE_X46Y122        SRL16E                                       r  mandelbrot_dmul_6dEe_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/EXP/IP_SIGN_DELAY/i_pipe/opt_has_pipe.i_pipe[3].pipe_reg[3][0]_srl2/CLK
+                         clock pessimism             -0.008     0.888    
+    SLICE_X46Y122        SRL16E (Hold_srl16e_CLK_D)
+                                                      0.094     0.982    mandelbrot_dmul_6dEe_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/EXP/IP_SIGN_DELAY/i_pipe/opt_has_pipe.i_pipe[3].pipe_reg[3][0]_srl2
   -------------------------------------------------------------------
-                         required time                         -0.886    
-                         arrival time                           0.917    
+                         required time                         -0.982    
+                         arrival time                           1.018    
   -------------------------------------------------------------------
-                         slack                                  0.031    
+                         slack                                  0.036    
 
 
 
@@ -312,10 +367,10 @@ Waveform(ns):       { 0.000 5.000 }
 Period(ns):         10.000
 Sources:            { ap_clk }
 
-Check Type        Corner  Lib Pin      Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location      Pin
-Min Period        n/a     DSP48E1/CLK  n/a            4.275         10.000      5.725      DSP48_X2Y9    mandelbrot_dmul_6cud_U4/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/MULT/DSP48E1_SPD_DBL_VARIANT.FIX_MULT/DSP5/DSP/CLK
-Low Pulse Width   Fast    SRL16E/CLK   n/a            0.980         5.000       4.020      SLICE_X50Y40  ap_CS_fsm_reg[9]_srl2___ap_CS_fsm_reg_r_0/CLK
-High Pulse Width  Slow    SRL16E/CLK   n/a            0.980         5.000       4.020      SLICE_X46Y35  ap_CS_fsm_reg[21]_srl3___ap_CS_fsm_reg_r_1/CLK
+Check Type        Corner  Lib Pin      Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location       Pin
+Min Period        n/a     DSP48E1/CLK  n/a            4.275         10.000      5.725      DSP48_X4Y48    mandelbrot_dmul_6dEe_U3/mandelbrot_ap_dmul_4_max_dsp_64_u/U0/i_synth/MULT.OP/MULT/DSP48E1_SPD_DBL_VARIANT.FIX_MULT/DSP5/DSP/CLK
+Low Pulse Width   Fast    SRLC32E/CLK  n/a            0.980         5.000       4.020      SLICE_X58Y107  mandelbrot_ddiv_6eOg_U6/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/EXP/EXP_PRE_RND_DEL/i_pipe/opt_has_pipe.i_pipe[26].pipe_reg[26][0]_srl26/CLK
+High Pulse Width  Slow    SRL16E/CLK   n/a            0.980         5.000       4.020      SLICE_X54Y96   mandelbrot_ddiv_6eOg_U7/mandelbrot_ap_ddiv_29_no_dsp_64_u/U0/i_synth/DIV_OP.SPD.OP/MANT_DIV/RT[53].Q_DEL/i_pipe/opt_has_pipe.first_q_reg[2]_srl2/CLK
 
 
 

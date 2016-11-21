@@ -19,7 +19,7 @@ __SIM_DDS__ = 1
 
 ObjDir = obj
 
-HLS_SOURCES = ../../tb_mandel.c ../../top.cpp
+HLS_SOURCES = ../../tb_mandel.cpp ../../top.cpp
 
 TARGET := csim.exe
 
@@ -58,7 +58,6 @@ IFLAG += -D__SIM_FIR__
 IFLAG += -D__SIM_DDS__
 
 IFLAG += -g
-DFLAG += -DAUTOCC
 DFLAG += -D__xilinx_ip_top= -DAESL_TB
 CCFLAG += 
 
@@ -70,11 +69,9 @@ all: $(TARGET)
 
 
 
-AUTOCC := apcc  
-
-$(ObjDir)/tb_mandel.o: ../../tb_mandel.c $(ObjDir)/.dir
-	$(Echo) "   Compiling(apcc) ../../tb_mandel.c in $(BuildMode) mode" $(AVE_DIR_DLOG)
-	$(Verb)  $(AUTOCC) -c -MMD  $(IFLAG) $(DFLAG) $< -o $@ ; \
+$(ObjDir)/tb_mandel.o: ../../tb_mandel.cpp $(ObjDir)/.dir
+	$(Echo) "   Compiling ../../tb_mandel.cpp in $(BuildMode) mode" $(AVE_DIR_DLOG)
+	$(Verb)  $(CC) ${CCFLAG} -c -MMD  $(IFLAG) $(DFLAG) $< -o $@ ; \
 
 -include $(ObjDir)/tb_mandel.d
 

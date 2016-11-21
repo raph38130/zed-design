@@ -4,6 +4,6 @@
 // Copyright (C) 1986-2016 Xilinx, Inc. All Rights Reserved.
 // ==============================================================
 
-extern unsigned char AESL_WRAP_mandelbrot (
-double cx,
-double cy);
+extern int AESL_WRAP_mandelbrot (
+int cx,
+int cy);

@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# xsim v2016.3 (64-bit)
+# SW Build 1682563 on Mon Oct 10 19:07:26 MDT 2016
+# IP Build 1681267 on Mon Oct 10 21:28:31 MDT 2016
+# Start of session at: Mon Nov 21 10:08:38 2016
+# Process ID: 7543
+# Current directory: /home/raph/zed-design/mandel1/solution1/sim/vhdl
+# Command line: xsim -mode tcl -source {xsim.dir/mandelbrot/xsim_script.tcl}
+# Log file: /home/raph/zed-design/mandel1/solution1/sim/vhdl/xsim.log
+# Journal file: /home/raph/zed-design/mandel1/solution1/sim/vhdl/xsim.jou
+#-----------------------------------------------------------
+source xsim.dir/mandelbrot/xsim_script.tcl
+source mandelbrot.tcl

@@ -1,5 +1,5 @@
 set C_TypeInfoList {{ 
-"mandelbrot" : [[], {"return": [[], {"scalar": "unsigned char"}] }, [{"ExternC" : 0}], [ {"cx": [[], {"scalar": "double"}] }, {"cy": [[], {"scalar": "double"}] }],[],""]
+"mandelbrot" : [[], {"return": [[], {"scalar": "int"}] }, [{"ExternC" : 0}], [ {"cx": [[], {"scalar": "int"}] }, {"cy": [[], {"scalar": "int"}] }],[],""]
 }}
 set moduleName mandelbrot
 set isCombinational 0
@@ -11,49 +11,63 @@ set isOneStateSeq 0
 set ProfileFlag 0
 set StallSigGenFlag 0
 set C_modelName {mandelbrot}
-set C_modelType { int 8 }
+set C_modelType { int 32 }
 set C_modelArgList {
-	{ cx double 64 regular  }
-	{ cy double 64 regular  }
+	{ cx int 32 regular {axi_slave 0}  }
+	{ cy int 32 regular {axi_slave 0}  }
 }
 set C_modelArgMapList {[ 
-	{ "Name" : "cx", "interface" : "wire", "bitwidth" : 64, "direction" : "READONLY", "bitSlice":[{"low":0,"up":63,"cElement": [{"cName": "cx","cData": "double","bit_use": { "low": 0,"up": 63},"cArray": [{"low" : 0,"up" : 0,"step" : 0}]}]}]} , 
- 	{ "Name" : "cy", "interface" : "wire", "bitwidth" : 64, "direction" : "READONLY", "bitSlice":[{"low":0,"up":63,"cElement": [{"cName": "cy","cData": "double","bit_use": { "low": 0,"up": 63},"cArray": [{"low" : 0,"up" : 0,"step" : 0}]}]}]} , 
- 	{ "Name" : "ap_return", "interface" : "wire", "bitwidth" : 8,"bitSlice":[{"low":0,"up":7,"cElement": [{"cName": "return","cData": "unsigned char","bit_use": { "low": 0,"up": 7},"cArray": [{"low" : 0,"up" : 1,"step" : 0}]}]}]} ]}
+	{ "Name" : "cx", "interface" : "axi_slave", "bundle":"AXILiteS","type":"ap_none","bitwidth" : 32, "direction" : "READONLY", "bitSlice":[{"low":0,"up":31,"cElement": [{"cName": "cx","cData": "int","bit_use": { "low": 0,"up": 31},"cArray": [{"low" : 0,"up" : 0,"step" : 0}]}]}], "offset" : {"in":24}, "offset_end" : {"in":31}} , 
+ 	{ "Name" : "cy", "interface" : "axi_slave", "bundle":"AXILiteS","type":"ap_none","bitwidth" : 32, "direction" : "READONLY", "bitSlice":[{"low":0,"up":31,"cElement": [{"cName": "cy","cData": "int","bit_use": { "low": 0,"up": 31},"cArray": [{"low" : 0,"up" : 0,"step" : 0}]}]}], "offset" : {"in":32}, "offset_end" : {"in":39}} , 
+ 	{ "Name" : "ap_return", "interface" : "axi_slave", "bundle":"AXILiteS","type":"ap_none","bitwidth" : 32,"bitSlice":[{"low":0,"up":31,"cElement": [{"cName": "return","cData": "int","bit_use": { "low": 0,"up": 31},"cArray": [{"low" : 0,"up" : 1,"step" : 0}]}]}], "offset" : {"out":16}} ]}
 # RTL Port declarations: 
-set portNum 13
+set portNum 20
 set portList { 
 	{ ap_clk sc_in sc_logic 1 clock -1 } 
-	{ ap_rst sc_in sc_logic 1 reset -1 active_high_sync } 
-	{ ap_start sc_in sc_logic 1 start -1 } 
-	{ ap_done sc_out sc_logic 1 predone -1 } 
-	{ ap_idle sc_out sc_logic 1 done -1 } 
-	{ ap_ready sc_out sc_logic 1 ready -1 } 
-	{ cx sc_in sc_lv 64 signal 0 } 
-	{ cx_ap_vld sc_in sc_logic 1 invld 0 } 
-	{ cx_ap_ack sc_out sc_logic 1 inacc 0 } 
-	{ cy sc_in sc_lv 64 signal 1 } 
-	{ cy_ap_vld sc_in sc_logic 1 invld 1 } 
-	{ cy_ap_ack sc_out sc_logic 1 inacc 1 } 
-	{ ap_return sc_out sc_lv 8 signal -1 } 
+	{ ap_rst_n sc_in sc_logic 1 reset -1 active_low_sync } 
+	{ s_axi_AXILiteS_AWVALID sc_in sc_logic 1 signal -1 } 
+	{ s_axi_AXILiteS_AWREADY sc_out sc_logic 1 signal -1 } 
+	{ s_axi_AXILiteS_AWADDR sc_in sc_lv 6 signal -1 } 
+	{ s_axi_AXILiteS_WVALID sc_in sc_logic 1 signal -1 } 
+	{ s_axi_AXILiteS_WREADY sc_out sc_logic 1 signal -1 } 
+	{ s_axi_AXILiteS_WDATA sc_in sc_lv 32 signal -1 } 
+	{ s_axi_AXILiteS_WSTRB sc_in sc_lv 4 signal -1 } 
+	{ s_axi_AXILiteS_ARVALID sc_in sc_logic 1 signal -1 } 
+	{ s_axi_AXILiteS_ARREADY sc_out sc_logic 1 signal -1 } 
+	{ s_axi_AXILiteS_ARADDR sc_in sc_lv 6 signal -1 } 
+	{ s_axi_AXILiteS_RVALID sc_out sc_logic 1 signal -1 } 
+	{ s_axi_AXILiteS_RREADY sc_in sc_logic 1 signal -1 } 
+	{ s_axi_AXILiteS_RDATA sc_out sc_lv 32 signal -1 } 
+	{ s_axi_AXILiteS_RRESP sc_out sc_lv 2 signal -1 } 
+	{ s_axi_AXILiteS_BVALID sc_out sc_logic 1 signal -1 } 
+	{ s_axi_AXILiteS_BREADY sc_in sc_logic 1 signal -1 } 
+	{ s_axi_AXILiteS_BRESP sc_out sc_lv 2 signal -1 } 
+	{ interrupt sc_out sc_logic 1 signal -1 } 
 }
 set NewPortList {[ 
-	{ "name": "ap_clk", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "clock", "bundle":{"name": "ap_clk", "role": "default" }} , 
- 	{ "name": "ap_rst", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "reset", "bundle":{"name": "ap_rst", "role": "default" }} , 
- 	{ "name": "ap_start", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "start", "bundle":{"name": "ap_start", "role": "default" }} , 
- 	{ "name": "ap_done", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "predone", "bundle":{"name": "ap_done", "role": "default" }} , 
- 	{ "name": "ap_idle", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "done", "bundle":{"name": "ap_idle", "role": "default" }} , 
- 	{ "name": "ap_ready", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "ready", "bundle":{"name": "ap_ready", "role": "default" }} , 
- 	{ "name": "cx", "direction": "in", "datatype": "sc_lv", "bitwidth":64, "type": "signal", "bundle":{"name": "cx", "role": "default" }} , 
- 	{ "name": "cx_ap_vld", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "invld", "bundle":{"name": "cx", "role": "ap_vld" }} , 
- 	{ "name": "cx_ap_ack", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "inacc", "bundle":{"name": "cx", "role": "ap_ack" }} , 
- 	{ "name": "cy", "direction": "in", "datatype": "sc_lv", "bitwidth":64, "type": "signal", "bundle":{"name": "cy", "role": "default" }} , 
- 	{ "name": "cy_ap_vld", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "invld", "bundle":{"name": "cy", "role": "ap_vld" }} , 
- 	{ "name": "cy_ap_ack", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "inacc", "bundle":{"name": "cy", "role": "ap_ack" }} , 
- 	{ "name": "ap_return", "direction": "out", "datatype": "sc_lv", "bitwidth":8, "type": "signal", "bundle":{"name": "ap_return", "role": "default" }}  ]}
+	{ "name": "s_axi_AXILiteS_AWADDR", "direction": "in", "datatype": "sc_lv", "bitwidth":6, "type": "signal", "bundle":{"name": "AXILiteS", "role": "AWADDR" },"address":[{"name":"mandelbrot","role":"start","value":"0","valid_bit":"0"},{"name":"mandelbrot","role":"continue","value":"0","valid_bit":"4"},{"name":"mandelbrot","role":"auto_start","value":"0","valid_bit":"7"},{"name":"cx","role":"data","value":"24"},{"name":"cy","role":"data","value":"32"}] },
+	{ "name": "s_axi_AXILiteS_AWVALID", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "AXILiteS", "role": "AWVALID" } },
+	{ "name": "s_axi_AXILiteS_AWREADY", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "AXILiteS", "role": "AWREADY" } },
+	{ "name": "s_axi_AXILiteS_WVALID", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "AXILiteS", "role": "WVALID" } },
+	{ "name": "s_axi_AXILiteS_WREADY", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "AXILiteS", "role": "WREADY" } },
+	{ "name": "s_axi_AXILiteS_WDATA", "direction": "in", "datatype": "sc_lv", "bitwidth":32, "type": "signal", "bundle":{"name": "AXILiteS", "role": "WDATA" } },
+	{ "name": "s_axi_AXILiteS_WSTRB", "direction": "in", "datatype": "sc_lv", "bitwidth":4, "type": "signal", "bundle":{"name": "AXILiteS", "role": "WSTRB" } },
+	{ "name": "s_axi_AXILiteS_ARADDR", "direction": "in", "datatype": "sc_lv", "bitwidth":6, "type": "signal", "bundle":{"name": "AXILiteS", "role": "ARADDR" },"address":[{"name":"mandelbrot","role":"start","value":"0","valid_bit":"0"},{"name":"mandelbrot","role":"done","value":"0","valid_bit":"1"},{"name":"mandelbrot","role":"idle","value":"0","valid_bit":"2"},{"name":"mandelbrot","role":"ready","value":"0","valid_bit":"3"},{"name":"mandelbrot","role":"auto_start","value":"0","valid_bit":"7"},{"name":"return","role":"data","value":"16"}] },
+	{ "name": "s_axi_AXILiteS_ARVALID", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "AXILiteS", "role": "ARVALID" } },
+	{ "name": "s_axi_AXILiteS_ARREADY", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "AXILiteS", "role": "ARREADY" } },
+	{ "name": "s_axi_AXILiteS_RVALID", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "AXILiteS", "role": "RVALID" } },
+	{ "name": "s_axi_AXILiteS_RREADY", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "AXILiteS", "role": "RREADY" } },
+	{ "name": "s_axi_AXILiteS_RDATA", "direction": "out", "datatype": "sc_lv", "bitwidth":32, "type": "signal", "bundle":{"name": "AXILiteS", "role": "RDATA" } },
+	{ "name": "s_axi_AXILiteS_RRESP", "direction": "out", "datatype": "sc_lv", "bitwidth":2, "type": "signal", "bundle":{"name": "AXILiteS", "role": "RRESP" } },
+	{ "name": "s_axi_AXILiteS_BVALID", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "AXILiteS", "role": "BVALID" } },
+	{ "name": "s_axi_AXILiteS_BREADY", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "AXILiteS", "role": "BREADY" } },
+	{ "name": "s_axi_AXILiteS_BRESP", "direction": "out", "datatype": "sc_lv", "bitwidth":2, "type": "signal", "bundle":{"name": "AXILiteS", "role": "BRESP" } },
+	{ "name": "interrupt", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "signal", "bundle":{"name": "AXILiteS", "role": "interrupt" } }, 
+ 	{ "name": "ap_clk", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "clock", "bundle":{"name": "ap_clk", "role": "default" }} , 
+ 	{ "name": "ap_rst_n", "direction": "in", "datatype": "sc_logic", "bitwidth":1, "type": "reset", "bundle":{"name": "ap_rst_n", "role": "default" }}  ]}
 
 set RtlHierarchyInfo {[
-	{"ID" : "0", "Level" : "0", "Path" : "`AUTOTB_DUT_INST", "Parent" : "", "Child" : ["1", "2", "3", "4", "5"],
+	{"ID" : "0", "Level" : "0", "Path" : "`AUTOTB_DUT_INST", "Parent" : "", "Child" : ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
 		"CDFG" : "mandelbrot",
 		"VariableLatency" : "1",
 		"AlignedPipeline" : "0",
@@ -62,28 +76,28 @@ set RtlHierarchyInfo {[
 		"Combinational" : "0",
 		"ControlExist" : "1",
 		"Port" : [
-		{"Name" : "cx", "Type" : "HS", "Direction" : "I",
-			"BlockSignal" : [
-			{"Name" : "cx_blk_n", "Type" : "RtlSignal"}]},
-		{"Name" : "cy", "Type" : "HS", "Direction" : "I",
-			"BlockSignal" : [
-			{"Name" : "cy_blk_n", "Type" : "RtlSignal"}]}]},
-	{"ID" : "1", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dadddsbkb_U1", "Parent" : "0"},
-	{"ID" : "2", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dmul_6cud_U2", "Parent" : "0"},
-	{"ID" : "3", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dmul_6cud_U3", "Parent" : "0"},
-	{"ID" : "4", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dmul_6cud_U4", "Parent" : "0"},
-	{"ID" : "5", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dcmp_6dEe_U5", "Parent" : "0"}]}
+		{"Name" : "cx", "Type" : "None", "Direction" : "I"},
+		{"Name" : "cy", "Type" : "None", "Direction" : "I"}]},
+	{"ID" : "1", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_AXILiteS_s_axi_U", "Parent" : "0"},
+	{"ID" : "2", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dadddsbkb_U1", "Parent" : "0"},
+	{"ID" : "3", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dadd_6cud_U2", "Parent" : "0"},
+	{"ID" : "4", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dmul_6dEe_U3", "Parent" : "0"},
+	{"ID" : "5", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dmul_6dEe_U4", "Parent" : "0"},
+	{"ID" : "6", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dmul_6dEe_U5", "Parent" : "0"},
+	{"ID" : "7", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_ddiv_6eOg_U6", "Parent" : "0"},
+	{"ID" : "8", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_ddiv_6eOg_U7", "Parent" : "0"},
+	{"ID" : "9", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dcmp_6fYi_U8", "Parent" : "0"},
+	{"ID" : "10", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_sitodpg8j_U9", "Parent" : "0"},
+	{"ID" : "11", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_sitodpg8j_U10", "Parent" : "0"}]}
 
 set hasDtUnsupportedChannel 0
 
 set PerformanceInfo {[
-	{"Name" : "Latency", "Min" : "31", "Max" : "7455"}
-	, {"Name" : "Interval", "Min" : "32", "Max" : "7456"}
+	{"Name" : "Latency", "Min" : "77", "Max" : "7501"}
+	, {"Name" : "Interval", "Min" : "78", "Max" : "7502"}
 ]}
 
 set Spec2ImplPortList { 
-	cx { ap_hs {  { cx in_data 0 64 }  { cx_ap_vld in_vld 0 1 }  { cx_ap_ack in_acc 1 1 } } }
-	cy { ap_hs {  { cy in_data 0 64 }  { cy_ap_vld in_vld 0 1 }  { cy_ap_ack in_acc 1 1 } } }
 }
 
 set busDeadlockParameterList { 

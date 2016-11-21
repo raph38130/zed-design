@@ -37,14 +37,11 @@
 
 int main() 
 {
-
    print("---Entering counter v0.7---\n\r");
    while(1) {
 			   GpioOutputExample(XPAR_AXI_GPIO_0_DEVICE_ID,8);
 			   printf("counter %d\n",COUNTER_mReadReg(XPAR_COUNTER_0_S00_AXI_BASEADDR,0));
 		   }
-
-
 
    print("---Exiting main---\n\r");
    Xil_DCacheDisable();
