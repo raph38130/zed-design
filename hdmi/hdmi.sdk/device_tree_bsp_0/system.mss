@@ -5,7 +5,6 @@
 BEGIN OS
  PARAMETER OS_NAME = device_tree
  PARAMETER PROC_INSTANCE = ps7_cortexa9_0
- PARAMETER bootargs = console=ttyPS0,115200 root=/dev/mmcblk0p2 rw earlyprintk rootfstype=ext4 rootwait
  PARAMETER console_device = ps7_uart_1
  PARAMETER main_memory = ps7_ddr_0
 END
@@ -35,7 +34,7 @@ BEGIN DRIVER
  PARAMETER DRIVER_NAME = axi_vdma
  PARAMETER HW_INSTANCE = axi_hdmi_dma
  PARAMETER interrupt-parent = intc
- PARAMETER interrupts = 0 58 4
+ PARAMETER interrupts = 0 57 4
  PARAMETER reg = 0x43000000 0x10000
  PARAMETER xlnx,flush-fsync = 1
  PARAMETER xlnx,num-fstores = 3
@@ -52,7 +51,7 @@ BEGIN DRIVER
  PARAMETER DRIVER_NAME = axi_iic
  PARAMETER HW_INSTANCE = axi_iic_main
  PARAMETER interrupt-parent = intc
- PARAMETER interrupts = 0 59 4
+ PARAMETER interrupts = 0 58 4
  PARAMETER reg = 0x41600000 0x1000
 END
 
@@ -61,6 +60,26 @@ BEGIN DRIVER
  PARAMETER HW_INSTANCE = axi_spdif_tx_core
  PARAMETER compatible = xlnx,axi-spdif-tx-1.0
  PARAMETER reg = 0x75c00000 0x10000
+END
+
+BEGIN DRIVER
+ PARAMETER DRIVER_NAME = generic
+ PARAMETER HW_INSTANCE = fill_0
+ PARAMETER compatible = xlnx,fill-1.0
+ PARAMETER reg = 0x43c80000 0x80000
+ PARAMETER xlnx,s-axi-axilites-addr-width = 5
+ PARAMETER xlnx,s-axi-axilites-data-width = 32
+END
+
+BEGIN DRIVER
+ PARAMETER DRIVER_NAME = generic
+ PARAMETER HW_INSTANCE = mandelbrot_0
+ PARAMETER compatible = xlnx,mandelbrot-1.0
+ PARAMETER interrupt-parent = intc
+ PARAMETER interrupts = 0 59 4
+ PARAMETER reg = 0x43c00000 0x10000
+ PARAMETER xlnx,s-axi-axilites-addr-width = 6
+ PARAMETER xlnx,s-axi-axilites-data-width = 32
 END
 
 BEGIN DRIVER

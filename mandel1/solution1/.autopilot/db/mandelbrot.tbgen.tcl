@@ -1,5 +1,6 @@
 set C_TypeInfoList {{ 
-"mandelbrot" : [[], {"return": [[], {"scalar": "int"}] }, [{"ExternC" : 0}], [ {"cx": [[], {"scalar": "int"}] }, {"cy": [[], {"scalar": "int"}] }],[],""]
+"mandelbrot" : [[], {"return": [[], {"scalar": "int"}] }, [{"ExternC" : 0}], [ {"cx": [[], {"scalar": "int"}] }, {"cy": [[], {"scalar": "int"}] }],["0"],""],
+ "0": [ "i", [[], {"scalar": "int"}],""]
 }}
 set moduleName mandelbrot
 set isCombinational 0
@@ -77,7 +78,8 @@ set RtlHierarchyInfo {[
 		"ControlExist" : "1",
 		"Port" : [
 		{"Name" : "cx", "Type" : "None", "Direction" : "I"},
-		{"Name" : "cy", "Type" : "None", "Direction" : "I"}]},
+		{"Name" : "cy", "Type" : "None", "Direction" : "I"},
+		{"Name" : "i", "Type" : "Vld", "Direction" : "O"}]},
 	{"ID" : "1", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_AXILiteS_s_axi_U", "Parent" : "0"},
 	{"ID" : "2", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dadddsbkb_U1", "Parent" : "0"},
 	{"ID" : "3", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.mandelbrot_dadd_6cud_U2", "Parent" : "0"},
@@ -93,8 +95,8 @@ set RtlHierarchyInfo {[
 set hasDtUnsupportedChannel 0
 
 set PerformanceInfo {[
-	{"Name" : "Latency", "Min" : "77", "Max" : "7501"}
-	, {"Name" : "Interval", "Min" : "78", "Max" : "7502"}
+	{"Name" : "Latency", "Min" : "49", "Max" : "49"}
+	, {"Name" : "Interval", "Min" : "50", "Max" : "50"}
 ]}
 
 set Spec2ImplPortList { 

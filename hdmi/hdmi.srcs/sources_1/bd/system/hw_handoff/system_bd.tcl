@@ -176,7 +176,7 @@ proc create_root_design { parentCell } {
   # Create instance: axi_cpu_interconnect, and set properties
   set axi_cpu_interconnect [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_cpu_interconnect ]
   set_property -dict [ list \
-CONFIG.NUM_MI {7} \
+CONFIG.NUM_MI {8} \
  ] $axi_cpu_interconnect
 
   # Create instance: axi_hdmi_clkgen, and set properties
@@ -220,6 +220,17 @@ CONFIG.USE_BOARD_FLOW {true} \
 CONFIG.DMA_TYPE {1} \
 CONFIG.S_AXI_ADDRESS_WIDTH {16} \
  ] $axi_spdif_tx_core
+
+  # Create instance: fill_0, and set properties
+  set fill_0 [ create_bd_cell -type ip -vlnv rp:hls:fill:1.1 fill_0 ]
+
+  set_property -dict [ list \
+CONFIG.NUM_READ_OUTSTANDING {1} \
+CONFIG.NUM_WRITE_OUTSTANDING {1} \
+ ] [get_bd_intf_pins /fill_0/s_axi_AXILiteS]
+
+  # Create instance: mandelbrot_0, and set properties
+  set mandelbrot_0 [ create_bd_cell -type ip -vlnv rp:hls:mandelbrot:1.0 mandelbrot_0 ]
 
   # Create instance: sys_audio_clkgen, and set properties
   set sys_audio_clkgen [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:5.3 sys_audio_clkgen ]
@@ -1576,7 +1587,9 @@ CONFIG.C_EXT_RST_WIDTH {1} \
   connect_bd_intf_net -intf_net axi_cpu_interconnect_M02_AXI [get_bd_intf_pins axi_cpu_interconnect/M02_AXI] [get_bd_intf_pins axi_hdmi_core/s_axi]
   connect_bd_intf_net -intf_net axi_cpu_interconnect_M03_AXI [get_bd_intf_pins axi_cpu_interconnect/M03_AXI] [get_bd_intf_pins axi_spdif_tx_core/S_AXI]
   connect_bd_intf_net -intf_net axi_cpu_interconnect_M04_AXI [get_bd_intf_pins axi_cpu_interconnect/M04_AXI] [get_bd_intf_pins axi_i2s_adi/S_AXI]
+  connect_bd_intf_net -intf_net axi_cpu_interconnect_M05_AXI [get_bd_intf_pins axi_cpu_interconnect/M05_AXI] [get_bd_intf_pins mandelbrot_0/s_axi_AXILiteS]
   connect_bd_intf_net -intf_net axi_cpu_interconnect_M06_AXI [get_bd_intf_pins axi_cpu_interconnect/M06_AXI] [get_bd_intf_pins axi_hdmi_dma/S_AXI_LITE]
+  connect_bd_intf_net -intf_net axi_cpu_interconnect_M07_AXI [get_bd_intf_pins axi_cpu_interconnect/M07_AXI] [get_bd_intf_pins fill_0/s_axi_AXILiteS]
   connect_bd_intf_net -intf_net axi_hp0_interconnect_M00_AXI [get_bd_intf_pins axi_hp0_interconnect/M00_AXI] [get_bd_intf_pins sys_ps7/S_AXI_HP0]
   connect_bd_intf_net -intf_net axi_i2s_adi_DMA_REQ_RX [get_bd_intf_pins axi_i2s_adi/DMA_REQ_RX] [get_bd_intf_pins sys_ps7/DMA2_REQ]
   connect_bd_intf_net -intf_net axi_i2s_adi_DMA_REQ_TX [get_bd_intf_pins axi_i2s_adi/DMA_REQ_TX] [get_bd_intf_pins sys_ps7/DMA1_REQ]
@@ -1605,12 +1618,13 @@ CONFIG.C_EXT_RST_WIDTH {1} \
   connect_bd_net -net axi_spdif_tx_core_spdif_tx_o [get_bd_ports spdif] [get_bd_pins axi_spdif_tx_core/spdif_tx_o]
   connect_bd_net -net downstream_scl_I_1 [get_bd_ports iic_mux_scl_I] [get_bd_pins util_i2c_mixer_0/downstream_scl_I]
   connect_bd_net -net downstream_sda_I_1 [get_bd_ports iic_mux_sda_I] [get_bd_pins util_i2c_mixer_0/downstream_sda_I]
+  connect_bd_net -net mandelbrot_0_interrupt [get_bd_pins mandelbrot_0/interrupt] [get_bd_pins sys_concat_intc/In13]
   connect_bd_net -net sys_200m_clk [get_bd_pins axi_hdmi_clkgen/clk] [get_bd_pins sys_audio_clkgen/clk_in1] [get_bd_pins sys_ps7/FCLK_CLK1]
   connect_bd_net -net sys_audio_clkgen_clk_out1 [get_bd_ports i2s_mclk] [get_bd_pins axi_i2s_adi/DATA_CLK_I] [get_bd_pins axi_spdif_tx_core/spdif_data_clk] [get_bd_pins sys_audio_clkgen/clk_out1]
   connect_bd_net -net sys_concat_intc_dout [get_bd_pins sys_concat_intc/dout] [get_bd_pins sys_ps7/IRQ_F2P]
-  connect_bd_net -net sys_cpu_clk [get_bd_pins axi_cpu_interconnect/ACLK] [get_bd_pins axi_cpu_interconnect/M00_ACLK] [get_bd_pins axi_cpu_interconnect/M01_ACLK] [get_bd_pins axi_cpu_interconnect/M02_ACLK] [get_bd_pins axi_cpu_interconnect/M03_ACLK] [get_bd_pins axi_cpu_interconnect/M04_ACLK] [get_bd_pins axi_cpu_interconnect/M05_ACLK] [get_bd_pins axi_cpu_interconnect/M06_ACLK] [get_bd_pins axi_cpu_interconnect/S00_ACLK] [get_bd_pins axi_hdmi_clkgen/s_axi_aclk] [get_bd_pins axi_hdmi_core/s_axi_aclk] [get_bd_pins axi_hdmi_core/vdma_clk] [get_bd_pins axi_hdmi_dma/m_axi_mm2s_aclk] [get_bd_pins axi_hdmi_dma/m_axis_mm2s_aclk] [get_bd_pins axi_hdmi_dma/s_axi_lite_aclk] [get_bd_pins axi_hp0_interconnect/ACLK] [get_bd_pins axi_hp0_interconnect/M00_ACLK] [get_bd_pins axi_hp0_interconnect/S00_ACLK] [get_bd_pins axi_i2s_adi/DMA_REQ_RX_ACLK] [get_bd_pins axi_i2s_adi/DMA_REQ_TX_ACLK] [get_bd_pins axi_i2s_adi/S_AXI_ACLK] [get_bd_pins axi_iic_main/s_axi_aclk] [get_bd_pins axi_spdif_tx_core/DMA_REQ_ACLK] [get_bd_pins axi_spdif_tx_core/S_AXI_ACLK] [get_bd_pins sys_ps7/DMA0_ACLK] [get_bd_pins sys_ps7/DMA1_ACLK] [get_bd_pins sys_ps7/DMA2_ACLK] [get_bd_pins sys_ps7/FCLK_CLK0] [get_bd_pins sys_ps7/M_AXI_GP0_ACLK] [get_bd_pins sys_ps7/S_AXI_HP0_ACLK] [get_bd_pins sys_rstgen/slowest_sync_clk]
+  connect_bd_net -net sys_cpu_clk [get_bd_pins axi_cpu_interconnect/ACLK] [get_bd_pins axi_cpu_interconnect/M00_ACLK] [get_bd_pins axi_cpu_interconnect/M01_ACLK] [get_bd_pins axi_cpu_interconnect/M02_ACLK] [get_bd_pins axi_cpu_interconnect/M03_ACLK] [get_bd_pins axi_cpu_interconnect/M04_ACLK] [get_bd_pins axi_cpu_interconnect/M05_ACLK] [get_bd_pins axi_cpu_interconnect/M06_ACLK] [get_bd_pins axi_cpu_interconnect/M07_ACLK] [get_bd_pins axi_cpu_interconnect/S00_ACLK] [get_bd_pins axi_hdmi_clkgen/s_axi_aclk] [get_bd_pins axi_hdmi_core/s_axi_aclk] [get_bd_pins axi_hdmi_core/vdma_clk] [get_bd_pins axi_hdmi_dma/m_axi_mm2s_aclk] [get_bd_pins axi_hdmi_dma/m_axis_mm2s_aclk] [get_bd_pins axi_hdmi_dma/s_axi_lite_aclk] [get_bd_pins axi_hp0_interconnect/ACLK] [get_bd_pins axi_hp0_interconnect/M00_ACLK] [get_bd_pins axi_hp0_interconnect/S00_ACLK] [get_bd_pins axi_i2s_adi/DMA_REQ_RX_ACLK] [get_bd_pins axi_i2s_adi/DMA_REQ_TX_ACLK] [get_bd_pins axi_i2s_adi/S_AXI_ACLK] [get_bd_pins axi_iic_main/s_axi_aclk] [get_bd_pins axi_spdif_tx_core/DMA_REQ_ACLK] [get_bd_pins axi_spdif_tx_core/S_AXI_ACLK] [get_bd_pins fill_0/ap_clk] [get_bd_pins mandelbrot_0/ap_clk] [get_bd_pins sys_ps7/DMA0_ACLK] [get_bd_pins sys_ps7/DMA1_ACLK] [get_bd_pins sys_ps7/DMA2_ACLK] [get_bd_pins sys_ps7/FCLK_CLK0] [get_bd_pins sys_ps7/M_AXI_GP0_ACLK] [get_bd_pins sys_ps7/S_AXI_HP0_ACLK] [get_bd_pins sys_rstgen/slowest_sync_clk]
   connect_bd_net -net sys_cpu_reset [get_bd_pins sys_rstgen/peripheral_reset]
-  connect_bd_net -net sys_cpu_resetn [get_bd_pins axi_cpu_interconnect/ARESETN] [get_bd_pins axi_cpu_interconnect/M00_ARESETN] [get_bd_pins axi_cpu_interconnect/M01_ARESETN] [get_bd_pins axi_cpu_interconnect/M02_ARESETN] [get_bd_pins axi_cpu_interconnect/M03_ARESETN] [get_bd_pins axi_cpu_interconnect/M04_ARESETN] [get_bd_pins axi_cpu_interconnect/M05_ARESETN] [get_bd_pins axi_cpu_interconnect/M06_ARESETN] [get_bd_pins axi_cpu_interconnect/S00_ARESETN] [get_bd_pins axi_hdmi_clkgen/s_axi_aresetn] [get_bd_pins axi_hdmi_core/s_axi_aresetn] [get_bd_pins axi_hdmi_dma/axi_resetn] [get_bd_pins axi_hp0_interconnect/ARESETN] [get_bd_pins axi_hp0_interconnect/M00_ARESETN] [get_bd_pins axi_hp0_interconnect/S00_ARESETN] [get_bd_pins axi_i2s_adi/DMA_REQ_RX_RSTN] [get_bd_pins axi_i2s_adi/DMA_REQ_TX_RSTN] [get_bd_pins axi_i2s_adi/S_AXI_ARESETN] [get_bd_pins axi_iic_main/s_axi_aresetn] [get_bd_pins axi_spdif_tx_core/DMA_REQ_RSTN] [get_bd_pins axi_spdif_tx_core/S_AXI_ARESETN] [get_bd_pins sys_audio_clkgen/resetn] [get_bd_pins sys_rstgen/peripheral_aresetn]
+  connect_bd_net -net sys_cpu_resetn [get_bd_pins axi_cpu_interconnect/ARESETN] [get_bd_pins axi_cpu_interconnect/M00_ARESETN] [get_bd_pins axi_cpu_interconnect/M01_ARESETN] [get_bd_pins axi_cpu_interconnect/M02_ARESETN] [get_bd_pins axi_cpu_interconnect/M03_ARESETN] [get_bd_pins axi_cpu_interconnect/M04_ARESETN] [get_bd_pins axi_cpu_interconnect/M05_ARESETN] [get_bd_pins axi_cpu_interconnect/M06_ARESETN] [get_bd_pins axi_cpu_interconnect/M07_ARESETN] [get_bd_pins axi_cpu_interconnect/S00_ARESETN] [get_bd_pins axi_hdmi_clkgen/s_axi_aresetn] [get_bd_pins axi_hdmi_core/s_axi_aresetn] [get_bd_pins axi_hdmi_dma/axi_resetn] [get_bd_pins axi_hp0_interconnect/ARESETN] [get_bd_pins axi_hp0_interconnect/M00_ARESETN] [get_bd_pins axi_hp0_interconnect/S00_ARESETN] [get_bd_pins axi_i2s_adi/DMA_REQ_RX_RSTN] [get_bd_pins axi_i2s_adi/DMA_REQ_TX_RSTN] [get_bd_pins axi_i2s_adi/S_AXI_ARESETN] [get_bd_pins axi_iic_main/s_axi_aresetn] [get_bd_pins axi_spdif_tx_core/DMA_REQ_RSTN] [get_bd_pins axi_spdif_tx_core/S_AXI_ARESETN] [get_bd_pins fill_0/ap_rst_n] [get_bd_pins mandelbrot_0/ap_rst_n] [get_bd_pins sys_audio_clkgen/resetn] [get_bd_pins sys_rstgen/peripheral_aresetn]
   connect_bd_net -net sys_ps7_FCLK_RESET0_N [get_bd_pins sys_ps7/FCLK_RESET0_N] [get_bd_pins sys_rstgen/ext_reset_in]
   connect_bd_net -net util_i2c_mixer_0_downstream_scl_O [get_bd_ports iic_mux_scl_O] [get_bd_pins util_i2c_mixer_0/downstream_scl_O]
   connect_bd_net -net util_i2c_mixer_0_downstream_scl_T [get_bd_ports iic_mux_scl_T] [get_bd_pins util_i2c_mixer_0/downstream_scl_T]
@@ -1625,6 +1639,8 @@ CONFIG.C_EXT_RST_WIDTH {1} \
   create_bd_addr_seg -range 0x00010000 -offset 0x77600000 [get_bd_addr_spaces sys_ps7/Data] [get_bd_addr_segs axi_i2s_adi/S_AXI/reg0] SEG_data_axi_i2s_adi
   create_bd_addr_seg -range 0x00001000 -offset 0x41600000 [get_bd_addr_spaces sys_ps7/Data] [get_bd_addr_segs axi_iic_main/S_AXI/Reg] SEG_data_axi_iic_main
   create_bd_addr_seg -range 0x00010000 -offset 0x75C00000 [get_bd_addr_spaces sys_ps7/Data] [get_bd_addr_segs axi_spdif_tx_core/S_AXI/reg0] SEG_data_axi_spdif_tx_core
+  create_bd_addr_seg -range 0x00010000 -offset 0x43C10000 [get_bd_addr_spaces sys_ps7/Data] [get_bd_addr_segs fill_0/s_axi_AXILiteS/Reg] SEG_fill_0_Reg
+  create_bd_addr_seg -range 0x00010000 -offset 0x43C00000 [get_bd_addr_spaces sys_ps7/Data] [get_bd_addr_segs mandelbrot_0/s_axi_AXILiteS/Reg] SEG_mandelbrot_0_Reg
 
   # Perform GUI Layout
   regenerate_bd_layout -layout_string {
@@ -1648,10 +1664,12 @@ preplace portBus iic_mux_scl_I -pg 1 -y 640 -defaultsOSRD -right
 preplace portBus iic_mux_sda_I -pg 1 -y 610 -defaultsOSRD -right
 preplace inst axi_i2s_adi -pg 1 -lvl 3 -y 900 -defaultsOSRD
 preplace inst axi_hdmi_clkgen -pg 1 -lvl 2 -y 780 -defaultsOSRD
-preplace inst axi_hp0_interconnect -pg 1 -lvl 1 -y 350 -defaultsOSRD
-preplace inst axi_hdmi_core -pg 1 -lvl 2 -y 260 -defaultsOSRD
+preplace inst mandelbrot_0 -pg 1 -lvl 3 -y 290 -defaultsOSRD
+preplace inst axi_hp0_interconnect -pg 1 -lvl 1 -y 330 -defaultsOSRD
+preplace inst axi_hdmi_core -pg 1 -lvl 2 -y 230 -defaultsOSRD
 preplace inst axi_iic_main -pg 1 -lvl 3 -y 670 -defaultsOSRD
 preplace inst sys_concat_intc -pg 1 -lvl 2 -y 1170 -defaultsOSRD
+preplace inst fill_0 -pg 1 -lvl 4 -y 400 -defaultsOSRD
 preplace inst sys_audio_clkgen -pg 1 -lvl 3 -y 1430 -defaultsOSRD
 preplace inst axi_hdmi_dma -pg 1 -lvl 2 -y 540 -defaultsOSRD
 preplace inst sys_rstgen -pg 1 -lvl 1 -y 1160 -defaultsOSRD
@@ -1660,51 +1678,54 @@ preplace inst axi_cpu_interconnect -pg 1 -lvl 1 -y 720 -defaultsOSRD
 preplace inst axi_spdif_tx_core -pg 1 -lvl 3 -y 1140 -defaultsOSRD
 preplace inst sys_ps7 -pg 1 -lvl 1 -y 1460 -defaultsOSRD
 preplace netloc axi_cpu_interconnect_M02_AXI 1 1 1 510
-preplace netloc axi_cpu_interconnect_M03_AXI 1 1 2 580J 680 1100
-preplace netloc axi_hdmi_core_hdmi_16_data_e 1 1 3 530 10 NJ 10 1570J
-preplace netloc axi_iic_main_IIC 1 2 2 1160 460 1540
-preplace netloc axi_spdif_tx_core_DMA_REQ 1 0 4 70 1260 570J 1380 1030J 1260 1540
-preplace netloc axi_spdif_tx_core_spdif_tx_o 1 3 1 1570J
-preplace netloc axi_i2s_adi_I2S 1 3 1 NJ
-preplace netloc axi_hp0_interconnect_M00_AXI 1 0 2 30 230 500
-preplace netloc axi_cpu_interconnect_M04_AXI 1 1 2 560J 690 1120
-preplace netloc util_i2c_mixer_0_downstream_sda_O 1 3 1 1570J
-preplace netloc sys_audio_clkgen_clk_out1 1 2 2 1170 1240 1560
-preplace netloc sys_cpu_clk 1 0 3 20 210 530 1530 1090
-preplace netloc axi_i2s_adi_DMA_REQ_TX 1 0 4 50 960 NJ 960 1040J 1040 1540
-preplace netloc axi_cpu_interconnect_M00_AXI 1 1 2 520 650 NJ
-preplace netloc util_i2c_mixer_0_downstream_scl_O 1 3 1 1570J
-preplace netloc axi_hdmi_core_hdmi_16_data 1 1 3 590 30 NJ 30 1540J
-preplace netloc axi_hdmi_clkgen_clk_0 1 1 2 600 70 1080
-preplace netloc sys_ps7_DDR 1 1 3 520J 1390 1140J 1350 NJ
-preplace netloc sys_ps7_DMA1_ACK 1 1 2 NJ 1470 1120
-preplace netloc downstream_scl_I_1 1 2 2 1160 750 1570J
-preplace netloc axi_hdmi_core_hdmi_16_hsync 1 2 2 NJ 230 NJ
+preplace netloc axi_cpu_interconnect_M03_AXI 1 1 2 580J 870 1070
+preplace netloc axi_hdmi_core_hdmi_16_data_e 1 1 4 620 30 NJ 30 NJ 30 2010J
+preplace netloc axi_iic_main_IIC 1 2 2 1160 460 1560
+preplace netloc axi_spdif_tx_core_DMA_REQ 1 0 4 70 1260 530J 1390 1110J 1260 1560
+preplace netloc axi_spdif_tx_core_spdif_tx_o 1 3 2 NJ 1170 2020J
+preplace netloc axi_i2s_adi_I2S 1 3 2 NJ 920 1990J
+preplace netloc axi_hp0_interconnect_M00_AXI 1 0 2 30 450 500
+preplace netloc axi_cpu_interconnect_M04_AXI 1 1 2 550J 690 1070
+preplace netloc util_i2c_mixer_0_downstream_sda_O 1 3 2 NJ 570 2000J
+preplace netloc sys_audio_clkgen_clk_out1 1 2 3 1170 1040 1590 1040 2010
+preplace netloc sys_cpu_clk 1 0 4 20 200 560 1530 1100 1530 1600J
+preplace netloc axi_i2s_adi_DMA_REQ_TX 1 0 4 50 1250 580J 1380 1040J 1250 1570
+preplace netloc mandelbrot_0_interrupt 1 1 3 600 10 NJ 10 1600
+preplace netloc axi_cpu_interconnect_M07_AXI 1 1 3 570 680 1090J 370 NJ
+preplace netloc axi_cpu_interconnect_M00_AXI 1 1 2 N 650 NJ
+preplace netloc util_i2c_mixer_0_downstream_scl_O 1 3 2 NJ 530 2000J
+preplace netloc axi_hdmi_core_hdmi_16_data 1 1 4 610 0 NJ 0 NJ 0 2020J
+preplace netloc axi_hdmi_clkgen_clk_0 1 1 2 640 670 1040
+preplace netloc sys_ps7_DDR 1 1 4 520J 1400 1160J 1350 NJ 1350 NJ
+preplace netloc sys_ps7_DMA1_ACK 1 1 2 NJ 1470 1130
+preplace netloc downstream_scl_I_1 1 2 3 1160 740 NJ 740 2010J
+preplace netloc axi_hdmi_core_hdmi_16_hsync 1 2 3 NJ 200 NJ 200 2000J
 preplace netloc sys_ps7_FCLK_RESET0_N 1 0 2 70 1070 490
-preplace netloc sys_cpu_resetn 1 0 3 50 470 540 910 1150
-preplace netloc axi_cpu_interconnect_M06_AXI 1 1 1 550
-preplace netloc S00_AXI_1 1 0 2 70 480 500
-preplace netloc axi_i2s_adi_DMA_REQ_RX 1 0 4 60 1280 560J 1370 1040J 1280 1550
-preplace netloc util_i2c_mixer_0_downstream_sda_T 1 3 1 1570J
-preplace netloc axi_hdmi_core_vdma_ready 1 2 1 1030
-preplace netloc sys_ps7_FIXED_IO 1 1 3 510J 1400 1170J 1370 NJ
-preplace netloc S00_AXI_2 1 0 3 70 60 NJ 60 1060
-preplace netloc sys_ps7_DMA2_ACK 1 1 2 NJ 1490 1110
-preplace netloc axi_hdmi_core_hdmi_16_vsync 1 2 2 NJ 250 NJ
-preplace netloc axi_hdmi_core_hdmi_out_clk 1 2 2 NJ 210 1540J
-preplace netloc axi_cpu_interconnect_M01_AXI 1 1 1 570
-preplace netloc downstream_sda_I_1 1 2 2 1170 760 1550J
-preplace netloc util_i2c_mixer_0_downstream_scl_T 1 3 1 1570J
-preplace netloc axi_hdmi_dma_m_axis_mm2s_tvalid 1 2 1 1050
-preplace netloc sys_200m_clk 1 1 2 580 1550 1170
-preplace netloc sys_ps7_DMA0_ACK 1 1 2 NJ 1450 1130
-preplace netloc axi_hdmi_dma_m_axis_mm2s_tdata 1 2 1 1040
+preplace netloc sys_cpu_resetn 1 0 4 40 210 520 910 1150 430 NJ
+preplace netloc axi_cpu_interconnect_M05_AXI 1 1 2 540J 660 1080J
+preplace netloc axi_cpu_interconnect_M06_AXI 1 1 1 530
+preplace netloc S00_AXI_1 1 0 2 70 460 500
+preplace netloc axi_i2s_adi_DMA_REQ_RX 1 0 4 60 1280 540J 1370 1050J 1280 1580
+preplace netloc util_i2c_mixer_0_downstream_sda_T 1 3 2 NJ 550 2000J
+preplace netloc axi_hdmi_core_vdma_ready 1 2 1 1040
+preplace netloc sys_ps7_FIXED_IO 1 1 4 510J 1410 1170J 1370 NJ 1370 NJ
+preplace netloc S00_AXI_2 1 0 3 30 20 NJ 20 1070
+preplace netloc sys_ps7_DMA2_ACK 1 1 2 NJ 1490 1120
+preplace netloc axi_hdmi_core_hdmi_16_vsync 1 2 3 NJ 220 NJ 220 1980J
+preplace netloc axi_hdmi_core_hdmi_out_clk 1 2 3 NJ 180 NJ 180 1990J
+preplace netloc axi_cpu_interconnect_M01_AXI 1 1 1 590
+preplace netloc downstream_sda_I_1 1 2 3 1170 750 NJ 750 1990J
+preplace netloc util_i2c_mixer_0_downstream_scl_T 1 3 2 NJ 510 2000J
+preplace netloc axi_hdmi_dma_m_axis_mm2s_tvalid 1 2 1 1060
+preplace netloc sys_200m_clk 1 1 2 590 1550 1170
+preplace netloc sys_ps7_DMA0_ACK 1 1 2 NJ 1450 1140
+preplace netloc axi_hdmi_dma_m_axis_mm2s_tdata 1 2 1 1050
 preplace netloc sys_cpu_reset 1 1 1 N
-preplace netloc axi_iic_main_iic2intc_irpt 1 1 3 600 670 1060J 740 1540
-preplace netloc axi_hdmi_dma_mm2s_introut 1 1 2 590 660 1030
-preplace netloc sys_concat_intc_dout 1 0 3 40 970 NJ 970 1030
-preplace netloc axi_hdmi_core_vdma_fs 1 1 2 580 40 1070
-levelinfo -pg 1 0 280 830 1360 1590 -top 0 -bot 1640
+preplace netloc axi_iic_main_iic2intc_irpt 1 1 3 620 430 1130J 440 1570
+preplace netloc axi_hdmi_dma_mm2s_introut 1 1 2 640 880 1050
+preplace netloc sys_concat_intc_dout 1 0 3 40 980 580J 950 1040
+preplace netloc axi_hdmi_core_vdma_fs 1 1 2 630 40 1040
+levelinfo -pg 1 0 280 840 1380 1790 2040 -top -10 -bot 1640
 ",
 }
 

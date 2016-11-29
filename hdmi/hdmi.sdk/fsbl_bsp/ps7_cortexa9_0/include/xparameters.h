@@ -352,6 +352,25 @@
 
 /******************************************************************/
 
+/* Definitions for driver MANDELBROT */
+#define XPAR_XMANDELBROT_NUM_INSTANCES 1
+
+/* Definitions for peripheral MANDELBROT_0 */
+#define XPAR_MANDELBROT_0_DEVICE_ID 0
+#define XPAR_MANDELBROT_0_S_AXI_AXILITES_BASEADDR 0x43C00000
+#define XPAR_MANDELBROT_0_S_AXI_AXILITES_HIGHADDR 0x43C0FFFF
+
+
+/******************************************************************/
+
+/* Canonical definitions for peripheral MANDELBROT_0 */
+#define XPAR_XMANDELBROT_0_DEVICE_ID XPAR_MANDELBROT_0_DEVICE_ID
+#define XPAR_XMANDELBROT_0_S_AXI_AXILITES_BASEADDR 0x43C00000
+#define XPAR_XMANDELBROT_0_S_AXI_AXILITES_HIGHADDR 0x43C0FFFF
+
+
+/******************************************************************/
+
 /* Definitions for driver QSPIPS */
 #define XPAR_XQSPIPS_NUM_INSTANCES 1
 
@@ -376,8 +395,9 @@
 /******************************************************************/
 
 /* Definitions for Fabric interrupts connected to ps7_scugic_0 */
-#define XPAR_FABRIC_AXI_IIC_MAIN_IIC2INTC_IRPT_INTR 91
-#define XPAR_FABRIC_AXI_HDMI_DMA_MM2S_INTROUT_INTR 90
+#define XPAR_FABRIC_MANDELBROT_0_INTERRUPT_INTR 91
+#define XPAR_FABRIC_AXI_IIC_MAIN_IIC2INTC_IRPT_INTR 90
+#define XPAR_FABRIC_AXI_HDMI_DMA_MM2S_INTROUT_INTR 89
 
 /******************************************************************/
 

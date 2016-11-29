@@ -1,0 +1,36 @@
+{
+   guistr: "# # String gsaved with Nlview 6.6.5b  2016-09-06 bk=1.3687 VDI=39 GEI=35 GUI=JA:1.6
+#  -string -flagsOSRD
+preplace port S_AXI_CONTROL_BUS -pg 1 -y 130 -defaultsOSRD
+preplace port S_AXI_LITE -pg 1 -y 390 -defaultsOSRD
+preplace port mm2s_introut -pg 1 -y 510 -defaultsOSRD
+preplace port M_AXI_MM2S -pg 1 -y 410 -defaultsOSRD
+preplace port M_AXI_S2MM -pg 1 -y 430 -defaultsOSRD
+preplace port s2mm_introut -pg 1 -y 530 -defaultsOSRD
+preplace port mm2s_fsync -pg 1 -y 550 -defaultsOSRD
+preplace port aclk -pg 1 -y 150 -defaultsOSRD
+preplace port s_axi_lite_aclk -pg 1 -y 430 -defaultsOSRD
+preplace port interrupt -pg 1 -y 170 -defaultsOSRD
+preplace portBus aresetn -pg 1 -y 170 -defaultsOSRD
+preplace inst image_filter_1 -pg 1 -lvl 2 -y 160 -defaultsOSRD
+preplace inst axi_vdma_2 -pg 1 -lvl 2 -y 470 -defaultsOSRD
+preplace inst axis_register_slice_0 -pg 1 -lvl 1 -y 320 -defaultsOSRD
+preplace inst axis_register_slice_1 -pg 1 -lvl 1 -y 60 -defaultsOSRD
+preplace netloc Conn1 1 2 1 NJ
+preplace netloc Conn2 1 2 1 NJ
+preplace netloc image_filter_1_OUTPUT_STREAM 1 0 3 40 240 NJ 240 630
+preplace netloc Conn3 1 0 2 NJ 390 NJ
+preplace netloc filter_int_1 1 2 1 NJ
+preplace netloc axi_vdma_2_s2mm_introut 1 2 1 NJ
+preplace netloc axi_interconnect_gp0_M06_AXI 1 0 2 NJ 130 NJ
+preplace netloc mm2s_fsync_1 1 0 2 NJ 550 NJ
+preplace netloc axi_vdma_2_M_AXIS_MM2S 1 0 3 40 140 250J 80 640
+preplace netloc proc_sys_reset_1_interconnect_aresetn 1 0 2 30 190 260
+preplace netloc clk_150mhz 1 0 2 20 450 270
+preplace netloc s_axi_lite_aclk_1 1 0 2 NJ 430 NJ
+preplace netloc axis_register_slice_1_M_AXIS 1 1 1 270
+preplace netloc axis_register_slice_0_M_AXIS 1 1 1 250
+preplace netloc axi_vdma_2_mm2s_introut 1 2 1 NJ
+levelinfo -pg 1 0 150 450 660 -top -10 -bot 600
+",
+}

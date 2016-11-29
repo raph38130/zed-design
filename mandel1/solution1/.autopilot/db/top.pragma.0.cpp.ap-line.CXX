@@ -11,3 +11,6 @@
 #pragma line 6 "<command line>" 2 ::: 193
 #pragma line 1 "<built-in>" 2 ::: 194
 #pragma line 1 "mandel1/solution1/top.cpp" 2 ::: 195
+#pragma line 16 "mandel1/solution1/top.cpp" ::: 213
+#pragma line 16 "mandel1/solution1/top.cpp" ::: 216
+#pragma line 16 "mandel1/solution1/top.cpp" ::: 219

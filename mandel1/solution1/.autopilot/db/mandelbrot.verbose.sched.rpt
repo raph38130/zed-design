@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'mandelbrot'
 ================================================================
-* Date:           Mon Nov 21 10:07:39 2016
+* Date:           Thu Nov 24 23:15:31 2016
 
 * Version:        2016.3 (Build 1682563 on Mon Oct 10 19:41:59 MDT 2016)
 * Project:        mandel1
@@ -20,29 +20,29 @@
     +--------+-------+----------+------------+
     |  Clock | Target| Estimated| Uncertainty|
     +--------+-------+----------+------------+
-    |ap_clk  |  10.00|      8.62|        1.25|
+    |ap_clk  |  10.00|     16.46|        1.25|
     +--------+-------+----------+------------+
 
 + Latency (clock cycles): 
     * Summary: 
-    +-----+------+-----+------+---------+
-    |   Latency  |  Interval  | Pipeline|
-    | min |  max | min |  max |   Type  |
-    +-----+------+-----+------+---------+
-    |   77|  7501|   78|  7502|   none  |
-    +-----+------+-----+------+---------+
+    +-----+-----+-----+-----+---------+
+    |  Latency  |  Interval | Pipeline|
+    | min | max | min | max |   Type  |
+    +-----+-----+-----+-----+---------+
+    |   49|   49|   50|   50|   none  |
+    +-----+-----+-----+-----+---------+
 
     + Detail: 
         * Instance: 
         N/A
 
         * Loop: 
-        +----------+-----+------+----------+-----------+-----------+---------+----------+
-        |          |   Latency  | Iteration|  Initiation Interval  |   Trip  |          |
-        | Loop Name| min |  max |  Latency |  achieved |   target  |  Count  | Pipelined|
-        +----------+-----+------+----------+-----------+-----------+---------+----------+
-        |- Loop 1  |   29|  7452|        29|          -|          -| 1 ~ 256 |    no    |
-        +----------+-----+------+----------+-----------+-----------+---------+----------+
+        +---------------------+-----+-----+----------+-----------+-----------+------+----------+
+        |                     |  Latency  | Iteration|  Initiation Interval  | Trip |          |
+        |      Loop Name      | min | max |  Latency |  achieved |   target  | Count| Pipelined|
+        +---------------------+-----+-----+----------+-----------+-----------+------+----------+
+        |- mandelbrot_label2  |    0|    0|        24|         23|          1|     0|    yes   |
+        +---------------------+-----+-----+----------+-----------+-----------+------+----------+
 
 ============================================================
 + Verbose Summary: Synthesis Manager
@@ -66,12 +66,16 @@ IsDontTouch: 0
 HasImplIP: 0
 IsGatedGlobalClock: 0
 
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 23, depth = 24
+
 
 ============================================================
 + Verbose Summary: Schedule
 ============================================================
-* Number of FSM states: 77
-* Pipeline: 0
+* Number of FSM states: 73
+* Pipeline: 1
+  Pipeline-0: II = 23, D = 24, States = { 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 }
 * Dataflow Pipeline: 0
 
 * FSM state transitions: 
@@ -172,8 +176,8 @@ IsGatedGlobalClock: 0
 48 --> 
 	49  / true
 49 --> 
-	50  / (!tmp_6)
-	77  / (tmp_6)
+	73  / (!icmp)
+	50  / (icmp)
 50 --> 
 	51  / true
 51 --> 
@@ -219,711 +223,712 @@ IsGatedGlobalClock: 0
 71 --> 
 	72  / true
 72 --> 
-	73  / true
+	49  / true
 73 --> 
-	74  / true
-74 --> 
-	75  / true
-75 --> 
-	76  / true
-76 --> 
-	77  / true
-77 --> 
-	49  / (!tmp_6 & !tmp_18)
 * FSM state operations: 
 
  <State 1>: 7.28ns
-ST_1: cy_read (7)  [1/1] 1.00ns
+ST_1: cy_read (8)  [1/1] 1.00ns
 :4  %cy_read = call i32 @_ssdm_op_Read.s_axilite.i32(i32 %cy) nounwind
 
-ST_1: cx_read (8)  [1/1] 1.00ns
+ST_1: cx_read (9)  [1/1] 1.00ns
 :5  %cx_read = call i32 @_ssdm_op_Read.s_axilite.i32(i32 %cx) nounwind
 
-ST_1: tmp (12)  [6/6] 6.28ns  loc: mandel1/solution1/top.cpp:11
+ST_1: tmp (13)  [6/6] 6.28ns  loc: mandel1/solution1/top.cpp:14
 :9  %tmp = sitofp i32 %cx_read to double
 
-ST_1: tmp_3 (16)  [6/6] 6.28ns  loc: mandel1/solution1/top.cpp:11
+ST_1: tmp_3 (17)  [6/6] 6.28ns  loc: mandel1/solution1/top.cpp:14
 :13  %tmp_3 = sitofp i32 %cy_read to double
 
 
  <State 2>: 6.28ns
-ST_2: tmp (12)  [5/6] 6.28ns  loc: mandel1/solution1/top.cpp:11
+ST_2: tmp (13)  [5/6] 6.28ns  loc: mandel1/solution1/top.cpp:14
 :9  %tmp = sitofp i32 %cx_read to double
 
-ST_2: tmp_3 (16)  [5/6] 6.28ns  loc: mandel1/solution1/top.cpp:11
+ST_2: tmp_3 (17)  [5/6] 6.28ns  loc: mandel1/solution1/top.cpp:14
 :13  %tmp_3 = sitofp i32 %cy_read to double
 
 
  <State 3>: 6.28ns
-ST_3: tmp (12)  [4/6] 6.28ns  loc: mandel1/solution1/top.cpp:11
+ST_3: tmp (13)  [4/6] 6.28ns  loc: mandel1/solution1/top.cpp:14
 :9  %tmp = sitofp i32 %cx_read to double
 
-ST_3: tmp_3 (16)  [4/6] 6.28ns  loc: mandel1/solution1/top.cpp:11
+ST_3: tmp_3 (17)  [4/6] 6.28ns  loc: mandel1/solution1/top.cpp:14
 :13  %tmp_3 = sitofp i32 %cy_read to double
 
 
  <State 4>: 6.28ns
-ST_4: tmp (12)  [3/6] 6.28ns  loc: mandel1/solution1/top.cpp:11
+ST_4: tmp (13)  [3/6] 6.28ns  loc: mandel1/solution1/top.cpp:14
 :9  %tmp = sitofp i32 %cx_read to double
 
-ST_4: tmp_3 (16)  [3/6] 6.28ns  loc: mandel1/solution1/top.cpp:11
+ST_4: tmp_3 (17)  [3/6] 6.28ns  loc: mandel1/solution1/top.cpp:14
 :13  %tmp_3 = sitofp i32 %cy_read to double
 
 
  <State 5>: 6.28ns
-ST_5: tmp (12)  [2/6] 6.28ns  loc: mandel1/solution1/top.cpp:11
+ST_5: tmp (13)  [2/6] 6.28ns  loc: mandel1/solution1/top.cpp:14
 :9  %tmp = sitofp i32 %cx_read to double
 
-ST_5: tmp_3 (16)  [2/6] 6.28ns  loc: mandel1/solution1/top.cpp:11
+ST_5: tmp_3 (17)  [2/6] 6.28ns  loc: mandel1/solution1/top.cpp:14
 :13  %tmp_3 = sitofp i32 %cy_read to double
 
 
  <State 6>: 6.28ns
-ST_6: tmp (12)  [1/6] 6.28ns  loc: mandel1/solution1/top.cpp:11
+ST_6: tmp (13)  [1/6] 6.28ns  loc: mandel1/solution1/top.cpp:14
 :9  %tmp = sitofp i32 %cx_read to double
 
-ST_6: tmp_3 (16)  [1/6] 6.28ns  loc: mandel1/solution1/top.cpp:11
+ST_6: tmp_3 (17)  [1/6] 6.28ns  loc: mandel1/solution1/top.cpp:14
 :13  %tmp_3 = sitofp i32 %cy_read to double
 
 
  <State 7>: 8.62ns
-ST_7: tmp_1 (13)  [31/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_7: tmp_1 (14)  [31/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_7: tmp_4 (17)  [31/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_7: tmp_4 (18)  [31/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 8>: 8.62ns
-ST_8: tmp_1 (13)  [30/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_8: tmp_1 (14)  [30/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_8: tmp_4 (17)  [30/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_8: tmp_4 (18)  [30/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 9>: 8.62ns
-ST_9: tmp_1 (13)  [29/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_9: tmp_1 (14)  [29/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_9: tmp_4 (17)  [29/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_9: tmp_4 (18)  [29/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 10>: 8.62ns
-ST_10: tmp_1 (13)  [28/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_10: tmp_1 (14)  [28/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_10: tmp_4 (17)  [28/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_10: tmp_4 (18)  [28/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 11>: 8.62ns
-ST_11: tmp_1 (13)  [27/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_11: tmp_1 (14)  [27/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_11: tmp_4 (17)  [27/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_11: tmp_4 (18)  [27/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 12>: 8.62ns
-ST_12: tmp_1 (13)  [26/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_12: tmp_1 (14)  [26/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_12: tmp_4 (17)  [26/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_12: tmp_4 (18)  [26/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 13>: 8.62ns
-ST_13: tmp_1 (13)  [25/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_13: tmp_1 (14)  [25/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_13: tmp_4 (17)  [25/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_13: tmp_4 (18)  [25/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 14>: 8.62ns
-ST_14: tmp_1 (13)  [24/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_14: tmp_1 (14)  [24/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_14: tmp_4 (17)  [24/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_14: tmp_4 (18)  [24/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 15>: 8.62ns
-ST_15: tmp_1 (13)  [23/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_15: tmp_1 (14)  [23/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_15: tmp_4 (17)  [23/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_15: tmp_4 (18)  [23/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 16>: 8.62ns
-ST_16: tmp_1 (13)  [22/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_16: tmp_1 (14)  [22/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_16: tmp_4 (17)  [22/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_16: tmp_4 (18)  [22/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 17>: 8.62ns
-ST_17: tmp_1 (13)  [21/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_17: tmp_1 (14)  [21/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_17: tmp_4 (17)  [21/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_17: tmp_4 (18)  [21/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 18>: 8.62ns
-ST_18: tmp_1 (13)  [20/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_18: tmp_1 (14)  [20/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_18: tmp_4 (17)  [20/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_18: tmp_4 (18)  [20/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 19>: 8.62ns
-ST_19: tmp_1 (13)  [19/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_19: tmp_1 (14)  [19/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_19: tmp_4 (17)  [19/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_19: tmp_4 (18)  [19/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 20>: 8.62ns
-ST_20: tmp_1 (13)  [18/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_20: tmp_1 (14)  [18/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_20: tmp_4 (17)  [18/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_20: tmp_4 (18)  [18/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 21>: 8.62ns
-ST_21: tmp_1 (13)  [17/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_21: tmp_1 (14)  [17/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_21: tmp_4 (17)  [17/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_21: tmp_4 (18)  [17/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 22>: 8.62ns
-ST_22: tmp_1 (13)  [16/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_22: tmp_1 (14)  [16/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_22: tmp_4 (17)  [16/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_22: tmp_4 (18)  [16/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 23>: 8.62ns
-ST_23: tmp_1 (13)  [15/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_23: tmp_1 (14)  [15/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_23: tmp_4 (17)  [15/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_23: tmp_4 (18)  [15/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 24>: 8.62ns
-ST_24: tmp_1 (13)  [14/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_24: tmp_1 (14)  [14/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_24: tmp_4 (17)  [14/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_24: tmp_4 (18)  [14/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 25>: 8.62ns
-ST_25: tmp_1 (13)  [13/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_25: tmp_1 (14)  [13/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_25: tmp_4 (17)  [13/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_25: tmp_4 (18)  [13/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 26>: 8.62ns
-ST_26: tmp_1 (13)  [12/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_26: tmp_1 (14)  [12/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_26: tmp_4 (17)  [12/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_26: tmp_4 (18)  [12/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 27>: 8.62ns
-ST_27: tmp_1 (13)  [11/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_27: tmp_1 (14)  [11/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_27: tmp_4 (17)  [11/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_27: tmp_4 (18)  [11/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 28>: 8.62ns
-ST_28: tmp_1 (13)  [10/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_28: tmp_1 (14)  [10/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_28: tmp_4 (17)  [10/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_28: tmp_4 (18)  [10/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 29>: 8.62ns
-ST_29: tmp_1 (13)  [9/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_29: tmp_1 (14)  [9/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_29: tmp_4 (17)  [9/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_29: tmp_4 (18)  [9/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 30>: 8.62ns
-ST_30: tmp_1 (13)  [8/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_30: tmp_1 (14)  [8/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_30: tmp_4 (17)  [8/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_30: tmp_4 (18)  [8/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 31>: 8.62ns
-ST_31: tmp_1 (13)  [7/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_31: tmp_1 (14)  [7/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_31: tmp_4 (17)  [7/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_31: tmp_4 (18)  [7/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 32>: 8.62ns
-ST_32: tmp_1 (13)  [6/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_32: tmp_1 (14)  [6/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_32: tmp_4 (17)  [6/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_32: tmp_4 (18)  [6/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 33>: 8.62ns
-ST_33: tmp_1 (13)  [5/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_33: tmp_1 (14)  [5/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_33: tmp_4 (17)  [5/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_33: tmp_4 (18)  [5/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 34>: 8.62ns
-ST_34: tmp_1 (13)  [4/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_34: tmp_1 (14)  [4/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_34: tmp_4 (17)  [4/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_34: tmp_4 (18)  [4/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 35>: 8.62ns
-ST_35: tmp_1 (13)  [3/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_35: tmp_1 (14)  [3/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_35: tmp_4 (17)  [3/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_35: tmp_4 (18)  [3/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 36>: 8.62ns
-ST_36: tmp_1 (13)  [2/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_36: tmp_1 (14)  [2/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_36: tmp_4 (17)  [2/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_36: tmp_4 (18)  [2/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 37>: 8.62ns
-ST_37: tmp_1 (13)  [1/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_37: tmp_1 (14)  [1/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :10  %tmp_1 = fdiv double %tmp, 6.400000e+02
 
-ST_37: tmp_4 (17)  [1/31] 8.62ns  loc: mandel1/solution1/top.cpp:11
+ST_37: tmp_4 (18)  [1/31] 8.62ns  loc: mandel1/solution1/top.cpp:14
 :14  %tmp_4 = fdiv double %tmp_3, 4.800000e+02
 
 
  <State 38>: 7.79ns
-ST_38: tmp_2 (14)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:11
+ST_38: tmp_2 (15)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:14
 :11  %tmp_2 = fmul double %tmp_1, 3.000000e+00
 
-ST_38: tmp_5 (18)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:11
+ST_38: tmp_5 (19)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:14
 :15  %tmp_5 = fmul double %tmp_4, -2.000000e+00
 
 
  <State 39>: 7.79ns
-ST_39: tmp_2 (14)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:11
+ST_39: tmp_2 (15)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:14
 :11  %tmp_2 = fmul double %tmp_1, 3.000000e+00
 
-ST_39: tmp_5 (18)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:11
+ST_39: tmp_5 (19)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:14
 :15  %tmp_5 = fmul double %tmp_4, -2.000000e+00
 
 
  <State 40>: 7.79ns
-ST_40: tmp_2 (14)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:11
+ST_40: tmp_2 (15)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:14
 :11  %tmp_2 = fmul double %tmp_1, 3.000000e+00
 
-ST_40: tmp_5 (18)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:11
+ST_40: tmp_5 (19)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:14
 :15  %tmp_5 = fmul double %tmp_4, -2.000000e+00
 
 
  <State 41>: 7.79ns
-ST_41: tmp_2 (14)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:11
+ST_41: tmp_2 (15)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:14
 :11  %tmp_2 = fmul double %tmp_1, 3.000000e+00
 
-ST_41: tmp_5 (18)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:11
+ST_41: tmp_5 (19)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:14
 :15  %tmp_5 = fmul double %tmp_4, -2.000000e+00
 
 
  <State 42>: 7.79ns
-ST_42: tmp_2 (14)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:11
+ST_42: tmp_2 (15)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:14
 :11  %tmp_2 = fmul double %tmp_1, 3.000000e+00
 
-ST_42: tmp_5 (18)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:11
+ST_42: tmp_5 (19)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:14
 :15  %tmp_5 = fmul double %tmp_4, -2.000000e+00
 
 
  <State 43>: 7.79ns
-ST_43: tmp_2 (14)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:11
+ST_43: tmp_2 (15)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:14
 :11  %tmp_2 = fmul double %tmp_1, 3.000000e+00
 
-ST_43: tmp_5 (18)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:11
+ST_43: tmp_5 (19)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:14
 :15  %tmp_5 = fmul double %tmp_4, -2.000000e+00
 
 
  <State 44>: 8.23ns
-ST_44: dcx (15)  [5/5] 8.23ns  loc: mandel1/solution1/top.cpp:11
+ST_44: dcx (16)  [5/5] 8.23ns  loc: mandel1/solution1/top.cpp:14
 :12  %dcx = fadd double %tmp_2, -2.000000e+00
 
-ST_44: dcy (19)  [5/5] 8.23ns  loc: mandel1/solution1/top.cpp:11
+ST_44: dcy (20)  [5/5] 8.23ns  loc: mandel1/solution1/top.cpp:14
 :16  %dcy = fadd double %tmp_5, 1.000000e+00
 
 
  <State 45>: 8.23ns
-ST_45: dcx (15)  [4/5] 8.23ns  loc: mandel1/solution1/top.cpp:11
+ST_45: dcx (16)  [4/5] 8.23ns  loc: mandel1/solution1/top.cpp:14
 :12  %dcx = fadd double %tmp_2, -2.000000e+00
 
-ST_45: dcy (19)  [4/5] 8.23ns  loc: mandel1/solution1/top.cpp:11
+ST_45: dcy (20)  [4/5] 8.23ns  loc: mandel1/solution1/top.cpp:14
 :16  %dcy = fadd double %tmp_5, 1.000000e+00
 
 
  <State 46>: 8.23ns
-ST_46: dcx (15)  [3/5] 8.23ns  loc: mandel1/solution1/top.cpp:11
+ST_46: dcx (16)  [3/5] 8.23ns  loc: mandel1/solution1/top.cpp:14
 :12  %dcx = fadd double %tmp_2, -2.000000e+00
 
-ST_46: dcy (19)  [3/5] 8.23ns  loc: mandel1/solution1/top.cpp:11
+ST_46: dcy (20)  [3/5] 8.23ns  loc: mandel1/solution1/top.cpp:14
 :16  %dcy = fadd double %tmp_5, 1.000000e+00
 
 
  <State 47>: 8.23ns
-ST_47: dcx (15)  [2/5] 8.23ns  loc: mandel1/solution1/top.cpp:11
+ST_47: dcx (16)  [2/5] 8.23ns  loc: mandel1/solution1/top.cpp:14
 :12  %dcx = fadd double %tmp_2, -2.000000e+00
 
-ST_47: dcy (19)  [2/5] 8.23ns  loc: mandel1/solution1/top.cpp:11
+ST_47: dcy (20)  [2/5] 8.23ns  loc: mandel1/solution1/top.cpp:14
 :16  %dcy = fadd double %tmp_5, 1.000000e+00
 
 
  <State 48>: 8.23ns
-ST_48: StgValue_174 (3)  [1/1] 0.00ns
-:0  call void (...)* @_ssdm_op_SpecBitsMap(i32 %cx) nounwind, !map !7
+ST_48: StgValue_170 (4)  [1/1] 0.00ns
+:0  call void (...)* @_ssdm_op_SpecBitsMap(i32 %cx) nounwind, !map !25
 
-ST_48: StgValue_175 (4)  [1/1] 0.00ns
-:1  call void (...)* @_ssdm_op_SpecBitsMap(i32 %cy) nounwind, !map !13
+ST_48: StgValue_171 (5)  [1/1] 0.00ns
+:1  call void (...)* @_ssdm_op_SpecBitsMap(i32 %cy) nounwind, !map !31
 
-ST_48: StgValue_176 (5)  [1/1] 0.00ns
-:2  call void (...)* @_ssdm_op_SpecBitsMap(i32 0) nounwind, !map !17
+ST_48: StgValue_172 (6)  [1/1] 0.00ns
+:2  call void (...)* @_ssdm_op_SpecBitsMap(i32 0) nounwind, !map !35
 
-ST_48: StgValue_177 (6)  [1/1] 0.00ns
+ST_48: StgValue_173 (7)  [1/1] 0.00ns
 :3  call void (...)* @_ssdm_op_SpecTopModule([11 x i8]* @mandelbrot_str) nounwind
 
-ST_48: StgValue_178 (9)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:2
+ST_48: StgValue_174 (10)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:7
 :6  call void (...)* @_ssdm_op_SpecInterface(i32 %cy, [10 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1) nounwind
 
-ST_48: StgValue_179 (10)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:3
+ST_48: StgValue_175 (11)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:8
 :7  call void (...)* @_ssdm_op_SpecInterface(i32 %cx, [10 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1) nounwind
 
-ST_48: StgValue_180 (11)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:4
+ST_48: StgValue_176 (12)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:9
 :8  call void (...)* @_ssdm_op_SpecInterface(i32 0, [10 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1) nounwind
 
-ST_48: dcx (15)  [1/5] 8.23ns  loc: mandel1/solution1/top.cpp:11
+ST_48: dcx (16)  [1/5] 8.23ns  loc: mandel1/solution1/top.cpp:14
 :12  %dcx = fadd double %tmp_2, -2.000000e+00
 
-ST_48: dcy (19)  [1/5] 8.23ns  loc: mandel1/solution1/top.cpp:11
+ST_48: dcy (20)  [1/5] 8.23ns  loc: mandel1/solution1/top.cpp:14
 :16  %dcy = fadd double %tmp_5, 1.000000e+00
 
-ST_48: StgValue_183 (20)  [1/1] 1.57ns  loc: mandel1/solution1/top.cpp:14
+ST_48: StgValue_179 (21)  [1/1] 1.57ns  loc: mandel1/solution1/top.cpp:16
 :17  br label %1
 
 
  <State 49>: 7.79ns
-ST_49: t (22)  [1/1] 0.00ns
-:0  %t = phi double [ 0.000000e+00, %0 ], [ %x, %2 ]
+ST_49: tmp_6 (23)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:16
+:0  %tmp_6 = phi i32 [ 0, %0 ], [ %tmp_16, %._crit_edge ]
 
-ST_49: y (23)  [1/1] 0.00ns
-:1  %y = phi double [ 0.000000e+00, %0 ], [ %y_1, %2 ]
+ST_49: t (24)  [1/1] 0.00ns
+:1  %t = phi double [ 0.000000e+00, %0 ], [ %x, %._crit_edge ]
 
-ST_49: i (24)  [1/1] 0.00ns
-:2  %i = phi i9 [ 0, %0 ], [ %i_1, %2 ]
+ST_49: y (25)  [1/1] 0.00ns
+:2  %y = phi double [ 0.000000e+00, %0 ], [ %y_1, %._crit_edge ]
 
-ST_49: tmp_6 (25)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:14
-:3  %tmp_6 = call i1 @_ssdm_op_BitSelect.i1.i9.i32(i9 %i, i32 8)
+ST_49: tmp_7 (26)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:16
+:3  %tmp_7 = call i24 @_ssdm_op_PartSelect.i24.i32.i32.i32(i32 %tmp_6, i32 8, i32 31)
 
-ST_49: empty (26)  [1/1] 0.00ns
-:4  %empty = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 1, i64 256, i64 128) nounwind
+ST_49: icmp (27)  [1/1] 2.40ns  loc: mandel1/solution1/top.cpp:16
+:4  %icmp = icmp slt i24 %tmp_7, 1
 
-ST_49: i_1 (27)  [1/1] 1.84ns  loc: mandel1/solution1/top.cpp:14
-:5  %i_1 = add i9 %i, 1
+ST_49: StgValue_185 (28)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:16
+:5  br i1 %icmp, label %._crit_edge, label %2
 
-ST_49: StgValue_190 (28)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:14
-:6  br i1 %tmp_6, label %.loopexit, label %2
+ST_49: tmp_8 (34)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:4  %tmp_8 = fmul double %t, %t
 
-ST_49: tmp_7 (30)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:16
-:0  %tmp_7 = fmul double %t, %t
+ST_49: tmp_9 (35)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:5  %tmp_9 = fmul double %y, %y
 
-ST_49: tmp_8 (31)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:16
-:1  %tmp_8 = fmul double %y, %y
-
-ST_49: tmp_s (34)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:17
-:4  %tmp_s = fmul double %t, 2.000000e+00
+ST_49: tmp_10 (38)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:8  %tmp_10 = fmul double %t, 2.000000e+00
 
 
  <State 50>: 7.79ns
-ST_50: tmp_7 (30)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:16
-:0  %tmp_7 = fmul double %t, %t
+ST_50: tmp_8 (34)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:4  %tmp_8 = fmul double %t, %t
 
-ST_50: tmp_8 (31)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:16
-:1  %tmp_8 = fmul double %y, %y
+ST_50: tmp_9 (35)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:5  %tmp_9 = fmul double %y, %y
 
-ST_50: tmp_s (34)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:17
-:4  %tmp_s = fmul double %t, 2.000000e+00
+ST_50: tmp_10 (38)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:8  %tmp_10 = fmul double %t, 2.000000e+00
 
 
  <State 51>: 7.79ns
-ST_51: tmp_7 (30)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:16
-:0  %tmp_7 = fmul double %t, %t
+ST_51: tmp_8 (34)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:4  %tmp_8 = fmul double %t, %t
 
-ST_51: tmp_8 (31)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:16
-:1  %tmp_8 = fmul double %y, %y
+ST_51: tmp_9 (35)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:5  %tmp_9 = fmul double %y, %y
 
-ST_51: tmp_s (34)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:17
-:4  %tmp_s = fmul double %t, 2.000000e+00
+ST_51: tmp_10 (38)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:8  %tmp_10 = fmul double %t, 2.000000e+00
 
 
  <State 52>: 7.79ns
-ST_52: tmp_7 (30)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:16
-:0  %tmp_7 = fmul double %t, %t
+ST_52: tmp_8 (34)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:4  %tmp_8 = fmul double %t, %t
 
-ST_52: tmp_8 (31)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:16
-:1  %tmp_8 = fmul double %y, %y
+ST_52: tmp_9 (35)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:5  %tmp_9 = fmul double %y, %y
 
-ST_52: tmp_s (34)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:17
-:4  %tmp_s = fmul double %t, 2.000000e+00
+ST_52: tmp_10 (38)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:8  %tmp_10 = fmul double %t, 2.000000e+00
 
 
  <State 53>: 7.79ns
-ST_53: tmp_7 (30)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:16
-:0  %tmp_7 = fmul double %t, %t
+ST_53: tmp_8 (34)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:4  %tmp_8 = fmul double %t, %t
 
-ST_53: tmp_8 (31)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:16
-:1  %tmp_8 = fmul double %y, %y
+ST_53: tmp_9 (35)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:5  %tmp_9 = fmul double %y, %y
 
-ST_53: tmp_s (34)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:17
-:4  %tmp_s = fmul double %t, 2.000000e+00
+ST_53: tmp_10 (38)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:8  %tmp_10 = fmul double %t, 2.000000e+00
 
 
- <State 54>: 7.79ns
-ST_54: tmp_7 (30)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:16
-:0  %tmp_7 = fmul double %t, %t
+ <State 54>: 15.58ns
+ST_54: tmp_8 (34)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:4  %tmp_8 = fmul double %t, %t
 
-ST_54: tmp_8 (31)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:16
-:1  %tmp_8 = fmul double %y, %y
+ST_54: tmp_9 (35)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:5  %tmp_9 = fmul double %y, %y
 
-ST_54: tmp_s (34)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:17
-:4  %tmp_s = fmul double %t, 2.000000e+00
+ST_54: tmp_10 (38)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:8  %tmp_10 = fmul double %t, 2.000000e+00
+
+ST_54: tmp_11 (39)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:9  %tmp_11 = fmul double %tmp_10, %y
+
+ST_54: tmp_6_op (53)  [1/1] 2.44ns  loc: mandel1/solution1/top.cpp:16
+._crit_edge:23  %tmp_6_op = add i32 1, %tmp_6
 
 
  <State 55>: 8.23ns
-ST_55: tmp_9 (32)  [5/5] 8.23ns  loc: mandel1/solution1/top.cpp:16
-:2  %tmp_9 = fsub double %tmp_7, %tmp_8
+ST_55: tmp_s (36)  [5/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:6  %tmp_s = fsub double %tmp_8, %tmp_9
 
-ST_55: tmp_10 (35)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:17
-:5  %tmp_10 = fmul double %tmp_s, %y
+ST_55: tmp_11 (39)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:9  %tmp_11 = fmul double %tmp_10, %y
 
 
  <State 56>: 8.23ns
-ST_56: tmp_9 (32)  [4/5] 8.23ns  loc: mandel1/solution1/top.cpp:16
-:2  %tmp_9 = fsub double %tmp_7, %tmp_8
+ST_56: tmp_s (36)  [4/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:6  %tmp_s = fsub double %tmp_8, %tmp_9
 
-ST_56: tmp_10 (35)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:17
-:5  %tmp_10 = fmul double %tmp_s, %y
+ST_56: tmp_11 (39)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:9  %tmp_11 = fmul double %tmp_10, %y
 
 
  <State 57>: 8.23ns
-ST_57: tmp_9 (32)  [3/5] 8.23ns  loc: mandel1/solution1/top.cpp:16
-:2  %tmp_9 = fsub double %tmp_7, %tmp_8
+ST_57: tmp_s (36)  [3/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:6  %tmp_s = fsub double %tmp_8, %tmp_9
 
-ST_57: tmp_10 (35)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:17
-:5  %tmp_10 = fmul double %tmp_s, %y
+ST_57: tmp_11 (39)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:9  %tmp_11 = fmul double %tmp_10, %y
 
 
  <State 58>: 8.23ns
-ST_58: tmp_9 (32)  [2/5] 8.23ns  loc: mandel1/solution1/top.cpp:16
-:2  %tmp_9 = fsub double %tmp_7, %tmp_8
+ST_58: tmp_s (36)  [2/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:6  %tmp_s = fsub double %tmp_8, %tmp_9
 
-ST_58: tmp_10 (35)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:17
-:5  %tmp_10 = fmul double %tmp_s, %y
+ST_58: tmp_11 (39)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:9  %tmp_11 = fmul double %tmp_10, %y
 
 
- <State 59>: 8.23ns
-ST_59: tmp_9 (32)  [1/5] 8.23ns  loc: mandel1/solution1/top.cpp:16
-:2  %tmp_9 = fsub double %tmp_7, %tmp_8
+ <State 59>: 16.46ns
+ST_59: tmp_s (36)  [1/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:6  %tmp_s = fsub double %tmp_8, %tmp_9
 
-ST_59: tmp_10 (35)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:17
-:5  %tmp_10 = fmul double %tmp_s, %y
+ST_59: x (37)  [5/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:7  %x = fadd double %tmp_s, %dcx
+
+ST_59: tmp_11 (39)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:9  %tmp_11 = fmul double %tmp_10, %y
+
+ST_59: y_1 (40)  [5/5] 8.23ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:10  %y_1 = fadd double %tmp_11, %dcy
 
 
  <State 60>: 8.23ns
-ST_60: x (33)  [5/5] 8.23ns  loc: mandel1/solution1/top.cpp:16
-:3  %x = fadd double %tmp_9, %dcx
+ST_60: x (37)  [4/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:7  %x = fadd double %tmp_s, %dcx
 
-ST_60: tmp_10 (35)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:17
-:5  %tmp_10 = fmul double %tmp_s, %y
+ST_60: y_1 (40)  [4/5] 8.23ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:10  %y_1 = fadd double %tmp_11, %dcy
 
 
  <State 61>: 8.23ns
-ST_61: x (33)  [4/5] 8.23ns  loc: mandel1/solution1/top.cpp:16
-:3  %x = fadd double %tmp_9, %dcx
+ST_61: x (37)  [3/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:7  %x = fadd double %tmp_s, %dcx
 
-ST_61: y_1 (36)  [5/5] 8.23ns  loc: mandel1/solution1/top.cpp:17
-:6  %y_1 = fadd double %tmp_10, %dcy
+ST_61: y_1 (40)  [3/5] 8.23ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:10  %y_1 = fadd double %tmp_11, %dcy
 
 
  <State 62>: 8.23ns
-ST_62: x (33)  [3/5] 8.23ns  loc: mandel1/solution1/top.cpp:16
-:3  %x = fadd double %tmp_9, %dcx
+ST_62: x (37)  [2/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:7  %x = fadd double %tmp_s, %dcx
 
-ST_62: y_1 (36)  [4/5] 8.23ns  loc: mandel1/solution1/top.cpp:17
-:6  %y_1 = fadd double %tmp_10, %dcy
-
-
- <State 63>: 8.23ns
-ST_63: x (33)  [2/5] 8.23ns  loc: mandel1/solution1/top.cpp:16
-:3  %x = fadd double %tmp_9, %dcx
-
-ST_63: y_1 (36)  [3/5] 8.23ns  loc: mandel1/solution1/top.cpp:17
-:6  %y_1 = fadd double %tmp_10, %dcy
+ST_62: y_1 (40)  [2/5] 8.23ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:10  %y_1 = fadd double %tmp_11, %dcy
 
 
- <State 64>: 8.23ns
-ST_64: x (33)  [1/5] 8.23ns  loc: mandel1/solution1/top.cpp:16
-:3  %x = fadd double %tmp_9, %dcx
+ <State 63>: 16.02ns
+ST_63: x (37)  [1/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
+._crit_edge:7  %x = fadd double %tmp_s, %dcx
 
-ST_64: y_1 (36)  [2/5] 8.23ns  loc: mandel1/solution1/top.cpp:17
-:6  %y_1 = fadd double %tmp_10, %dcy
+ST_63: y_1 (40)  [1/5] 8.23ns  loc: mandel1/solution1/top.cpp:19
+._crit_edge:10  %y_1 = fadd double %tmp_11, %dcy
+
+ST_63: tmp_12 (41)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:11  %tmp_12 = fmul double %x, %x
+
+ST_63: tmp_13 (42)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:12  %tmp_13 = fmul double %y_1, %y_1
 
 
- <State 65>: 8.23ns
-ST_65: y_1 (36)  [1/5] 8.23ns  loc: mandel1/solution1/top.cpp:17
-:6  %y_1 = fadd double %tmp_10, %dcy
+ <State 64>: 7.79ns
+ST_64: tmp_12 (41)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:11  %tmp_12 = fmul double %x, %x
+
+ST_64: tmp_13 (42)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:12  %tmp_13 = fmul double %y_1, %y_1
+
+
+ <State 65>: 7.79ns
+ST_65: tmp_12 (41)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:11  %tmp_12 = fmul double %x, %x
+
+ST_65: tmp_13 (42)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:12  %tmp_13 = fmul double %y_1, %y_1
 
 
  <State 66>: 7.79ns
-ST_66: tmp_11 (37)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
-:7  %tmp_11 = fmul double %x, %x
+ST_66: tmp_12 (41)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:11  %tmp_12 = fmul double %x, %x
 
-ST_66: tmp_12 (38)  [6/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
-:8  %tmp_12 = fmul double %y_1, %y_1
+ST_66: tmp_13 (42)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:12  %tmp_13 = fmul double %y_1, %y_1
 
 
  <State 67>: 7.79ns
-ST_67: tmp_11 (37)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
-:7  %tmp_11 = fmul double %x, %x
+ST_67: tmp_12 (41)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:11  %tmp_12 = fmul double %x, %x
 
-ST_67: tmp_12 (38)  [5/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
-:8  %tmp_12 = fmul double %y_1, %y_1
-
-
- <State 68>: 7.79ns
-ST_68: tmp_11 (37)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
-:7  %tmp_11 = fmul double %x, %x
-
-ST_68: tmp_12 (38)  [4/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
-:8  %tmp_12 = fmul double %y_1, %y_1
+ST_67: tmp_13 (42)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:12  %tmp_13 = fmul double %y_1, %y_1
 
 
- <State 69>: 7.79ns
-ST_69: tmp_11 (37)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
-:7  %tmp_11 = fmul double %x, %x
+ <State 68>: 16.02ns
+ST_68: tmp_12 (41)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:11  %tmp_12 = fmul double %x, %x
 
-ST_69: tmp_12 (38)  [3/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
-:8  %tmp_12 = fmul double %y_1, %y_1
+ST_68: tmp_13 (42)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:12  %tmp_13 = fmul double %y_1, %y_1
 
-
- <State 70>: 7.79ns
-ST_70: tmp_11 (37)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
-:7  %tmp_11 = fmul double %x, %x
-
-ST_70: tmp_12 (38)  [2/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
-:8  %tmp_12 = fmul double %y_1, %y_1
+ST_68: tmp_14 (43)  [5/5] 8.23ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:13  %tmp_14 = fadd double %tmp_12, %tmp_13
 
 
- <State 71>: 7.79ns
-ST_71: tmp_11 (37)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
-:7  %tmp_11 = fmul double %x, %x
-
-ST_71: tmp_12 (38)  [1/6] 7.79ns  loc: mandel1/solution1/top.cpp:18
-:8  %tmp_12 = fmul double %y_1, %y_1
+ <State 69>: 8.23ns
+ST_69: tmp_14 (43)  [4/5] 8.23ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:13  %tmp_14 = fadd double %tmp_12, %tmp_13
 
 
- <State 72>: 8.23ns
-ST_72: tmp_13 (39)  [5/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
-:9  %tmp_13 = fadd double %tmp_11, %tmp_12
+ <State 70>: 8.23ns
+ST_70: tmp_14 (43)  [3/5] 8.23ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:13  %tmp_14 = fadd double %tmp_12, %tmp_13
 
 
- <State 73>: 8.23ns
-ST_73: tmp_13 (39)  [4/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
-:9  %tmp_13 = fadd double %tmp_11, %tmp_12
+ <State 71>: 8.23ns
+ST_71: tmp_14 (43)  [2/5] 8.23ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:13  %tmp_14 = fadd double %tmp_12, %tmp_13
 
 
- <State 74>: 8.23ns
-ST_74: tmp_13 (39)  [3/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
-:9  %tmp_13 = fadd double %tmp_11, %tmp_12
+ <State 72>: 16.43ns
+ST_72: StgValue_242 (30)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:16
+._crit_edge:0  call void (...)* @_ssdm_op_SpecLoopName([18 x i8]* @p_str2) nounwind
+
+ST_72: tmp_15 (31)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:16
+._crit_edge:1  %tmp_15 = call i32 (...)* @_ssdm_op_SpecRegionBegin([18 x i8]* @p_str2) nounwind
+
+ST_72: StgValue_244 (32)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:17
+._crit_edge:2  call void (...)* @_ssdm_op_SpecPipeline(i32 -1, i32 1, i32 1, i32 0, [1 x i8]* @p_str1) nounwind
+
+ST_72: StgValue_245 (33)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:17
+._crit_edge:3  call void (...)* @_ssdm_op_SpecLoopTripCount(i32 0, i32 0, i32 0, [1 x i8]* @p_str1) nounwind
+
+ST_72: tmp_14 (43)  [1/5] 8.23ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:13  %tmp_14 = fadd double %tmp_12, %tmp_13
+
+ST_72: tmp_14_to_int (44)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:14  %tmp_14_to_int = bitcast double %tmp_14 to i64
+
+ST_72: tmp_17 (45)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:15  %tmp_17 = call i11 @_ssdm_op_PartSelect.i11.i64.i32.i32(i64 %tmp_14_to_int, i32 52, i32 62)
+
+ST_72: tmp_18 (46)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:16  %tmp_18 = trunc i64 %tmp_14_to_int to i52
+
+ST_72: notlhs (47)  [1/1] 2.11ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:17  %notlhs = icmp ne i11 %tmp_17, -1
+
+ST_72: notrhs (48)  [1/1] 2.64ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:18  %notrhs = icmp eq i52 %tmp_18, 0
+
+ST_72: tmp_19 (49)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:20 (grouped into LUT with out node tmp_16)
+._crit_edge:19  %tmp_19 = or i1 %notrhs, %notlhs
+
+ST_72: tmp_20 (50)  [1/1] 6.82ns  loc: mandel1/solution1/top.cpp:20
+._crit_edge:20  %tmp_20 = fcmp ogt double %tmp_14, 4.000000e+00
+
+ST_72: tmp_21 (51)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:20 (grouped into LUT with out node tmp_16)
+._crit_edge:21  %tmp_21 = and i1 %tmp_19, %tmp_20
+
+ST_72: empty (52)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:21
+._crit_edge:22  %empty = call i32 (...)* @_ssdm_op_SpecRegionEnd([18 x i8]* @p_str2, i32 %tmp_15) nounwind
+
+ST_72: tmp_16 (54)  [1/1] 1.37ns  loc: mandel1/solution1/top.cpp:16 (out node of the LUT)
+._crit_edge:24  %tmp_16 = select i1 %tmp_21, i32 257, i32 %tmp_6_op
+
+ST_72: StgValue_257 (55)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:16
+._crit_edge:25  br label %1
 
 
- <State 75>: 8.23ns
-ST_75: tmp_13 (39)  [2/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
-:9  %tmp_13 = fadd double %tmp_11, %tmp_12
+ <State 73>: 0.00ns
+ST_73: StgValue_258 (57)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:16
+:0  store i32 %tmp_6, i32* @i, align 4
 
-
- <State 76>: 8.23ns
-ST_76: tmp_13 (39)  [1/5] 8.23ns  loc: mandel1/solution1/top.cpp:18
-:9  %tmp_13 = fadd double %tmp_11, %tmp_12
-
-
- <State 77>: 8.20ns
-ST_77: tmp_13_to_int (40)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:18
-:10  %tmp_13_to_int = bitcast double %tmp_13 to i64
-
-ST_77: tmp_14 (41)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:18
-:11  %tmp_14 = call i11 @_ssdm_op_PartSelect.i11.i64.i32.i32(i64 %tmp_13_to_int, i32 52, i32 62)
-
-ST_77: tmp_15 (42)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:18
-:12  %tmp_15 = trunc i64 %tmp_13_to_int to i52
-
-ST_77: notlhs (43)  [1/1] 2.11ns  loc: mandel1/solution1/top.cpp:18
-:13  %notlhs = icmp ne i11 %tmp_14, -1
-
-ST_77: notrhs (44)  [1/1] 2.64ns  loc: mandel1/solution1/top.cpp:18
-:14  %notrhs = icmp eq i52 %tmp_15, 0
-
-ST_77: tmp_16 (45)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:18 (grouped into LUT with out node tmp_18)
-:15  %tmp_16 = or i1 %notrhs, %notlhs
-
-ST_77: tmp_17 (46)  [1/1] 6.82ns  loc: mandel1/solution1/top.cpp:18
-:16  %tmp_17 = fcmp ogt double %tmp_13, 4.000000e+00
-
-ST_77: tmp_18 (47)  [1/1] 1.37ns  loc: mandel1/solution1/top.cpp:18 (out node of the LUT)
-:17  %tmp_18 = and i1 %tmp_16, %tmp_17
-
-ST_77: StgValue_255 (48)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:18
-:18  br i1 %tmp_18, label %.loopexit, label %1
-
-ST_77: i_cast1 (50)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:14
-.loopexit:0  %i_cast1 = zext i9 %i to i32
-
-ST_77: StgValue_257 (51)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:20
-.loopexit:1  ret i32 %i_cast1
+ST_73: StgValue_259 (58)  [1/1] 0.00ns  loc: mandel1/solution1/top.cpp:22
+:1  ret i32 %tmp_6
 
 
 
@@ -934,314 +939,303 @@ Target clock period: 10ns, clock uncertainty: 1.25ns.
 
  <State 1>: 7.28ns
 The critical path consists of the following:
-	s_axi read on port 'cy' [7]  (1 ns)
-	'sitodp' operation ('tmp_3', mandel1/solution1/top.cpp:11) [16]  (6.28 ns)
+	s_axi read on port 'cy' [8]  (1 ns)
+	'sitodp' operation ('tmp_3', mandel1/solution1/top.cpp:14) [17]  (6.28 ns)
 
  <State 2>: 6.28ns
 The critical path consists of the following:
-	'sitodp' operation ('tmp', mandel1/solution1/top.cpp:11) [12]  (6.28 ns)
+	'sitodp' operation ('tmp', mandel1/solution1/top.cpp:14) [13]  (6.28 ns)
 
  <State 3>: 6.28ns
 The critical path consists of the following:
-	'sitodp' operation ('tmp', mandel1/solution1/top.cpp:11) [12]  (6.28 ns)
+	'sitodp' operation ('tmp', mandel1/solution1/top.cpp:14) [13]  (6.28 ns)
 
  <State 4>: 6.28ns
 The critical path consists of the following:
-	'sitodp' operation ('tmp', mandel1/solution1/top.cpp:11) [12]  (6.28 ns)
+	'sitodp' operation ('tmp', mandel1/solution1/top.cpp:14) [13]  (6.28 ns)
 
  <State 5>: 6.28ns
 The critical path consists of the following:
-	'sitodp' operation ('tmp', mandel1/solution1/top.cpp:11) [12]  (6.28 ns)
+	'sitodp' operation ('tmp', mandel1/solution1/top.cpp:14) [13]  (6.28 ns)
 
  <State 6>: 6.28ns
 The critical path consists of the following:
-	'sitodp' operation ('tmp', mandel1/solution1/top.cpp:11) [12]  (6.28 ns)
+	'sitodp' operation ('tmp', mandel1/solution1/top.cpp:14) [13]  (6.28 ns)
 
  <State 7>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 8>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 9>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 10>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 11>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 12>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 13>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 14>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 15>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 16>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 17>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 18>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 19>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 20>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 21>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 22>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 23>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 24>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 25>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 26>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 27>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 28>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 29>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 30>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 31>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 32>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 33>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 34>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 35>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 36>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 37>: 8.62ns
 The critical path consists of the following:
-	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:11) [13]  (8.62 ns)
+	'ddiv' operation ('tmp_1', mandel1/solution1/top.cpp:14) [14]  (8.62 ns)
 
  <State 38>: 7.79ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_2', mandel1/solution1/top.cpp:11) [14]  (7.79 ns)
+	'dmul' operation ('tmp_2', mandel1/solution1/top.cpp:14) [15]  (7.79 ns)
 
  <State 39>: 7.79ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_2', mandel1/solution1/top.cpp:11) [14]  (7.79 ns)
+	'dmul' operation ('tmp_2', mandel1/solution1/top.cpp:14) [15]  (7.79 ns)
 
  <State 40>: 7.79ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_2', mandel1/solution1/top.cpp:11) [14]  (7.79 ns)
+	'dmul' operation ('tmp_2', mandel1/solution1/top.cpp:14) [15]  (7.79 ns)
 
  <State 41>: 7.79ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_2', mandel1/solution1/top.cpp:11) [14]  (7.79 ns)
+	'dmul' operation ('tmp_2', mandel1/solution1/top.cpp:14) [15]  (7.79 ns)
 
  <State 42>: 7.79ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_2', mandel1/solution1/top.cpp:11) [14]  (7.79 ns)
+	'dmul' operation ('tmp_2', mandel1/solution1/top.cpp:14) [15]  (7.79 ns)
 
  <State 43>: 7.79ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_2', mandel1/solution1/top.cpp:11) [14]  (7.79 ns)
+	'dmul' operation ('tmp_2', mandel1/solution1/top.cpp:14) [15]  (7.79 ns)
 
  <State 44>: 8.23ns
 The critical path consists of the following:
-	'dadd' operation ('dcx', mandel1/solution1/top.cpp:11) [15]  (8.23 ns)
+	'dadd' operation ('dcx', mandel1/solution1/top.cpp:14) [16]  (8.23 ns)
 
  <State 45>: 8.23ns
 The critical path consists of the following:
-	'dadd' operation ('dcx', mandel1/solution1/top.cpp:11) [15]  (8.23 ns)
+	'dadd' operation ('dcx', mandel1/solution1/top.cpp:14) [16]  (8.23 ns)
 
  <State 46>: 8.23ns
 The critical path consists of the following:
-	'dadd' operation ('dcx', mandel1/solution1/top.cpp:11) [15]  (8.23 ns)
+	'dadd' operation ('dcx', mandel1/solution1/top.cpp:14) [16]  (8.23 ns)
 
  <State 47>: 8.23ns
 The critical path consists of the following:
-	'dadd' operation ('dcx', mandel1/solution1/top.cpp:11) [15]  (8.23 ns)
+	'dadd' operation ('dcx', mandel1/solution1/top.cpp:14) [16]  (8.23 ns)
 
  <State 48>: 8.23ns
 The critical path consists of the following:
-	'dadd' operation ('dcx', mandel1/solution1/top.cpp:11) [15]  (8.23 ns)
+	'dadd' operation ('dcx', mandel1/solution1/top.cpp:14) [16]  (8.23 ns)
 
  <State 49>: 7.79ns
 The critical path consists of the following:
-	'phi' operation ('x') with incoming values : ('x', mandel1/solution1/top.cpp:16) [22]  (0 ns)
-	'dmul' operation ('tmp_7', mandel1/solution1/top.cpp:16) [30]  (7.79 ns)
+	'phi' operation ('x') with incoming values : ('x', mandel1/solution1/top.cpp:18) [24]  (0 ns)
+	'dmul' operation ('tmp_8', mandel1/solution1/top.cpp:18) [34]  (7.79 ns)
 
  <State 50>: 7.79ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_7', mandel1/solution1/top.cpp:16) [30]  (7.79 ns)
+	'dmul' operation ('tmp_8', mandel1/solution1/top.cpp:18) [34]  (7.79 ns)
 
  <State 51>: 7.79ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_7', mandel1/solution1/top.cpp:16) [30]  (7.79 ns)
+	'dmul' operation ('tmp_8', mandel1/solution1/top.cpp:18) [34]  (7.79 ns)
 
  <State 52>: 7.79ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_7', mandel1/solution1/top.cpp:16) [30]  (7.79 ns)
+	'dmul' operation ('tmp_8', mandel1/solution1/top.cpp:18) [34]  (7.79 ns)
 
  <State 53>: 7.79ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_7', mandel1/solution1/top.cpp:16) [30]  (7.79 ns)
+	'dmul' operation ('tmp_8', mandel1/solution1/top.cpp:18) [34]  (7.79 ns)
 
- <State 54>: 7.79ns
+ <State 54>: 15.6ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_7', mandel1/solution1/top.cpp:16) [30]  (7.79 ns)
+	'dmul' operation ('tmp_10', mandel1/solution1/top.cpp:19) [38]  (7.79 ns)
+	'dmul' operation ('tmp_11', mandel1/solution1/top.cpp:19) [39]  (7.79 ns)
 
  <State 55>: 8.23ns
 The critical path consists of the following:
-	'dsub' operation ('tmp_9', mandel1/solution1/top.cpp:16) [32]  (8.23 ns)
+	'dsub' operation ('tmp_s', mandel1/solution1/top.cpp:18) [36]  (8.23 ns)
 
  <State 56>: 8.23ns
 The critical path consists of the following:
-	'dsub' operation ('tmp_9', mandel1/solution1/top.cpp:16) [32]  (8.23 ns)
+	'dsub' operation ('tmp_s', mandel1/solution1/top.cpp:18) [36]  (8.23 ns)
 
  <State 57>: 8.23ns
 The critical path consists of the following:
-	'dsub' operation ('tmp_9', mandel1/solution1/top.cpp:16) [32]  (8.23 ns)
+	'dsub' operation ('tmp_s', mandel1/solution1/top.cpp:18) [36]  (8.23 ns)
 
  <State 58>: 8.23ns
 The critical path consists of the following:
-	'dsub' operation ('tmp_9', mandel1/solution1/top.cpp:16) [32]  (8.23 ns)
+	'dsub' operation ('tmp_s', mandel1/solution1/top.cpp:18) [36]  (8.23 ns)
 
- <State 59>: 8.23ns
+ <State 59>: 16.5ns
 The critical path consists of the following:
-	'dsub' operation ('tmp_9', mandel1/solution1/top.cpp:16) [32]  (8.23 ns)
+	'dsub' operation ('tmp_s', mandel1/solution1/top.cpp:18) [36]  (8.23 ns)
+	'dadd' operation ('x', mandel1/solution1/top.cpp:18) [37]  (8.23 ns)
 
  <State 60>: 8.23ns
 The critical path consists of the following:
-	'dadd' operation ('x', mandel1/solution1/top.cpp:16) [33]  (8.23 ns)
+	'dadd' operation ('x', mandel1/solution1/top.cpp:18) [37]  (8.23 ns)
 
  <State 61>: 8.23ns
 The critical path consists of the following:
-	'dadd' operation ('x', mandel1/solution1/top.cpp:16) [33]  (8.23 ns)
+	'dadd' operation ('x', mandel1/solution1/top.cpp:18) [37]  (8.23 ns)
 
  <State 62>: 8.23ns
 The critical path consists of the following:
-	'dadd' operation ('x', mandel1/solution1/top.cpp:16) [33]  (8.23 ns)
+	'dadd' operation ('x', mandel1/solution1/top.cpp:18) [37]  (8.23 ns)
 
- <State 63>: 8.23ns
+ <State 63>: 16ns
 The critical path consists of the following:
-	'dadd' operation ('x', mandel1/solution1/top.cpp:16) [33]  (8.23 ns)
+	'dadd' operation ('x', mandel1/solution1/top.cpp:18) [37]  (8.23 ns)
+	'dmul' operation ('tmp_12', mandel1/solution1/top.cpp:20) [41]  (7.79 ns)
 
- <State 64>: 8.23ns
+ <State 64>: 7.79ns
 The critical path consists of the following:
-	'dadd' operation ('x', mandel1/solution1/top.cpp:16) [33]  (8.23 ns)
+	'dmul' operation ('tmp_12', mandel1/solution1/top.cpp:20) [41]  (7.79 ns)
 
- <State 65>: 8.23ns
+ <State 65>: 7.79ns
 The critical path consists of the following:
-	'dadd' operation ('y', mandel1/solution1/top.cpp:17) [36]  (8.23 ns)
+	'dmul' operation ('tmp_12', mandel1/solution1/top.cpp:20) [41]  (7.79 ns)
 
  <State 66>: 7.79ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_11', mandel1/solution1/top.cpp:18) [37]  (7.79 ns)
+	'dmul' operation ('tmp_12', mandel1/solution1/top.cpp:20) [41]  (7.79 ns)
 
  <State 67>: 7.79ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_11', mandel1/solution1/top.cpp:18) [37]  (7.79 ns)
+	'dmul' operation ('tmp_12', mandel1/solution1/top.cpp:20) [41]  (7.79 ns)
 
- <State 68>: 7.79ns
+ <State 68>: 16ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_11', mandel1/solution1/top.cpp:18) [37]  (7.79 ns)
+	'dmul' operation ('tmp_12', mandel1/solution1/top.cpp:20) [41]  (7.79 ns)
+	'dadd' operation ('tmp_14', mandel1/solution1/top.cpp:20) [43]  (8.23 ns)
 
- <State 69>: 7.79ns
+ <State 69>: 8.23ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_11', mandel1/solution1/top.cpp:18) [37]  (7.79 ns)
+	'dadd' operation ('tmp_14', mandel1/solution1/top.cpp:20) [43]  (8.23 ns)
 
- <State 70>: 7.79ns
+ <State 70>: 8.23ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_11', mandel1/solution1/top.cpp:18) [37]  (7.79 ns)
+	'dadd' operation ('tmp_14', mandel1/solution1/top.cpp:20) [43]  (8.23 ns)
 
- <State 71>: 7.79ns
+ <State 71>: 8.23ns
 The critical path consists of the following:
-	'dmul' operation ('tmp_11', mandel1/solution1/top.cpp:18) [37]  (7.79 ns)
+	'dadd' operation ('tmp_14', mandel1/solution1/top.cpp:20) [43]  (8.23 ns)
 
- <State 72>: 8.23ns
+ <State 72>: 16.4ns
 The critical path consists of the following:
-	'dadd' operation ('tmp_13', mandel1/solution1/top.cpp:18) [39]  (8.23 ns)
+	'dadd' operation ('tmp_14', mandel1/solution1/top.cpp:20) [43]  (8.23 ns)
+	'dcmp' operation ('tmp_20', mandel1/solution1/top.cpp:20) [50]  (6.82 ns)
+	'and' operation ('tmp_21', mandel1/solution1/top.cpp:20) [51]  (0 ns)
+	'select' operation ('tmp_16', mandel1/solution1/top.cpp:16) [54]  (1.37 ns)
 
- <State 73>: 8.23ns
+ <State 73>: 0ns
 The critical path consists of the following:
-	'dadd' operation ('tmp_13', mandel1/solution1/top.cpp:18) [39]  (8.23 ns)
-
- <State 74>: 8.23ns
-The critical path consists of the following:
-	'dadd' operation ('tmp_13', mandel1/solution1/top.cpp:18) [39]  (8.23 ns)
-
- <State 75>: 8.23ns
-The critical path consists of the following:
-	'dadd' operation ('tmp_13', mandel1/solution1/top.cpp:18) [39]  (8.23 ns)
-
- <State 76>: 8.23ns
-The critical path consists of the following:
-	'dadd' operation ('tmp_13', mandel1/solution1/top.cpp:18) [39]  (8.23 ns)
-
- <State 77>: 8.2ns
-The critical path consists of the following:
-	'dcmp' operation ('tmp_17', mandel1/solution1/top.cpp:18) [46]  (6.82 ns)
-	'and' operation ('tmp_18', mandel1/solution1/top.cpp:18) [47]  (1.37 ns)
 
 
 ============================================================
@@ -1325,10 +1319,6 @@ N/A
 	State 71
 	State 72
 	State 73
-	State 74
-	State 75
-	State 76
-	State 77
 
 
 ============================================================

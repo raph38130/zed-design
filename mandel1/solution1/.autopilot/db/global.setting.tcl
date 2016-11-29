@@ -44,7 +44,7 @@ set TargetInfo "xc7z020:clg484:-1"
 set SourceFiles {sc {} c top.cpp}
 set SourceFlags {sc {} c {{}}}
 set DirectiveFile {/home/raph/zed-design/mandel1/solution1/solution1.directive}
-set TBFiles {verilog {top.cpp tb_mandel.cpp tb.h} bc {top.cpp tb_mandel.cpp tb.h} vhdl {top.cpp tb_mandel.cpp tb.h} sc {top.cpp tb_mandel.cpp tb.h} cas {top.cpp tb_mandel.cpp tb.h} c {}}
+set TBFiles {verilog {tb.h tb_mandel.cpp top.cpp} bc {tb.h tb_mandel.cpp top.cpp} vhdl {tb.h tb_mandel.cpp top.cpp} sc {tb.h tb_mandel.cpp top.cpp} cas {tb.h tb_mandel.cpp top.cpp} c {}}
 set SpecLanguage "C"
 set TVInFiles {bc {} c {} sc {} cas {} vhdl {} verilog {}}
 set TVOutFiles {bc {} c {} sc {} cas {} vhdl {} verilog {}}

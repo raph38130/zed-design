@@ -1,0 +1,4 @@
+lappend pragmaStatus0 {pragma "ALLOCATION" source "/home/raph/zed-design/mandel1/solution1/top.cpp" location "mandelbrot/mandelbrot_label1" found 0 funcFound 1 applied 0 ambiguous 0 reason "Directive 'ALLOCATION' cannot be applied: Label 'mandelbrot_label1' does not exist in function 'mandelbrot'. "}
+lappend pragmaStatus1 {pragma "LOOP_FLATTEN" source "/home/raph/zed-design/mandel1/solution1/top.cpp" location "mandelbrot/mandelbrot_label2" found 1 funcFound 1 applied 1 ambiguous 0 reason "null"}
+lappend pragmaStatus2 {pragma "LOOP_TRIPCOUNT" source "/home/raph/zed-design/mandel1/solution1/top.cpp" location "mandelbrot/mandelbrot_label2" found 1 funcFound 1 applied 1 ambiguous 0 reason "null"}
+lappend pragmaStatus3 {pragma "PIPELINE" source "/home/raph/zed-design/mandel1/solution1/top.cpp" location "mandelbrot/mandelbrot_label2" found 1 funcFound 1 applied 1 ambiguous 0 reason "null"}

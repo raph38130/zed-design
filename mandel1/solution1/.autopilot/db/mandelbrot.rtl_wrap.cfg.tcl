@@ -3,6 +3,21 @@ set moduleName "mandelbrot"
 set moduleIsExternC "0"
 set rawDecl ""
 set globalVariable ""
+set PortName3 "i"
+set BitWidth3 "32"
+set ArrayOpt3 ""
+set Const3 "0"
+set Volatile3 "0"
+set Pointer3 "0"
+set Reference3 "0"
+set Initializer3 ""
+set External3 0
+set Dims3 [list 0]
+set Interface3 "wire"
+set NameSpace3 [list ]
+set DataType3 "int"
+set Port3 [list $PortName3 $Interface3 $DataType3 $Pointer3 $Dims3 $Const3 $Volatile3 $ArrayOpt3 $Initializer3 $External3 $NameSpace3]
+lappend globalVariable $Port3
 set PortList ""
 set PortName1 "cx"
 set BitWidth1 "32"

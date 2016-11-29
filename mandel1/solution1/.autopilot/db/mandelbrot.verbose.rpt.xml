@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vivado HLS Report for 'mandelbrot'" level="0">
-<item name = "Date">Mon Nov 21 10:07:40 2016
+<item name = "Date">Thu Nov 24 23:15:31 2016
 </item>
 <item name = "Version">2016.3 (Build 1682563 on Mon Oct 10 19:41:59 MDT 2016)</item>
 <item name = "Project">mandel1</item>
@@ -15,7 +15,7 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="4">Clock, Target, Estimated, Uncertainty</keys>
-<column name="ap_clk">10.00, 9.40, 1.25</column>
+<column name="ap_clk">10.00, 16.46, 1.25</column>
 </table>
 </item>
 </section>
@@ -24,7 +24,7 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="6">, min, max, min, max, Type</keys>
-<column name="">77, 7501, 78, 7502, none</column>
+<column name="">49, 49, 50, 50, none</column>
 </table>
 </item>
 <item name = "Detail">
@@ -35,7 +35,7 @@
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
-<column name="- Loop 1">29, 7452, 29, -, -, 1 ~ 256, no</column>
+<column name="- mandelbrot_label2">0, 0, 24, 23, 1, 0, yes</column>
 </table>
 </item>
 </section>
@@ -48,14 +48,14 @@
 <item name = "Summary"><table name="" hasTotal="1">
 <keys size="5">Name, BRAM_18K, DSP48E, FF, LUT</keys>
 <column name="DSP">-, -, -, -</column>
-<column name="Expression">-, -, 0, 33</column>
+<column name="Expression">-, -, 0, 97</column>
 <column name="FIFO">-, -, -, -</column>
 <column name="Instance">0, 39, 9361, 13339</column>
 <column name="Memory">-, -, -, -</column>
-<column name="Multiplexer">-, -, -, 691</column>
-<column name="Register">-, -, 992, -</column>
+<column name="Multiplexer">-, -, -, 995</column>
+<column name="Register">-, -, 907, -</column>
 <specialColumn name="Available">280, 220, 106400, 53200</specialColumn>
-<specialColumn name="Utilization (%)">0, 17, 9, 26</specialColumn>
+<specialColumn name="Utilization (%)">0, 17, 9, 27</specialColumn>
 </table>
 </item>
 <item name = "Detail">
@@ -89,48 +89,55 @@
 </item>
 <item name = "Expression"><table name="" hasTotal="1">
 <keys size="7">Variable Name, Operation, DSP48E, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
-<column name="i_1_fu_191_p2">+, 0, 0, 9, 9, 1</column>
-<column name="tmp_18_fu_232_p2">and, 0, 0, 1, 1, 1</column>
-<column name="notlhs_fu_214_p2">icmp, 0, 0, 4, 11, 2</column>
-<column name="notrhs_fu_220_p2">icmp, 0, 0, 18, 52, 1</column>
-<column name="tmp_16_fu_226_p2">or, 0, 0, 1, 1, 1</column>
+<column name="tmp_6_op_fu_222_p2">+, 0, 0, 32, 1, 32</column>
+<column name="tmp_21_fu_264_p2">and, 0, 0, 1, 1, 1</column>
+<column name="icmp_fu_216_p2">icmp, 0, 0, 9, 24, 1</column>
+<column name="notlhs_fu_246_p2">icmp, 0, 0, 4, 11, 2</column>
+<column name="notrhs_fu_252_p2">icmp, 0, 0, 18, 52, 1</column>
+<column name="tmp_19_fu_258_p2">or, 0, 0, 1, 1, 1</column>
+<column name="tmp_16_fu_270_p3">select, 0, 0, 32, 1, 9</column>
 </table>
 </item>
 <item name = "Multiplexer"><table name="" hasTotal="1">
 <keys size="5">Name, LUT, Input Size, Bits, Total Bits</keys>
-<column name="ap_NS_fsm">168, 78, 1, 78</column>
-<column name="grp_fu_110_opcode">2, 3, 2, 6</column>
-<column name="grp_fu_110_p0">64, 3, 64, 192</column>
-<column name="grp_fu_110_p1">64, 5, 64, 320</column>
-<column name="grp_fu_120_p0">64, 5, 64, 320</column>
-<column name="grp_fu_120_p1">64, 5, 64, 320</column>
-<column name="grp_fu_125_p0">64, 4, 64, 256</column>
-<column name="grp_fu_125_p1">64, 4, 64, 256</column>
-<column name="i_reg_98">9, 2, 9, 18</column>
-<column name="t_reg_74">64, 2, 64, 128</column>
-<column name="y_reg_86">64, 2, 64, 128</column>
+<column name="ap_NS_fsm">161, 73, 1, 73</column>
+<column name="grp_fu_122_opcode">2, 3, 2, 6</column>
+<column name="grp_fu_122_p0">64, 4, 64, 256</column>
+<column name="grp_fu_122_p1">64, 5, 64, 320</column>
+<column name="grp_fu_127_p0">64, 3, 64, 192</column>
+<column name="grp_fu_127_p1">64, 3, 64, 192</column>
+<column name="grp_fu_133_p0">64, 5, 64, 320</column>
+<column name="grp_fu_133_p1">64, 5, 64, 320</column>
+<column name="grp_fu_138_p0">64, 4, 64, 256</column>
+<column name="grp_fu_138_p1">64, 4, 64, 256</column>
+<column name="t_phi_fu_102_p4">64, 2, 64, 128</column>
+<column name="t_reg_98">64, 2, 64, 128</column>
+<column name="tmp_6_phi_fu_90_p4">32, 2, 32, 64</column>
+<column name="tmp_6_reg_86">32, 2, 32, 64</column>
+<column name="y_phi_fu_114_p4">64, 2, 64, 128</column>
+<column name="y_reg_110">64, 2, 64, 128</column>
 </table>
 </item>
 <item name = "Register"><table name="" hasTotal="1">
 <keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
-<column name="ap_CS_fsm">77, 0, 77, 0</column>
-<column name="dcx_reg_272">64, 0, 64, 0</column>
-<column name="dcy_reg_277">64, 0, 64, 0</column>
-<column name="i_1_reg_286">9, 0, 9, 0</column>
-<column name="i_reg_98">9, 0, 9, 0</column>
-<column name="reg_164">64, 0, 64, 0</column>
-<column name="reg_169">64, 0, 64, 0</column>
-<column name="reg_175">64, 0, 64, 0</column>
-<column name="t_reg_74">64, 0, 64, 0</column>
-<column name="tmp_13_reg_303">64, 0, 64, 0</column>
-<column name="tmp_1_reg_262">64, 0, 64, 0</column>
-<column name="tmp_3_reg_257">64, 0, 64, 0</column>
-<column name="tmp_4_reg_267">64, 0, 64, 0</column>
-<column name="tmp_6_reg_282">1, 0, 1, 0</column>
-<column name="tmp_reg_252">64, 0, 64, 0</column>
-<column name="tmp_s_reg_291">64, 0, 64, 0</column>
-<column name="y_1_reg_296">64, 0, 64, 0</column>
-<column name="y_reg_86">64, 0, 64, 0</column>
+<column name="ap_CS_fsm">72, 0, 72, 0</column>
+<column name="ap_enable_reg_pp0_iter0">1, 0, 1, 0</column>
+<column name="ap_enable_reg_pp0_iter1">1, 0, 1, 0</column>
+<column name="dcx_reg_313">64, 0, 64, 0</column>
+<column name="dcy_reg_318">64, 0, 64, 0</column>
+<column name="icmp_reg_323">1, 0, 1, 0</column>
+<column name="reg_186">64, 0, 64, 0</column>
+<column name="reg_192">64, 0, 64, 0</column>
+<column name="reg_198">64, 0, 64, 0</column>
+<column name="t_reg_98">64, 0, 64, 0</column>
+<column name="tmp_1_reg_303">64, 0, 64, 0</column>
+<column name="tmp_3_reg_298">64, 0, 64, 0</column>
+<column name="tmp_4_reg_308">64, 0, 64, 0</column>
+<column name="tmp_6_op_reg_332">32, 0, 32, 0</column>
+<column name="tmp_6_reg_86">32, 0, 32, 0</column>
+<column name="tmp_reg_293">64, 0, 64, 0</column>
+<column name="y_1_reg_337">64, 0, 64, 0</column>
+<column name="y_reg_110">64, 0, 64, 0</column>
 </table>
 </item>
 </section>

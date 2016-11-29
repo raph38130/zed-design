@@ -9,20 +9,23 @@
 #1 "<built-in>"
 #1 "<command-line>"
 #1 "/home/raph/zed-design/mandel1/solution1/top.cpp"
+int i=0;
+const double X1 = 1.0, Y1 = 1.0, X2 =-2.0, Y2 = -1.0;
+const int Width=640, Height=480;
+
+
 int mandelbrot(int cx, int cy) {
 #pragma HLS INTERFACE s_axilite port=cy
 #pragma HLS INTERFACE s_axilite port=cx
 #pragma HLS INTERFACE s_axilite port=return
 
-const double X1 = 1.0, Y1 = 1.0, X2 =-2.0, Y2 = -1.0;
-const int Width=640, Height=480;
 
 double x=0.0,y=0.0,
-dcx = (double)cx / Width * (X1 - X2) + X2,
-dcy = (double)cy / Height * (Y2 - Y1) + Y1;
+    dcx = (double)cx / Width * (X1 - X2) + X2,
+    dcy = (double)cy / Height * (Y2 - Y1) + Y1;
 
-int i=0;
-for(i = 0; i < 256; i++) {
+
+mandelbrot_label0:for(i = 0; i < 256; i++) {
     double t = x;
     x = x*x - y*y + dcx;
     y = 2*t*y + dcy;

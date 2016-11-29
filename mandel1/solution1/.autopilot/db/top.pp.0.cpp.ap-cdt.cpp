@@ -204,24 +204,48 @@ extern "C" {
 #pragma line 6 "<command line>" 2
 #pragma line 1 "<built-in>" 2
 #pragma line 1 "mandel1/solution1/top.cpp" 2
+int i=0;
+const double X1 = 1.0, Y1 = 1.0, X2 =-2.0, Y2 = -1.0;
+const int Width=640, Height=480;
+#pragma empty_line
+#pragma empty_line
 int mandelbrot(int cx, int cy) {
 #pragma HLS INTERFACE s_axilite port=cy
 #pragma HLS INTERFACE s_axilite port=cx
 #pragma HLS INTERFACE s_axilite port=return
 #pragma empty_line
-const double X1 = 1.0, Y1 = 1.0, X2 =-2.0, Y2 = -1.0;
-const int Width=640, Height=480;
 #pragma empty_line
 double x=0.0,y=0.0,
-dcx = (double)cx / Width * (X1 - X2) + X2,
-dcy = (double)cy / Height * (Y2 - Y1) + Y1;
+    dcx = (double)cx / Width * (X1 - X2) + X2,
+    dcy = (double)cy / Height * (Y2 - Y1) + Y1;
 #pragma empty_line
-int i=0;
-for(i = 0; i < 256; i++) {
+mandelbrot_label2:for(i = 0; i < 256; i++) {
+#pragma HLS PIPELINE
+#pragma line 16 "mandel1/solution1/top.cpp"
+
+#pragma HLS LOOP_TRIPCOUNT
+#pragma line 16 "mandel1/solution1/top.cpp"
+
+#pragma HLS LOOP_FLATTEN
+#pragma line 16 "mandel1/solution1/top.cpp"
+
     double t = x;
     x = x*x - y*y + dcx;
     y = 2*t*y + dcy;
-    if ((x*x+y*y) > 4.0) break;
+    if ((x*x+y*y) > 4.0) i=256;
    }
 return i;
 }
+
+class ssdm_global_array_toppp0cppaplinecpp {
+	public:
+		 inline __attribute__((always_inline)) ssdm_global_array_toppp0cppaplinecpp() {
+			_ssdm_SpecConstant(&X1);
+			_ssdm_SpecConstant(&Y1);
+			_ssdm_SpecConstant(&X2);
+			_ssdm_SpecConstant(&Y2);
+			_ssdm_SpecConstant(&Width);
+			_ssdm_SpecConstant(&Height);
+		}
+};
+static ssdm_global_array_toppp0cppaplinecpp ssdm_global_array_ins;
