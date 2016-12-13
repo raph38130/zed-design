@@ -1,0 +1,60 @@
+
+
+   
+ loop:
+     load s0, 55
+     output s0,08
+     call delay_1s
+     
+     load s0, AA 
+     output s0,08
+     call delay_1s
+     
+     jump loop
+    
+    
+    
+    
+    
+    
+     ;------------------------------------------------------------------------------------------
+     ; Software Delays based on 100MHz clock
+     ;------------------------------------------------------------------------------------------
+     ;
+     ; The number of iterations of a delay loop required to form each delay required are
+     ; loaded into the register set [s2,s1,s0] and then the delay loop is started.
+     ;
+     ; Registers used s0, s1, s2
+     ;
+     ; 1ms is 10,000 x 100ns     (10,000 = 002710 hex)
+     ;
+delay_1ms: LOAD s2, 00
+     LOAD s1, 27
+     LOAD s0, 10
+     JUMP software_delay
+     ;
+     ; 20ms is 200,000 x 100ns     (200,000 = 030D40 hex)
+     ;
+delay_20ms: LOAD s2, 03
+     LOAD s1, 0D
+     LOAD s0, 40
+     JUMP software_delay
+     ;
+     ;
+     ; 1s is 10,000,000 x 100ns     (10,000,000 = 989680 hex)
+     ;
+delay_1s: LOAD s2, 98
+     LOAD s1, 96
+     LOAD s0, 80
+     JUMP software_delay
+     ;
+     ; The delay loop decrements [s2,s1,s0] until it reaches zero
+     ; Each decrement cycle is 5 instructions which is 10 clock cycles (100ns at 100MHz)
+     ;
+software_delay: LOAD s0, s0             ;pad loop to make it 10 clock cycles (5 instructions)
+     SUB s0, 1'd
+     SUBCY s1, 0'd
+     SUBCY s2, 0'd
+     JUMP NZ, software_delay
+     RETURN 
+     ;

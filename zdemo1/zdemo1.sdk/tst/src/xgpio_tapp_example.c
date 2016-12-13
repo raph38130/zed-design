@@ -194,7 +194,6 @@ int GpioOutputExample(u16 DeviceId, u32 GpioWidth)
 
 	 /* Set the GPIO outputs to low */
 	 XGpio_DiscreteWrite(&GpioOutput, LED_CHANNEL, 0x0);
-
 	 for (LedBit = 0x0; LedBit < GpioWidth; LedBit++)  {
 
 		for (LedLoop = 0; LedLoop < LED_MAX_BLINK; LedLoop++) {

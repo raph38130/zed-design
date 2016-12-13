@@ -34,7 +34,7 @@ BEGIN DRIVER
  PARAMETER DRIVER_NAME = axi_vdma
  PARAMETER HW_INSTANCE = axi_hdmi_dma
  PARAMETER interrupt-parent = intc
- PARAMETER interrupts = 0 57 4
+ PARAMETER interrupts = 0 54 4
  PARAMETER reg = 0x43000000 0x10000
  PARAMETER xlnx,flush-fsync = 1
  PARAMETER xlnx,num-fstores = 3
@@ -51,7 +51,7 @@ BEGIN DRIVER
  PARAMETER DRIVER_NAME = axi_iic
  PARAMETER HW_INSTANCE = axi_iic_main
  PARAMETER interrupt-parent = intc
- PARAMETER interrupts = 0 58 4
+ PARAMETER interrupts = 0 55 4
  PARAMETER reg = 0x41600000 0x1000
 END
 
@@ -63,12 +63,24 @@ BEGIN DRIVER
 END
 
 BEGIN DRIVER
+ PARAMETER DRIVER_NAME = axi_vdma
+ PARAMETER HW_INSTANCE = img_proc_axi_vdma_0
+ PARAMETER interrupt-parent = intc
+ PARAMETER interrupts = 0 58 4 0 57 4
+ PARAMETER reg = 0x43010000 0x10000
+ PARAMETER xlnx,flush-fsync = 1
+ PARAMETER xlnx,num-fstores = 1
+END
+
+BEGIN DRIVER
  PARAMETER DRIVER_NAME = generic
- PARAMETER HW_INSTANCE = fill_0
- PARAMETER compatible = xlnx,fill-1.0
- PARAMETER reg = 0x43c80000 0x80000
- PARAMETER xlnx,s-axi-axilites-addr-width = 5
- PARAMETER xlnx,s-axi-axilites-data-width = 32
+ PARAMETER HW_INSTANCE = img_proc_image_filter_0
+ PARAMETER compatible = xlnx,image-filter-1.0
+ PARAMETER interrupt-parent = intc
+ PARAMETER interrupts = 0 59 4
+ PARAMETER reg = 0x43c10000 0x10000
+ PARAMETER xlnx,s-axi-control-bus-addr-width = 8
+ PARAMETER xlnx,s-axi-control-bus-data-width = 32
 END
 
 BEGIN DRIVER
@@ -76,7 +88,7 @@ BEGIN DRIVER
  PARAMETER HW_INSTANCE = mandelbrot_0
  PARAMETER compatible = xlnx,mandelbrot-1.0
  PARAMETER interrupt-parent = intc
- PARAMETER interrupts = 0 59 4
+ PARAMETER interrupts = 0 56 4
  PARAMETER reg = 0x43c00000 0x10000
  PARAMETER xlnx,s-axi-axilites-addr-width = 6
  PARAMETER xlnx,s-axi-axilites-data-width = 32

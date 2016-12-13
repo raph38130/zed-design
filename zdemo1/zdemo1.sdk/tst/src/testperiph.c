@@ -35,11 +35,12 @@
 #include "counter.h"
 
 
+
 int main() 
 {
-   print("---Entering counter v0.7---\n\r");
+   print("---Entering counter v0.9---\n\r");
    while(1) {
-			   GpioOutputExample(XPAR_AXI_GPIO_0_DEVICE_ID,8);
+			   GpioOutputExample(XPAR_AXI_GPIO_0_DEVICE_ID,4);
 			   printf("counter %d\n",COUNTER_mReadReg(XPAR_COUNTER_0_S00_AXI_BASEADDR,0));
 		   }
 
