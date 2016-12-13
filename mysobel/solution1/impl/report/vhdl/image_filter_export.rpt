@@ -1,0 +1,20 @@
+
+
+Implementation tool: Xilinx Vivado v.2016.3
+Project:             mysobel
+Solution:            solution1
+Device target:       xc7z020clg484-1
+Report date:         Sat Dec 03 16:54:41 CET 2016
+
+#=== Post-Implementation Resource usage ===
+SLICE:          799
+LUT:           2165
+FF:            1954
+DSP:             10
+BRAM:             3
+SRL:              3
+#=== Final timing ===
+CP required:    10.000
+CP achieved post-synthesis:    7.672
+CP achieved post-implemetation:    8.796
+Timing met

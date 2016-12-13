@@ -1,0 +1,988 @@
+
+
+================================================================
+== Vivado HLS Report for 'sobel_filter_core'
+================================================================
+* Date:           Sat Dec  3 16:51:18 2016
+
+* Version:        2016.3 (Build 1682563 on Mon Oct 10 19:41:59 MDT 2016)
+* Project:        mysobel
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg484-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|      9.40|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+-----+-----+-----+---------+
+    |  Latency  |  Interval | Pipeline|
+    | min | max | min | max |   Type  |
+    +-----+-----+-----+-----+---------+
+    |    ?|    ?|    ?|    ?|   none  |
+    +-----+-----+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------+-----+-----+----------+-----------+-----------+------+----------+
+        |             |  Latency  | Iteration|  Initiation Interval  | Trip |          |
+        |  Loop Name  | min | max |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------+-----+-----+----------+-----------+-----------+------+----------+
+        |- Loop 1     |    ?|    ?|         ?|          -|          -|     ?|    no    |
+        | + Loop 1.1  |    ?|    ?|         8|          1|          1|     ?|    yes   |
+        +-------------+-----+-----+----------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 2
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 8
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states: 11
+* Pipeline: 1
+  Pipeline-0: II = 1, D = 8, States = { 3 4 5 6 7 8 9 10 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+	2  / true
+2 --> 
+	3  / (!exitcond1_i)
+3 --> 
+	4  / true
+4 --> 
+	5  / true
+5 --> 
+	6  / true
+6 --> 
+	11  / (exitcond_i)
+	7  / (!exitcond_i)
+7 --> 
+	8  / true
+8 --> 
+	9  / true
+9 --> 
+	10  / true
+10 --> 
+	3  / true
+11 --> 
+	2  / true
+* FSM state operations: 
+
+ <State 1>: 6.89ns
+ST_1: buff_C_val_1_0 (27)  [1/1] 0.00ns
+entry:0  %buff_C_val_1_0 = alloca i8
+
+ST_1: buff_C_val_0_0_i_i_s (28)  [1/1] 0.00ns
+entry:1  %buff_C_val_0_0_i_i_s = alloca i8
+
+ST_1: buff_C_val_0_1_i_i_s (29)  [1/1] 0.00ns
+entry:2  %buff_C_val_0_1_i_i_s = alloca i8
+
+ST_1: buff_C_val_0_0 (30)  [1/1] 0.00ns
+entry:3  %buff_C_val_0_0 = alloca i8
+
+ST_1: buff_C_val_1_0_i_i_s (31)  [1/1] 0.00ns
+entry:4  %buff_C_val_1_0_i_i_s = alloca i8
+
+ST_1: buff_C_val_1_1_i_i_s (32)  [1/1] 0.00ns
+entry:5  %buff_C_val_1_1_i_i_s = alloca i8
+
+ST_1: buff_C_val_2_1_i_i_s (33)  [1/1] 0.00ns
+entry:6  %buff_C_val_2_1_i_i_s = alloca i8
+
+ST_1: buff_C_val_2_0_i_i_s (34)  [1/1] 0.00ns
+entry:7  %buff_C_val_2_0_i_i_s = alloca i8
+
+ST_1: cols_read (35)  [1/1] 0.00ns
+entry:8  %cols_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %cols)
+
+ST_1: rows_read (36)  [1/1] 0.00ns
+entry:9  %rows_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %rows)
+
+ST_1: buff_A_val_0 (37)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:100->mysobel/solution1/top.cpp:205
+entry:10  %buff_A_val_0 = alloca [1920 x i8], align 1
+
+ST_1: buff_A_val_1 (38)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:100->mysobel/solution1/top.cpp:205
+entry:11  %buff_A_val_1 = alloca [1920 x i8], align 1
+
+ST_1: buff_A_val_2 (39)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:100->mysobel/solution1/top.cpp:205
+entry:12  %buff_A_val_2 = alloca [1920 x i8], align 1
+
+ST_1: tmp (40)  [1/1] 0.00ns
+entry:13  %tmp = trunc i32 %rows_read to i11
+
+ST_1: tmp_1 (41)  [1/1] 0.00ns
+entry:14  %tmp_1 = trunc i32 %cols_read to i11
+
+ST_1: StgValue_27 (42)  [1/1] 0.00ns
+entry:15  call void (...)* @_ssdm_op_SpecInterface(i8* %dst_data_stream_1_V, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_28 (43)  [1/1] 0.00ns
+entry:16  call void (...)* @_ssdm_op_SpecInterface(i8* %dst_data_stream_0_V, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_29 (44)  [1/1] 0.00ns
+entry:17  call void (...)* @_ssdm_op_SpecInterface(i8* %src_data_stream_1_V, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_30 (45)  [1/1] 0.00ns
+entry:18  call void (...)* @_ssdm_op_SpecInterface(i8* %src_data_stream_0_V, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_31 (46)  [1/1] 0.00ns
+entry:19  call void (...)* @_ssdm_op_SpecInterface(i32* %c_invert_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_32 (47)  [1/1] 0.00ns
+entry:20  call void (...)* @_ssdm_op_SpecInterface(i32* %c_low_thresh_channel_1, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_33 (48)  [1/1] 0.00ns
+entry:21  call void (...)* @_ssdm_op_SpecInterface(i32* %c_high_thresh_channe, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_34 (49)  [1/1] 0.00ns
+entry:22  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR2C1_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_35 (50)  [1/1] 0.00ns
+entry:23  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR2C0_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_36 (51)  [1/1] 0.00ns
+entry:24  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR1C2_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_37 (52)  [1/1] 0.00ns
+entry:25  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR1C1_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_38 (53)  [1/1] 0.00ns
+entry:26  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR1C0_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_39 (54)  [1/1] 0.00ns
+entry:27  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR0C2_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_40 (55)  [1/1] 0.00ns
+entry:28  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR0C1_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_41 (56)  [1/1] 0.00ns
+entry:29  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR0C0_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_42 (57)  [1/1] 0.00ns
+entry:30  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR2C2_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_43 (58)  [1/1] 0.00ns
+entry:31  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR2C1_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_44 (59)  [1/1] 0.00ns
+entry:32  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR2C0_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_45 (60)  [1/1] 0.00ns
+entry:33  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR1C2_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_46 (61)  [1/1] 0.00ns
+entry:34  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR1C1_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_47 (62)  [1/1] 0.00ns
+entry:35  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR1C0_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_48 (63)  [1/1] 0.00ns
+entry:36  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR0C2_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_49 (64)  [1/1] 0.00ns
+entry:37  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR0C1_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_50 (65)  [1/1] 0.00ns
+entry:38  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR0C0_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: C_XR0C0_channel_read (66)  [1/1] 4.38ns
+entry:39  %C_XR0C0_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_XR0C0_channel)
+
+ST_1: C_XR0C1_channel_read (67)  [1/1] 4.38ns
+entry:40  %C_XR0C1_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_XR0C1_channel)
+
+ST_1: C_XR0C2_channel_read (68)  [1/1] 4.38ns
+entry:41  %C_XR0C2_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_XR0C2_channel)
+
+ST_1: C_XR1C0_channel_read (69)  [1/1] 4.38ns
+entry:42  %C_XR1C0_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_XR1C0_channel)
+
+ST_1: C_XR1C1_channel_read (70)  [1/1] 4.38ns
+entry:43  %C_XR1C1_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_XR1C1_channel)
+
+ST_1: C_XR1C2_channel_read (71)  [1/1] 4.38ns
+entry:44  %C_XR1C2_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_XR1C2_channel)
+
+ST_1: C_XR2C0_channel_read (72)  [1/1] 4.38ns
+entry:45  %C_XR2C0_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_XR2C0_channel)
+
+ST_1: C_XR2C1_channel_read (73)  [1/1] 4.38ns
+entry:46  %C_XR2C1_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_XR2C1_channel)
+
+ST_1: C_XR2C2_channel_read (74)  [1/1] 4.38ns
+entry:47  %C_XR2C2_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_XR2C2_channel)
+
+ST_1: C_YR0C0_channel_read (75)  [1/1] 4.38ns
+entry:48  %C_YR0C0_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_YR0C0_channel)
+
+ST_1: C_YR0C1_channel_read (76)  [1/1] 4.38ns
+entry:49  %C_YR0C1_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_YR0C1_channel)
+
+ST_1: C_YR0C2_channel_read (77)  [1/1] 4.38ns
+entry:50  %C_YR0C2_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_YR0C2_channel)
+
+ST_1: C_YR1C0_channel_read (78)  [1/1] 4.38ns
+entry:51  %C_YR1C0_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_YR1C0_channel)
+
+ST_1: C_YR1C1_channel_read (79)  [1/1] 4.38ns
+entry:52  %C_YR1C1_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_YR1C1_channel)
+
+ST_1: C_YR1C2_channel_read (80)  [1/1] 4.38ns
+entry:53  %C_YR1C2_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_YR1C2_channel)
+
+ST_1: C_YR2C0_channel_read (81)  [1/1] 4.38ns
+entry:54  %C_YR2C0_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_YR2C0_channel)
+
+ST_1: C_YR2C1_channel_read (82)  [1/1] 4.38ns
+entry:55  %C_YR2C1_channel_read = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %C_YR2C1_channel)
+
+ST_1: c_high_thresh_channe_1 (83)  [1/1] 4.38ns
+entry:56  %c_high_thresh_channe_1 = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %c_high_thresh_channe)
+
+ST_1: c_low_thresh_channel (84)  [1/1] 4.38ns
+entry:57  %c_low_thresh_channel = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %c_low_thresh_channel_1)
+
+ST_1: c_invert_channel_rea (85)  [1/1] 4.38ns
+entry:58  %c_invert_channel_rea = call i32 @_ssdm_op_Read.ap_fifo.i32P(i32* %c_invert_channel)
+
+ST_1: rbegin_i_i_i_i (86)  [1/1] 0.00ns
+entry:59  %rbegin_i_i_i_i = call i32 (...)* @_ssdm_op_SpecRegionBegin([64 x i8]* @hls_KD_KD_LineBuffe) nounwind
+
+ST_1: rend_i_i_i_i (87)  [1/1] 0.00ns
+entry:60  %rend_i_i_i_i = call i32 (...)* @_ssdm_op_SpecRegionEnd([64 x i8]* @hls_KD_KD_LineBuffe, i32 %rbegin_i_i_i_i) nounwind
+
+ST_1: rows_cast_i_i_cast_i (88)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205
+entry:61  %rows_cast_i_i_cast_i = zext i11 %tmp to i12
+
+ST_1: tmp_31_i_i_i (89)  [1/1] 1.84ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205
+entry:62  %tmp_31_i_i_i = add i12 -1, %rows_cast_i_i_cast_i
+
+ST_1: tmp_31_i_i_cast_i (90)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205
+entry:63  %tmp_31_i_i_cast_i = sext i12 %tmp_31_i_i_i to i13
+
+ST_1: cols_cast_i_i_cast_i (91)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205
+entry:64  %cols_cast_i_i_cast_i = zext i11 %tmp_1 to i12
+
+ST_1: tmp_32_i_i_i (92)  [1/1] 1.84ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205
+entry:65  %tmp_32_i_i_i = add i12 -1, %cols_cast_i_i_cast_i
+
+ST_1: tmp_32_i_i_cast_i (93)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205
+entry:66  %tmp_32_i_i_cast_i = sext i12 %tmp_32_i_i_i to i13
+
+ST_1: tmp_3_i (94)  [1/1] 1.84ns  loc: mysobel/solution1/top.cpp:103->mysobel/solution1/top.cpp:205
+entry:67  %tmp_3_i = add i12 1, %cols_cast_i_i_cast_i
+
+ST_1: tmp_6_i (95)  [1/1] 1.84ns  loc: mysobel/solution1/top.cpp:103->mysobel/solution1/top.cpp:205
+entry:68  %tmp_6_i = add i12 1, %rows_cast_i_i_cast_i
+
+ST_1: tmp_2 (96)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:51->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:69  %tmp_2 = trunc i32 %C_XR0C0_channel_read to i8
+
+ST_1: tmp_3 (97)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:51->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:70  %tmp_3 = trunc i32 %C_XR0C1_channel_read to i8
+
+ST_1: tmp_4 (98)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:51->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:71  %tmp_4 = trunc i32 %C_XR0C2_channel_read to i8
+
+ST_1: tmp_5 (99)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:51->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:72  %tmp_5 = trunc i32 %C_XR1C0_channel_read to i8
+
+ST_1: tmp_6 (100)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:51->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:73  %tmp_6 = trunc i32 %C_XR1C1_channel_read to i8
+
+ST_1: tmp_7 (101)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:51->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:74  %tmp_7 = trunc i32 %C_XR1C2_channel_read to i8
+
+ST_1: tmp_8 (102)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:51->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:75  %tmp_8 = trunc i32 %C_XR2C0_channel_read to i8
+
+ST_1: tmp_9 (103)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:51->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:76  %tmp_9 = trunc i32 %C_XR2C1_channel_read to i8
+
+ST_1: tmp_10 (104)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:51->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:77  %tmp_10 = trunc i32 %C_XR2C2_channel_read to i8
+
+ST_1: tmp_11 (105)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:55->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:78  %tmp_11 = trunc i32 %C_YR0C0_channel_read to i8
+
+ST_1: tmp_12 (106)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:55->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:79  %tmp_12 = trunc i32 %C_YR0C1_channel_read to i8
+
+ST_1: tmp_13 (107)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:55->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:80  %tmp_13 = trunc i32 %C_YR0C2_channel_read to i8
+
+ST_1: tmp_14 (108)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:55->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:81  %tmp_14 = trunc i32 %C_YR1C0_channel_read to i8
+
+ST_1: tmp_15 (109)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:55->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:82  %tmp_15 = trunc i32 %C_YR1C1_channel_read to i8
+
+ST_1: tmp_16 (110)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:55->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:83  %tmp_16 = trunc i32 %C_YR1C2_channel_read to i8
+
+ST_1: tmp_17 (111)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:55->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:84  %tmp_17 = trunc i32 %C_YR2C0_channel_read to i8
+
+ST_1: tmp_18 (112)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:55->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:85  %tmp_18 = trunc i32 %C_YR2C1_channel_read to i8
+
+ST_1: tmp_36_0_i_i_i_i (113)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:86  %tmp_36_0_i_i_i_i = sext i8 %tmp_2 to i16
+
+ST_1: tmp_38_0_i_i_i_i (114)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:87  %tmp_38_0_i_i_i_i = sext i8 %tmp_11 to i16
+
+ST_1: tmp_36_0_1_i_i_i_i (115)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:88  %tmp_36_0_1_i_i_i_i = sext i8 %tmp_3 to i16
+
+ST_1: tmp_38_0_1_i_i_i_i (116)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:89  %tmp_38_0_1_i_i_i_i = sext i8 %tmp_12 to i16
+
+ST_1: tmp_36_0_2_i_i_i_i (117)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:90  %tmp_36_0_2_i_i_i_i = sext i8 %tmp_4 to i16
+
+ST_1: tmp_38_0_2_i_i_i_i (118)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:91  %tmp_38_0_2_i_i_i_i = sext i8 %tmp_13 to i16
+
+ST_1: tmp_36_1_i_i_i_i (119)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:92  %tmp_36_1_i_i_i_i = sext i8 %tmp_5 to i16
+
+ST_1: tmp_38_1_i_i_i_i (120)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:93  %tmp_38_1_i_i_i_i = sext i8 %tmp_14 to i16
+
+ST_1: tmp_36_1_1_i_i_i_i (121)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:94  %tmp_36_1_1_i_i_i_i = sext i8 %tmp_6 to i16
+
+ST_1: tmp_38_1_1_i_i_i_i (122)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:95  %tmp_38_1_1_i_i_i_i = sext i8 %tmp_15 to i16
+
+ST_1: tmp_36_1_2_i_i_i_i (123)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:96  %tmp_36_1_2_i_i_i_i = sext i8 %tmp_7 to i16
+
+ST_1: tmp_38_1_2_i_i_i_i (124)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:97  %tmp_38_1_2_i_i_i_i = sext i8 %tmp_16 to i16
+
+ST_1: tmp_36_2_i_i_i_i (125)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:98  %tmp_36_2_i_i_i_i = sext i8 %tmp_8 to i16
+
+ST_1: tmp_38_2_i_i_i_i (126)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:99  %tmp_38_2_i_i_i_i = sext i8 %tmp_17 to i16
+
+ST_1: tmp_36_2_1_i_i_i_i (127)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:100  %tmp_36_2_1_i_i_i_i = sext i8 %tmp_9 to i16
+
+ST_1: tmp_38_2_1_i_i_i_i (128)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:101  %tmp_38_2_1_i_i_i_i = sext i8 %tmp_18 to i16
+
+ST_1: tmp_36_2_2_i_i_i_i (129)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:102  %tmp_36_2_2_i_i_i_i = sext i8 %tmp_10 to i16
+
+ST_1: tmp_30_i_i_i_i (130)  [1/1] 2.52ns  loc: mysobel/solution1/top.cpp:84->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+entry:103  %tmp_30_i_i_i_i = icmp eq i32 %c_invert_channel_rea, 1
+
+ST_1: StgValue_116 (131)  [1/1] 1.57ns  loc: mysobel/solution1/top.cpp:103->mysobel/solution1/top.cpp:205
+entry:104  br label %.loopexit
+
+
+ <State 2>: 3.51ns
+ST_2: row_i_i_i (133)  [1/1] 0.00ns
+.loopexit:0  %row_i_i_i = phi i12 [ 0, %entry ], [ %row, %.loopexit.loopexit ]
+
+ST_2: row_cast_cast_i_i_i (134)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:103->mysobel/solution1/top.cpp:205
+.loopexit:1  %row_cast_cast_i_i_i = zext i12 %row_i_i_i to i13
+
+ST_2: exitcond1_i (135)  [1/1] 2.14ns  loc: mysobel/solution1/top.cpp:103->mysobel/solution1/top.cpp:205
+.loopexit:2  %exitcond1_i = icmp eq i12 %row_i_i_i, %tmp_6_i
+
+ST_2: row (136)  [1/1] 1.84ns  loc: mysobel/solution1/top.cpp:103->mysobel/solution1/top.cpp:205
+.loopexit:3  %row = add i12 %row_i_i_i, 1
+
+ST_2: StgValue_121 (137)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:103->mysobel/solution1/top.cpp:205
+.loopexit:4  br i1 %exitcond1_i, label %sobel_filter_core.exit, label %.preheader.preheader.i.i.i
+
+ST_2: tmp_34_i_i_i (139)  [1/1] 2.14ns  loc: mysobel/solution1/top.cpp:121->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i:0  %tmp_34_i_i_i = icmp ult i12 %row_i_i_i, %rows_cast_i_i_cast_i
+
+ST_2: tmp_19 (140)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i:1  %tmp_19 = call i11 @_ssdm_op_PartSelect.i11.i12.i32.i32(i12 %row_i_i_i, i32 1, i32 11)
+
+ST_2: icmp (141)  [1/1] 2.11ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i:2  %icmp = icmp eq i11 %tmp_19, 0
+
+ST_2: tmp_36_i_i_i (142)  [1/1] 2.14ns  loc: mysobel/solution1/top.cpp:154->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i:3  %tmp_36_i_i_i = icmp ne i12 %row_i_i_i, 0
+
+ST_2: tmp_37_i_i_i (143)  [1/1] 2.14ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i:4  %tmp_37_i_i_i = icmp sgt i13 %row_cast_cast_i_i_i, %tmp_31_i_i_cast_i
+
+ST_2: StgValue_127 (144)  [1/1] 1.57ns  loc: mysobel/solution1/top.cpp:104->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i:5  br label %.preheader.i.i.i
+
+ST_2: StgValue_128 (290)  [1/1] 0.00ns
+sobel_filter_core.exit:0  ret void
+
+
+ <State 3>: 4.88ns
+ST_3: col_assign_i (146)  [1/1] 0.00ns
+.preheader.i.i.i:0  %col_assign_i = phi i12 [ 0, %.preheader.preheader.i.i.i ], [ %col, %._crit_edge7.i.i.i ]
+
+ST_3: col_assign_cast_cast (148)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:104->mysobel/solution1/top.cpp:205
+.preheader.i.i.i:2  %col_assign_cast_cast = zext i12 %col_assign_i to i13
+
+ST_3: exitcond_i (149)  [1/1] 2.14ns  loc: mysobel/solution1/top.cpp:104->mysobel/solution1/top.cpp:205
+.preheader.i.i.i:3  %exitcond_i = icmp eq i12 %col_assign_i, %tmp_3_i
+
+ST_3: col (150)  [1/1] 1.84ns  loc: mysobel/solution1/top.cpp:104->mysobel/solution1/top.cpp:205
+.preheader.i.i.i:4  %col = add i12 %col_assign_i, 1
+
+ST_3: tmp_30_i_i_i (153)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:104->mysobel/solution1/top.cpp:205
+:0  %tmp_30_i_i_i = call i32 (...)* @_ssdm_op_SpecRegionBegin([12 x i8]* @p_str1805)
+
+ST_3: StgValue_134 (154)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:107->mysobel/solution1/top.cpp:205
+:1  call void (...)* @_ssdm_op_SpecPipeline(i32 1, i32 1, i32 1, i32 0, [1 x i8]* @p_str1806) nounwind
+
+ST_3: tmp_39_i_i_i (155)  [1/1] 2.14ns  loc: mysobel/solution1/top.cpp:114->mysobel/solution1/top.cpp:205
+:2  %tmp_39_i_i_i = icmp ult i12 %col_assign_i, %cols_cast_i_i_cast_i
+
+ST_3: StgValue_136 (156)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:114->mysobel/solution1/top.cpp:205
+:3  br i1 %tmp_39_i_i_i, label %.preheader.preheader.i.i.i.i.i, label %._crit_edge.i.i.i
+
+ST_3: tmp_40_i_i_i (158)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i.i.i:0  %tmp_40_i_i_i = zext i12 %col_assign_i to i64
+
+ST_3: buff_A_val_1_addr (159)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i.i.i:1  %buff_A_val_1_addr = getelementptr [1920 x i8]* %buff_A_val_1, i64 0, i64 %tmp_40_i_i_i
+
+ST_3: buff_A_val_1_load (160)  [2/2] 2.71ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i.i.i:2  %buff_A_val_1_load = load i8* %buff_A_val_1_addr, align 1
+
+ST_3: buff_A_val_0_addr (163)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i.i.i:5  %buff_A_val_0_addr = getelementptr [1920 x i8]* %buff_A_val_0, i64 0, i64 %tmp_40_i_i_i
+
+ST_3: temp (164)  [2/2] 2.71ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i.i.i:6  %temp = load i8* %buff_A_val_0_addr, align 1
+
+ST_3: or_cond_i_i_i (169)  [1/1] 1.37ns  loc: mysobel/solution1/top.cpp:121->mysobel/solution1/top.cpp:205
+._crit_edge.i.i.i:0  %or_cond_i_i_i = and i1 %tmp_39_i_i_i, %tmp_34_i_i_i
+
+ST_3: StgValue_143 (170)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:121->mysobel/solution1/top.cpp:205
+._crit_edge.i.i.i:1  br i1 %or_cond_i_i_i, label %"operator>>.exit.i.i.i", label %._crit_edge5.i.i_ifconv.i
+
+ST_3: tmp_45_i_i_i (198)  [1/1] 2.14ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:15  %tmp_45_i_i_i = icmp sgt i13 %col_assign_cast_cast, %tmp_32_i_i_cast_i
+
+ST_3: tmp_46_i_i_i (266)  [1/1] 2.14ns  loc: mysobel/solution1/top.cpp:154->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:83  %tmp_46_i_i_i = icmp ne i12 %col_assign_i, 0
+
+ST_3: or_cond3_i_i_i (267)  [1/1] 1.37ns  loc: mysobel/solution1/top.cpp:154->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:84  %or_cond3_i_i_i = and i1 %tmp_36_i_i_i, %tmp_46_i_i_i
+
+ST_3: StgValue_147 (268)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:154->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:85  br i1 %or_cond3_i_i_i, label %"operator<<.exit.i.i.i", label %._crit_edge7.i.i.i
+
+
+ <State 4>: 5.42ns
+ST_4: buff_A_val_1_load (160)  [1/2] 2.71ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i.i.i:2  %buff_A_val_1_load = load i8* %buff_A_val_1_addr, align 1
+
+ST_4: buff_A_val_2_addr (161)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i.i.i:3  %buff_A_val_2_addr = getelementptr [1920 x i8]* %buff_A_val_2, i64 0, i64 %tmp_40_i_i_i
+
+ST_4: StgValue_150 (162)  [1/1] 2.71ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i.i.i:4  store i8 %buff_A_val_1_load, i8* %buff_A_val_2_addr, align 1
+
+ST_4: temp (164)  [1/2] 2.71ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i.i.i:6  %temp = load i8* %buff_A_val_0_addr, align 1
+
+ST_4: StgValue_152 (165)  [1/1] 2.71ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i.i.i:7  store i8 %temp, i8* %buff_A_val_1_addr, align 1
+
+ST_4: StgValue_153 (166)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:116->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i.i.i:8  store i8 %temp, i8* %buff_C_val_1_0
+
+ST_4: StgValue_154 (167)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:117->mysobel/solution1/top.cpp:205
+.preheader.preheader.i.i.i.i.i:9  br label %._crit_edge.i.i.i
+
+
+ <State 5>: 7.08ns
+ST_5: StgValue_155 (151)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:104->mysobel/solution1/top.cpp:205
+.preheader.i.i.i:5  br i1 %exitcond_i, label %.loopexit.loopexit, label %0
+
+ST_5: tmp_41_i_i_i (172)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:617->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->mysobel/solution1/top.cpp:123->mysobel/solution1/top.cpp:205
+operator>>.exit.i.i.i:0  %tmp_41_i_i_i = call i32 (...)* @_ssdm_op_SpecRegionBegin([13 x i8]* @p_str1837)
+
+ST_5: StgValue_157 (173)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:621->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->mysobel/solution1/top.cpp:123->mysobel/solution1/top.cpp:205
+operator>>.exit.i.i.i:1  call void (...)* @_ssdm_op_SpecProtocol(i32 0, [1 x i8]* @p_str1806) nounwind
+
+ST_5: tmp_25 (174)  [1/1] 4.38ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:624->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->mysobel/solution1/top.cpp:123->mysobel/solution1/top.cpp:205
+operator>>.exit.i.i.i:2  %tmp_25 = call i8 @_ssdm_op_Read.ap_fifo.volatile.i8P(i8* %src_data_stream_0_V)
+
+ST_5: empty (175)  [1/1] 4.38ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:624->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->mysobel/solution1/top.cpp:123->mysobel/solution1/top.cpp:205
+operator>>.exit.i.i.i:3  %empty = call i8 @_ssdm_op_Read.ap_fifo.volatile.i8P(i8* %src_data_stream_1_V)
+
+ST_5: empty_9 (176)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:626->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->mysobel/solution1/top.cpp:123->mysobel/solution1/top.cpp:205
+operator>>.exit.i.i.i:4  %empty_9 = call i32 (...)* @_ssdm_op_SpecRegionEnd([13 x i8]* @p_str1837, i32 %tmp_41_i_i_i)
+
+ST_5: tmp_42_i_i_i (177)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:797->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:873->mysobel/solution1/top.cpp:125->mysobel/solution1/top.cpp:205
+operator>>.exit.i.i.i:5  %tmp_42_i_i_i = zext i12 %col_assign_i to i64
+
+ST_5: buff_A_val_0_addr_1 (178)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:797->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:873->mysobel/solution1/top.cpp:125->mysobel/solution1/top.cpp:205
+operator>>.exit.i.i.i:6  %buff_A_val_0_addr_1 = getelementptr [1920 x i8]* %buff_A_val_0, i64 0, i64 %tmp_42_i_i_i
+
+ST_5: StgValue_163 (179)  [1/1] 2.71ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:797->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:873->mysobel/solution1/top.cpp:125->mysobel/solution1/top.cpp:205
+operator>>.exit.i.i.i:7  store i8 %tmp_25, i8* %buff_A_val_0_addr_1, align 1
+
+ST_5: StgValue_164 (180)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:624->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->mysobel/solution1/top.cpp:123->mysobel/solution1/top.cpp:205
+operator>>.exit.i.i.i:8  store i8 %tmp_25, i8* %buff_C_val_0_0
+
+ST_5: StgValue_165 (181)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:126->mysobel/solution1/top.cpp:205
+operator>>.exit.i.i.i:9  br label %._crit_edge5.i.i_ifconv.i
+
+ST_5: buff_C_val_1_0_loa (183)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:0  %buff_C_val_1_0_loa = load i8* %buff_C_val_1_0
+
+ST_5: tmp_43_i_i_i (190)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:835->mysobel/solution1/top.cpp:134->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:7  %tmp_43_i_i_i = zext i12 %col_assign_i to i64
+
+ST_5: buff_A_val_2_addr_1 (191)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:835->mysobel/solution1/top.cpp:134->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:8  %buff_A_val_2_addr_1 = getelementptr [1920 x i8]* %buff_A_val_2, i64 0, i64 %tmp_43_i_i_i
+
+ST_5: buff_C_val_2_0 (192)  [2/2] 2.71ns  loc: mysobel/solution1/top.cpp:134->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:9  %buff_C_val_2_0 = load i8* %buff_A_val_2_addr_1, align 1
+
+ST_5: tmp_21 (196)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:13  %tmp_21 = call i11 @_ssdm_op_PartSelect.i11.i12.i32.i32(i12 %col_assign_i, i32 1, i32 11)
+
+ST_5: icmp6 (197)  [1/1] 2.11ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:14  %icmp6 = icmp eq i11 %tmp_21, 0
+
+
+ <State 6>: 7.75ns
+ST_6: buff_C_val_2_1 (147)  [1/1] 0.00ns
+.preheader.i.i.i:1  %buff_C_val_2_1 = load i8* %buff_C_val_2_0_i_i_s
+
+ST_6: buff_C_val_0_0_i_i_1 (184)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:1  %buff_C_val_0_0_i_i_1 = load i8* %buff_C_val_0_0_i_i_s
+
+ST_6: buff_C_val_0_1_i_i_1 (185)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:2  %buff_C_val_0_1_i_i_1 = load i8* %buff_C_val_0_1_i_i_s
+
+ST_6: buff_C_val_0_0_1 (186)  [1/1] 0.00ns
+._crit_edge5.i.i_ifconv.i:3  %buff_C_val_0_0_1 = load i8* %buff_C_val_0_0
+
+ST_6: buff_C_val_1_0_i_i_1 (187)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:4  %buff_C_val_1_0_i_i_1 = load i8* %buff_C_val_1_0_i_i_s
+
+ST_6: buff_C_val_1_1_i_i_1 (188)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:5  %buff_C_val_1_1_i_i_1 = load i8* %buff_C_val_1_1_i_i_s
+
+ST_6: buff_C_val_2_1_i_i_1 (189)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:6  %buff_C_val_2_1_i_i_1 = load i8* %buff_C_val_2_1_i_i_s
+
+ST_6: buff_C_val_2_0 (192)  [1/2] 2.71ns  loc: mysobel/solution1/top.cpp:134->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:9  %buff_C_val_2_0 = load i8* %buff_A_val_2_addr_1, align 1
+
+ST_6: buff_C_val_2_0_1 (193)  [1/1] 1.37ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:10  %buff_C_val_2_0_1 = select i1 %tmp_39_i_i_i, i8 %buff_C_val_2_0, i8 %buff_C_val_2_1
+
+ST_6: buff_C_val_1_0_1 (194)  [1/1] 1.37ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:11  %buff_C_val_1_0_1 = select i1 %tmp_39_i_i_i, i8 %buff_C_val_1_0_loa, i8 %buff_C_val_1_0_i_i_1
+
+ST_6: buff_C_val_0_0_2 (195)  [1/1] 1.37ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:12  %buff_C_val_0_0_2 = select i1 %tmp_39_i_i_i, i8 %buff_C_val_0_0_1, i8 %buff_C_val_0_0_i_i_1
+
+ST_6: tmp_35_0_i_i_i_i (202)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:19  %tmp_35_0_i_i_i_i = zext i8 %buff_C_val_0_0_2 to i16
+
+ST_6: tmp_37_0_i_i_i_i (203)  [1/1] 6.38ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:20  %tmp_37_0_i_i_i_i = mul i16 %tmp_36_0_i_i_i_i, %tmp_35_0_i_i_i_i
+
+ST_6: tmp_39_0_i_i_i_i (204)  [1/1] 6.38ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:21  %tmp_39_0_i_i_i_i = mul i16 %tmp_38_0_i_i_i_i, %tmp_35_0_i_i_i_i
+
+ST_6: tmp_35_1_1_i_i_i_i (214)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:31  %tmp_35_1_1_i_i_i_i = zext i8 %buff_C_val_1_0_i_i_1 to i16
+
+ST_6: tmp_37_1_1_i_i_i_i (215)  [1/1] 6.38ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:32  %tmp_37_1_1_i_i_i_i = mul i16 %tmp_36_1_1_i_i_i_i, %tmp_35_1_1_i_i_i_i
+
+ST_6: tmp_39_1_1_i_i_i_i (216)  [1/1] 6.38ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:33  %tmp_39_1_1_i_i_i_i = mul i16 %tmp_38_1_1_i_i_i_i, %tmp_35_1_1_i_i_i_i
+
+ST_6: tmp_35_2_1_i_i_i_i (223)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:40  %tmp_35_2_1_i_i_i_i = zext i8 %buff_C_val_2_1 to i16
+
+ST_6: tmp_37_2_1_i_i_i_i (224)  [1/1] 6.38ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:41  %tmp_37_2_1_i_i_i_i = mul i16 %tmp_36_2_1_i_i_i_i, %tmp_35_2_1_i_i_i_i
+
+ST_6: tmp_39_2_1_i_i_i_i (225)  [1/1] 6.38ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:42  %tmp_39_2_1_i_i_i_i = mul i16 %tmp_38_2_1_i_i_i_i, %tmp_35_2_1_i_i_i_i
+
+ST_6: tmp_35_2_2_i_i_i_i (226)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:43  %tmp_35_2_2_i_i_i_i = zext i8 %buff_C_val_2_1_i_i_1 to i16
+
+ST_6: tmp_37_2_2_i_i_i_i (227)  [1/1] 6.38ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:44  %tmp_37_2_2_i_i_i_i = mul i16 %tmp_36_2_2_i_i_i_i, %tmp_35_2_2_i_i_i_i
+
+ST_6: buff_C_val_0_0_i_i_2 (277)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge7.i.i.i:0  %buff_C_val_0_0_i_i_2 = load i8* %buff_C_val_0_0_i_i_s
+
+ST_6: buff_C_val_1_0_i_i_2 (278)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge7.i.i.i:1  %buff_C_val_1_0_i_i_2 = load i8* %buff_C_val_1_0_i_i_s
+
+ST_6: empty_12 (279)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:157->mysobel/solution1/top.cpp:205
+._crit_edge7.i.i.i:2  %empty_12 = call i32 (...)* @_ssdm_op_SpecRegionEnd([12 x i8]* @p_str1805, i32 %tmp_30_i_i_i)
+
+ST_6: StgValue_197 (280)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge7.i.i.i:3  store i8 %buff_C_val_2_0_1, i8* %buff_C_val_2_0_i_i_s
+
+ST_6: StgValue_198 (281)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge7.i.i.i:4  store i8 %buff_C_val_2_1, i8* %buff_C_val_2_1_i_i_s
+
+ST_6: StgValue_199 (282)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge7.i.i.i:5  store i8 %buff_C_val_1_0_i_i_2, i8* %buff_C_val_1_1_i_i_s
+
+ST_6: StgValue_200 (283)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge7.i.i.i:6  store i8 %buff_C_val_1_0_1, i8* %buff_C_val_1_0_i_i_s
+
+ST_6: StgValue_201 (284)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge7.i.i.i:7  store i8 %buff_C_val_0_0_i_i_2, i8* %buff_C_val_0_1_i_i_s
+
+ST_6: StgValue_202 (285)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge7.i.i.i:8  store i8 %buff_C_val_0_0_2, i8* %buff_C_val_0_0_i_i_s
+
+ST_6: StgValue_203 (286)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:104->mysobel/solution1/top.cpp:205
+._crit_edge7.i.i.i:9  br label %.preheader.i.i.i
+
+
+ <State 7>: 9.40ns
+ST_7: tmp_35_0_1_i_i_i_i (205)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:22  %tmp_35_0_1_i_i_i_i = zext i8 %buff_C_val_0_0_i_i_1 to i16
+
+ST_7: tmp_37_0_1_i_i_i_i (206)  [1/1] 3.36ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:23  %tmp_37_0_1_i_i_i_i = mul i16 %tmp_36_0_1_i_i_i_i, %tmp_35_0_1_i_i_i_i
+
+ST_7: tmp_39_0_1_i_i_i_i (207)  [1/1] 3.36ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:24  %tmp_39_0_1_i_i_i_i = mul i16 %tmp_38_0_1_i_i_i_i, %tmp_35_0_1_i_i_i_i
+
+ST_7: tmp_35_0_2_i_i_i_i (208)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:25  %tmp_35_0_2_i_i_i_i = zext i8 %buff_C_val_0_1_i_i_1 to i16
+
+ST_7: tmp_37_0_2_i_i_i_i (209)  [1/1] 3.36ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:26  %tmp_37_0_2_i_i_i_i = mul i16 %tmp_36_0_2_i_i_i_i, %tmp_35_0_2_i_i_i_i
+
+ST_7: tmp_39_0_2_i_i_i_i (210)  [1/1] 3.36ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:27  %tmp_39_0_2_i_i_i_i = mul i16 %tmp_38_0_2_i_i_i_i, %tmp_35_0_2_i_i_i_i
+
+ST_7: tmp_35_1_i_i_i_i (211)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:28  %tmp_35_1_i_i_i_i = zext i8 %buff_C_val_1_0_1 to i16
+
+ST_7: tmp_37_1_i_i_i_i (212)  [1/1] 3.36ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:29  %tmp_37_1_i_i_i_i = mul i16 %tmp_36_1_i_i_i_i, %tmp_35_1_i_i_i_i
+
+ST_7: tmp_39_1_i_i_i_i (213)  [1/1] 3.36ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:30  %tmp_39_1_i_i_i_i = mul i16 %tmp_38_1_i_i_i_i, %tmp_35_1_i_i_i_i
+
+ST_7: tmp_35_1_2_i_i_i_i (217)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:34  %tmp_35_1_2_i_i_i_i = zext i8 %buff_C_val_1_1_i_i_1 to i16
+
+ST_7: tmp_37_1_2_i_i_i_i (218)  [1/1] 3.36ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:35  %tmp_37_1_2_i_i_i_i = mul i16 %tmp_36_1_2_i_i_i_i, %tmp_35_1_2_i_i_i_i
+
+ST_7: tmp_39_1_2_i_i_i_i (219)  [1/1] 3.36ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:36  %tmp_39_1_2_i_i_i_i = mul i16 %tmp_38_1_2_i_i_i_i, %tmp_35_1_2_i_i_i_i
+
+ST_7: tmp_35_2_i_i_i_i (220)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:37  %tmp_35_2_i_i_i_i = zext i8 %buff_C_val_2_0_1 to i16
+
+ST_7: tmp_37_2_i_i_i_i (221)  [1/1] 3.36ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:38  %tmp_37_2_i_i_i_i = mul i16 %tmp_36_2_i_i_i_i, %tmp_35_2_i_i_i_i
+
+ST_7: tmp_39_2_i_i_i_i (222)  [1/1] 3.36ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:39  %tmp_39_2_i_i_i_i = mul i16 %tmp_38_2_i_i_i_i, %tmp_35_2_i_i_i_i
+
+ST_7: tmp2_i (228)  [1/1] 3.02ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:45  %tmp2_i = add i16 %tmp_37_2_1_i_i_i_i, %tmp_37_2_i_i_i_i
+
+ST_7: tmp3_i (229)  [1/1] 3.02ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:46  %tmp3_i = add i16 %tmp_37_1_1_i_i_i_i, %tmp_37_1_2_i_i_i_i
+
+ST_7: tmp4_i (230)  [1/1] 1.96ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:47  %tmp4_i = add i16 %tmp2_i, %tmp3_i
+
+ST_7: tmp5_i (231)  [1/1] 3.02ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:48  %tmp5_i = add i16 %tmp_37_0_i_i_i_i, %tmp_37_0_1_i_i_i_i
+
+ST_7: tmp6_i (232)  [1/1] 3.02ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:49  %tmp6_i = add i16 %tmp_37_2_2_i_i_i_i, %tmp_37_0_2_i_i_i_i
+
+ST_7: tmp7_i (233)  [1/1] 3.02ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:50  %tmp7_i = add i16 %tmp_37_1_i_i_i_i, %tmp6_i
+
+ST_7: tmp9_i (236)  [1/1] 3.02ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:53  %tmp9_i = add i16 %tmp_39_2_1_i_i_i_i, %tmp_39_2_i_i_i_i
+
+ST_7: tmp10_i (237)  [1/1] 3.02ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:54  %tmp10_i = add i16 %tmp_39_1_1_i_i_i_i, %tmp_39_1_2_i_i_i_i
+
+ST_7: tmp11_i (238)  [1/1] 1.96ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:55  %tmp11_i = add i16 %tmp9_i, %tmp10_i
+
+ST_7: tmp12_i (239)  [1/1] 3.02ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:56  %tmp12_i = add i16 %tmp_39_0_i_i_i_i, %tmp_39_0_1_i_i_i_i
+
+ST_7: tmp13_i (240)  [1/1] 3.02ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:57  %tmp13_i = add i16 %tmp_37_2_2_i_i_i_i, %tmp_39_0_2_i_i_i_i
+
+ST_7: tmp14_i (241)  [1/1] 3.02ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:58  %tmp14_i = add i16 %tmp_39_1_i_i_i_i, %tmp13_i
+
+
+ <State 8>: 7.11ns
+ST_8: tmp8_i (234)  [1/1] 1.73ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:51  %tmp8_i = add i16 %tmp5_i, %tmp7_i
+
+ST_8: x_weight_2_2_2_i_i_i (235)  [1/1] 1.73ns  loc: mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:52  %x_weight_2_2_2_i_i_i = add i16 %tmp4_i, %tmp8_i
+
+ST_8: tmp15_i (242)  [1/1] 1.73ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:59  %tmp15_i = add i16 %tmp12_i, %tmp14_i
+
+ST_8: y_weight_2_2_2_i_i_i (243)  [1/1] 1.73ns  loc: mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:60  %y_weight_2_2_2_i_i_i = add i16 %tmp11_i, %tmp15_i
+
+ST_8: tmp_17_i_i_i_i (244)  [1/1] 2.28ns  loc: mysobel/solution1/top.cpp:70->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:61  %tmp_17_i_i_i_i = icmp sgt i16 %x_weight_2_2_2_i_i_i, 0
+
+ST_8: tmp_18_i_i_i_i (245)  [1/1] 1.96ns  loc: mysobel/solution1/top.cpp:70->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:62  %tmp_18_i_i_i_i = sub i16 0, %x_weight_2_2_2_i_i_i
+
+ST_8: tmp_19_i_i_i_i (246)  [1/1] 1.37ns  loc: mysobel/solution1/top.cpp:70->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:63  %tmp_19_i_i_i_i = select i1 %tmp_17_i_i_i_i, i16 %x_weight_2_2_2_i_i_i, i16 %tmp_18_i_i_i_i
+
+ST_8: tmp_20_i_i_i_i (247)  [1/1] 2.28ns  loc: mysobel/solution1/top.cpp:70->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:64  %tmp_20_i_i_i_i = icmp sgt i16 %y_weight_2_2_2_i_i_i, 0
+
+ST_8: tmp_21_i_i_i_i (248)  [1/1] 1.96ns  loc: mysobel/solution1/top.cpp:70->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:65  %tmp_21_i_i_i_i = sub i16 0, %y_weight_2_2_2_i_i_i
+
+ST_8: tmp_22_i_i_i_i (249)  [1/1] 1.37ns  loc: mysobel/solution1/top.cpp:70->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:66  %tmp_22_i_i_i_i = select i1 %tmp_20_i_i_i_i, i16 %y_weight_2_2_2_i_i_i, i16 %tmp_21_i_i_i_i
+
+ST_8: tmp_22 (250)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:70->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:67  %tmp_22 = trunc i16 %tmp_22_i_i_i_i to i8
+
+ST_8: tmp_23 (251)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:70->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:68  %tmp_23 = trunc i16 %tmp_19_i_i_i_i to i8
+
+
+ <State 9>: 8.13ns
+ST_9: edge_weight (252)  [1/1] 1.96ns  loc: mysobel/solution1/top.cpp:70->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:69  %edge_weight = add i16 %tmp_22_i_i_i_i, %tmp_19_i_i_i_i
+
+ST_9: tmp_23_i_i_i_i (253)  [1/1] 2.28ns  loc: mysobel/solution1/top.cpp:72->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:70  %tmp_23_i_i_i_i = icmp slt i16 %edge_weight, 255
+
+ST_9: tmp_25_i_i_i_i (254)  [1/1] 1.72ns  loc: mysobel/solution1/top.cpp:73->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:71  %tmp_25_i_i_i_i = add i8 %tmp_23, %tmp_22
+
+ST_9: edge_val (255)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:73->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205 (grouped into LUT with out node edge_val1_i_i_i_i)
+._crit_edge5.i.i_ifconv.i:72  %edge_val = xor i8 %tmp_25_i_i_i_i, -1
+
+ST_9: edge_val1_i_i_i_i (256)  [1/1] 1.37ns  loc: mysobel/solution1/top.cpp:72->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205 (out node of the LUT)
+._crit_edge5.i.i_ifconv.i:73  %edge_val1_i_i_i_i = select i1 %tmp_23_i_i_i_i, i8 %edge_val, i8 0
+
+ST_9: tmp_26_i_i_i_i (257)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:78->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:74  %tmp_26_i_i_i_i = zext i8 %edge_val1_i_i_i_i to i32
+
+ST_9: tmp_27_i_i_i_i (258)  [1/1] 2.52ns  loc: mysobel/solution1/top.cpp:78->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:75  %tmp_27_i_i_i_i = icmp sgt i32 %tmp_26_i_i_i_i, %c_high_thresh_channe_1
+
+ST_9: tmp_28_i_i_i_i (259)  [1/1] 2.52ns  loc: mysobel/solution1/top.cpp:80->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205
+._crit_edge5.i.i_ifconv.i:76  %tmp_28_i_i_i_i = icmp slt i32 %tmp_26_i_i_i_i, %c_low_thresh_channel
+
+
+ <State 10>: 8.48ns
+ST_10: tmp_i (199)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205 (grouped into LUT with out node tmp_24)
+._crit_edge5.i.i_ifconv.i:16  %tmp_i = or i1 %icmp, %icmp6
+
+ST_10: tmp1_i (200)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205 (grouped into LUT with out node tmp_24)
+._crit_edge5.i.i_ifconv.i:17  %tmp1_i = or i1 %tmp_37_i_i_i, %tmp_45_i_i_i
+
+ST_10: or_cond4_i_i_i (201)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:142->mysobel/solution1/top.cpp:205 (grouped into LUT with out node tmp_24)
+._crit_edge5.i.i_ifconv.i:18  %or_cond4_i_i_i = or i1 %tmp1_i, %tmp_i
+
+ST_10: p_edge_val_i_i_i_i (260)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:87->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205 (grouped into LUT with out node edge_val_1)
+._crit_edge5.i.i_ifconv.i:77  %p_edge_val_i_i_i_i = select i1 %tmp_27_i_i_i_i, i8 -1, i8 0
+
+ST_10: tmp_i_10 (261)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:87->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205 (grouped into LUT with out node edge_val_1)
+._crit_edge5.i.i_ifconv.i:78  %tmp_i_10 = or i1 %tmp_27_i_i_i_i, %tmp_28_i_i_i_i
+
+ST_10: edge_val_1 (262)  [1/1] 1.37ns  loc: mysobel/solution1/top.cpp:87->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205 (out node of the LUT)
+._crit_edge5.i.i_ifconv.i:79  %edge_val_1 = select i1 %tmp_i_10, i8 %p_edge_val_i_i_i_i, i8 %edge_val1_i_i_i_i
+
+ST_10: edge_val_2 (263)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:85->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205 (grouped into LUT with out node edge_val_4)
+._crit_edge5.i.i_ifconv.i:80  %edge_val_2 = xor i8 %edge_val_1, -1
+
+ST_10: edge_val_4 (264)  [1/1] 1.37ns  loc: mysobel/solution1/top.cpp:84->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205 (out node of the LUT)
+._crit_edge5.i.i_ifconv.i:81  %edge_val_4 = select i1 %tmp_30_i_i_i_i, i8 %edge_val_2, i8 %edge_val_1
+
+ST_10: tmp_24 (265)  [1/1] 1.37ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:648->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->mysobel/solution1/top.cpp:155->mysobel/solution1/top.cpp:205 (out node of the LUT)
+._crit_edge5.i.i_ifconv.i:82  %tmp_24 = select i1 %or_cond4_i_i_i, i8 0, i8 %edge_val_4
+
+ST_10: tmp_47_i_i_i (270)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:641->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->mysobel/solution1/top.cpp:155->mysobel/solution1/top.cpp:205
+operator<<.exit.i.i.i:0  %tmp_47_i_i_i = call i32 (...)* @_ssdm_op_SpecRegionBegin([13 x i8]* @p_str1830)
+
+ST_10: StgValue_261 (271)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:645->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->mysobel/solution1/top.cpp:155->mysobel/solution1/top.cpp:205
+operator<<.exit.i.i.i:1  call void (...)* @_ssdm_op_SpecProtocol(i32 0, [1 x i8]* @p_str1806) nounwind
+
+ST_10: StgValue_262 (272)  [1/1] 4.38ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:648->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->mysobel/solution1/top.cpp:155->mysobel/solution1/top.cpp:205
+operator<<.exit.i.i.i:2  call void @_ssdm_op_Write.ap_fifo.volatile.i8P(i8* %dst_data_stream_0_V, i8 %tmp_24)
+
+ST_10: StgValue_263 (273)  [1/1] 4.38ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:648->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->mysobel/solution1/top.cpp:155->mysobel/solution1/top.cpp:205
+operator<<.exit.i.i.i:3  call void @_ssdm_op_Write.ap_fifo.volatile.i8P(i8* %dst_data_stream_1_V, i8 -128)
+
+ST_10: empty_11 (274)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:650->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->mysobel/solution1/top.cpp:155->mysobel/solution1/top.cpp:205
+operator<<.exit.i.i.i:4  %empty_11 = call i32 (...)* @_ssdm_op_SpecRegionEnd([13 x i8]* @p_str1830, i32 %tmp_47_i_i_i)
+
+ST_10: StgValue_265 (275)  [1/1] 0.00ns  loc: mysobel/solution1/top.cpp:156->mysobel/solution1/top.cpp:205
+operator<<.exit.i.i.i:5  br label %._crit_edge7.i.i.i
+
+
+ <State 11>: 0.00ns
+ST_11: StgValue_266 (288)  [1/1] 0.00ns
+.loopexit.loopexit:0  br label %.loopexit
+
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 1.25ns.
+
+ <State 1>: 6.89ns
+The critical path consists of the following:
+	fifo read on port 'c_invert_channel' [85]  (4.38 ns)
+	'icmp' operation ('tmp_30_i_i_i_i', mysobel/solution1/top.cpp:84->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [130]  (2.52 ns)
+
+ <State 2>: 3.51ns
+The critical path consists of the following:
+	'icmp' operation ('exitcond1_i', mysobel/solution1/top.cpp:103->mysobel/solution1/top.cpp:205) [135]  (2.14 ns)
+	blocking operation 1.37 ns on control path)
+
+ <State 3>: 4.88ns
+The critical path consists of the following:
+	'icmp' operation ('exitcond_i', mysobel/solution1/top.cpp:104->mysobel/solution1/top.cpp:205) [149]  (2.14 ns)
+	blocking operation 2.74 ns on control path)
+
+ <State 4>: 5.42ns
+The critical path consists of the following:
+	'load' operation ('buff_A_val_1_load', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205) on array 'buff_A.val[1]', mysobel/solution1/top.cpp:100->mysobel/solution1/top.cpp:205 [160]  (2.71 ns)
+	'store' operation (/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205) of variable 'buff_A_val_1_load', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:689->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:853->mysobel/solution1/top.cpp:115->mysobel/solution1/top.cpp:205 on array 'buff_A.val[2]', mysobel/solution1/top.cpp:100->mysobel/solution1/top.cpp:205 [162]  (2.71 ns)
+
+ <State 5>: 7.08ns
+The critical path consists of the following:
+	fifo read on port 'src_data_stream_0_V' (/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:624->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->mysobel/solution1/top.cpp:123->mysobel/solution1/top.cpp:205) [174]  (4.38 ns)
+	'store' operation (/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:797->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:873->mysobel/solution1/top.cpp:125->mysobel/solution1/top.cpp:205) of variable 'tmp', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:624->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->mysobel/solution1/top.cpp:123->mysobel/solution1/top.cpp:205 on array 'buff_A.val[0]', mysobel/solution1/top.cpp:100->mysobel/solution1/top.cpp:205 [179]  (2.71 ns)
+
+ <State 6>: 7.75ns
+The critical path consists of the following:
+	'load' operation ('buff_C_val_0_0_i_i_1', mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) on local variable 'Window<3, 3, unsigned char>.val[0][1]' [184]  (0 ns)
+	'select' operation ('buff_C.val[0][0]', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_mem.h:68->mysobel/solution1/top.cpp:66->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [195]  (1.37 ns)
+	'mul' operation ('tmp_37_0_i_i_i_i', mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [203]  (6.38 ns)
+
+ <State 7>: 9.4ns
+The critical path consists of the following:
+	'mul' operation ('tmp_37_0_2_i_i_i_i', mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [209]  (3.36 ns)
+	'add' operation ('tmp6_i', mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [232]  (3.02 ns)
+	'add' operation ('tmp7_i', mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [233]  (3.02 ns)
+
+ <State 8>: 7.11ns
+The critical path consists of the following:
+	'add' operation ('tmp8_i', mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [234]  (1.73 ns)
+	'add' operation ('x_weight_2_2_2_i_i_i', mysobel/solution1/top.cpp:63->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [235]  (1.73 ns)
+	'icmp' operation ('tmp_17_i_i_i_i', mysobel/solution1/top.cpp:70->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [244]  (2.28 ns)
+	'select' operation ('tmp_19_i_i_i_i', mysobel/solution1/top.cpp:70->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [246]  (1.37 ns)
+
+ <State 9>: 8.13ns
+The critical path consists of the following:
+	'add' operation ('edge_weight', mysobel/solution1/top.cpp:70->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [252]  (1.96 ns)
+	'icmp' operation ('tmp_23_i_i_i_i', mysobel/solution1/top.cpp:72->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [253]  (2.28 ns)
+	'select' operation ('edge_val1_i_i_i_i', mysobel/solution1/top.cpp:72->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [256]  (1.37 ns)
+	'icmp' operation ('tmp_27_i_i_i_i', mysobel/solution1/top.cpp:78->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [258]  (2.52 ns)
+
+ <State 10>: 8.48ns
+The critical path consists of the following:
+	'select' operation ('p_edge_val_i_i_i_i', mysobel/solution1/top.cpp:87->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [260]  (0 ns)
+	'select' operation ('edge_val', mysobel/solution1/top.cpp:87->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [262]  (1.37 ns)
+	'select' operation ('edge_val', mysobel/solution1/top.cpp:84->mysobel/solution1/top.cpp:147->mysobel/solution1/top.cpp:205) [264]  (1.37 ns)
+	'select' operation ('tmp', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:648->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->mysobel/solution1/top.cpp:155->mysobel/solution1/top.cpp:205) [265]  (1.37 ns)
+	fifo write on port 'dst_data_stream_0_V' (/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:648->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->mysobel/solution1/top.cpp:155->mysobel/solution1/top.cpp:205) [272]  (4.38 ns)
+
+ <State 11>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

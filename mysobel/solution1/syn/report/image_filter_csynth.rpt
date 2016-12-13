@@ -1,0 +1,188 @@
+
+
+================================================================
+== Vivado HLS Report for 'image_filter'
+================================================================
+* Date:           Sat Dec  3 16:51:19 2016
+
+* Version:        2016.3 (Build 1682563 on Mon Oct 10 19:41:59 MDT 2016)
+* Project:        mysobel
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg484-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|      9.40|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+-----+-----+-----+----------+
+    |  Latency  |  Interval | Pipeline |
+    | min | max | min | max |   Type   |
+    +-----+-----+-----+-----+----------+
+    |    ?|    ?|    ?|    ?| dataflow |
+    +-----+-----+-----+-----+----------+
+
+    + Detail: 
+        * Instance: 
+        +------------------------------+-------------------+-----+---------+-----+---------+---------+
+        |                              |                   |    Latency    |    Interval   | Pipeline|
+        |           Instance           |       Module      | min |   max   | min |   max   |   Type  |
+        +------------------------------+-------------------+-----+---------+-----+---------+---------+
+        |grp_sobel_filter_core_fu_408  |sobel_filter_core  |    ?|        ?|    ?|        ?|   none  |
+        |grp_AXIvideo2Mat44_fu_438     |AXIvideo2Mat44     |    3|  2081163|    3|  2081163|   none  |
+        |grp_Mat2AXIvideo_fu_522       |Mat2AXIvideo       |    1|  2077921|    1|  2077921|   none  |
+        +------------------------------+-------------------+-----+---------+-----+---------+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-------+--------+-------+
+|       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
++-----------------+---------+-------+--------+-------+
+|DSP              |        -|      -|       -|      -|
+|Expression       |        -|      -|       0|      2|
+|FIFO             |        0|      -|     120|    960|
+|Instance         |        3|     17|    2006|   2294|
+|Memory           |        -|      -|       -|      -|
+|Multiplexer      |        -|      -|       -|      -|
+|Register         |        -|      -|       -|      -|
++-----------------+---------+-------+--------+-------+
+|Total            |        3|     17|    2126|   3256|
++-----------------+---------+-------+--------+-------+
+|Available        |      280|    220|  106400|  53200|
++-----------------+---------+-------+--------+-------+
+|Utilization (%)  |        1|      7|       1|      6|
++-----------------+---------+-------+--------+-------+
+
++ Detail: 
+    * Instance: 
+    +----------------------------------+--------------------------------+---------+-------+-----+------+
+    |             Instance             |             Module             | BRAM_18K| DSP48E|  FF |  LUT |
+    +----------------------------------+--------------------------------+---------+-------+-----+------+
+    |AXIvideo2Mat44_U0                 |AXIvideo2Mat44                  |        0|      0|  169|   192|
+    |Mat2AXIvideo_U0                   |Mat2AXIvideo                    |        0|      0|  105|   115|
+    |image_filter_CONTROL_BUS_s_axi_U  |image_filter_CONTROL_BUS_s_axi  |        0|      0|  910|  1512|
+    |sobel_filter_core_U0              |sobel_filter_core               |        3|     17|  822|   475|
+    +----------------------------------+--------------------------------+---------+-------+-----+------+
+    |Total                             |                                |        3|     17| 2006|  2294|
+    +----------------------------------+--------------------------------+---------+-------+-----+------+
+
+    * DSP48: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    +--------------------------+---------+---+----+------+-----+---------+
+    |           Name           | BRAM_18K| FF| LUT| Depth| Bits| Size:D*B|
+    +--------------------------+---------+---+----+------+-----+---------+
+    |C_XR0C0_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_XR0C1_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_XR0C2_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_XR1C0_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_XR1C1_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_XR1C2_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_XR2C0_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_XR2C1_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_XR2C2_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_YR0C0_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_YR0C1_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_YR0C2_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_YR1C0_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_YR1C1_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_YR1C2_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_YR2C0_channel_U         |        0|  5|  44|     1|   32|       32|
+    |C_YR2C1_channel_U         |        0|  5|  44|     1|   32|       32|
+    |c_high_thresh_channe_1_U  |        0|  5|  44|     1|   32|       32|
+    |c_invert_channel_U        |        0|  5|  44|     1|   32|       32|
+    |c_low_thresh_channel_1_U  |        0|  5|  44|     1|   32|       32|
+    |img_0_data_stream_0_U     |        0|  5|  20|     1|    8|        8|
+    |img_0_data_stream_1_U     |        0|  5|  20|     1|    8|        8|
+    |img_1_data_stream_0_U     |        0|  5|  20|     1|    8|        8|
+    |img_1_data_stream_1_U     |        0|  5|  20|     1|    8|        8|
+    +--------------------------+---------+---+----+------+-----+---------+
+    |Total                     |        0|120| 960|    24|  672|      672|
+    +--------------------------+---------+---+----+------+-----+---------+
+
+    * Expression: 
+    +----------------------------+----------+-------+---+----+------------+------------+
+    |        Variable Name       | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------------+----------+-------+---+----+------------+------------+
+    |AXIvideo2Mat44_U0_ap_start  |    and   |      0|  0|   1|           1|           0|
+    |ap_idle                     |    and   |      0|  0|   1|           1|           1|
+    +----------------------------+----------+-------+---+----+------------+------------+
+    |Total                       |          |      0|  0|   2|           2|           1|
+    +----------------------------+----------+-------+---+----+------------+------------+
+
+    * Multiplexer: 
+    N/A
+
+    * Register: 
+    N/A
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------------+-----+-----+------------+------------------------+--------------+
+|         RTL Ports         | Dir | Bits|  Protocol  |      Source Object     |    C Type    |
++---------------------------+-----+-----+------------+------------------------+--------------+
+|s_axi_CONTROL_BUS_AWVALID  |  in |    1|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_AWREADY  | out |    1|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_AWADDR   |  in |    8|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_WVALID   |  in |    1|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_WREADY   | out |    1|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_WDATA    |  in |   32|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_WSTRB    |  in |    4|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_ARVALID  |  in |    1|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_ARREADY  | out |    1|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_ARADDR   |  in |    8|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_RVALID   | out |    1|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_RREADY   |  in |    1|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_RDATA    | out |   32|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_RRESP    | out |    2|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_BVALID   | out |    1|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_BREADY   |  in |    1|    s_axi   |       CONTROL_BUS      |    scalar    |
+|s_axi_CONTROL_BUS_BRESP    | out |    2|    s_axi   |       CONTROL_BUS      |    scalar    |
+|ap_clk                     |  in |    1| ap_ctrl_hs |      image_filter      | return value |
+|ap_rst_n                   |  in |    1| ap_ctrl_hs |      image_filter      | return value |
+|interrupt                  | out |    1| ap_ctrl_hs |      image_filter      | return value |
+|video_in_TDATA             |  in |   16|    axis    |  INPUT_STREAM_V_data_V |    pointer   |
+|video_in_TKEEP             |  in |    2|    axis    |  INPUT_STREAM_V_keep_V |    pointer   |
+|video_in_TSTRB             |  in |    2|    axis    |  INPUT_STREAM_V_strb_V |    pointer   |
+|video_in_TUSER             |  in |    1|    axis    |  INPUT_STREAM_V_user_V |    pointer   |
+|video_in_TLAST             |  in |    1|    axis    |  INPUT_STREAM_V_last_V |    pointer   |
+|video_in_TID               |  in |    1|    axis    |   INPUT_STREAM_V_id_V  |    pointer   |
+|video_in_TDEST             |  in |    1|    axis    |  INPUT_STREAM_V_dest_V |    pointer   |
+|video_in_TVALID            |  in |    1|    axis    |  INPUT_STREAM_V_dest_V |    pointer   |
+|video_in_TREADY            | out |    1|    axis    |  INPUT_STREAM_V_dest_V |    pointer   |
+|video_out_TDATA            | out |   16|    axis    | OUTPUT_STREAM_V_data_V |    pointer   |
+|video_out_TKEEP            | out |    2|    axis    | OUTPUT_STREAM_V_keep_V |    pointer   |
+|video_out_TSTRB            | out |    2|    axis    | OUTPUT_STREAM_V_strb_V |    pointer   |
+|video_out_TUSER            | out |    1|    axis    | OUTPUT_STREAM_V_user_V |    pointer   |
+|video_out_TLAST            | out |    1|    axis    | OUTPUT_STREAM_V_last_V |    pointer   |
+|video_out_TID              | out |    1|    axis    |  OUTPUT_STREAM_V_id_V  |    pointer   |
+|video_out_TDEST            | out |    1|    axis    | OUTPUT_STREAM_V_dest_V |    pointer   |
+|video_out_TVALID           | out |    1|    axis    | OUTPUT_STREAM_V_dest_V |    pointer   |
+|video_out_TREADY           |  in |    1|    axis    | OUTPUT_STREAM_V_dest_V |    pointer   |
++---------------------------+-----+-----+------------+------------------------+--------------+
+

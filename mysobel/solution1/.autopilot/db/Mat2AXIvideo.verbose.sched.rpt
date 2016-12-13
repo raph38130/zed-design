@@ -1,0 +1,296 @@
+
+
+================================================================
+== Vivado HLS Report for 'Mat2AXIvideo'
+================================================================
+* Date:           Sat Dec  3 16:51:18 2016
+
+* Version:        2016.3 (Build 1682563 on Mon Oct 10 19:41:59 MDT 2016)
+* Project:        mysobel
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg484-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|      4.38|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+---------+-----+---------+---------+
+    |    Latency    |    Interval   | Pipeline|
+    | min |   max   | min |   max   |   Type  |
+    +-----+---------+-----+---------+---------+
+    |    1|  2077921|    1|  2077921|   none  |
+    +-----+---------+-----+---------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +---------------+-----+---------+----------+-----------+-----------+----------+----------+
+        |               |    Latency    | Iteration|  Initiation Interval  |   Trip   |          |
+        |   Loop Name   | min |   max   |  Latency |  achieved |   target  |   Count  | Pipelined|
+        +---------------+-----+---------+----------+-----------+-----------+----------+----------+
+        |- loop_height  |    0|  2077920| 3 ~ 1924 |          -|          -| 0 ~ 1080 |    no    |
+        | + loop_width  |    0|     1921|         3|          1|          1| 0 ~ 1920 |    yes   |
+        +---------------+-----+---------+----------+-----------+-----------+----------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 2
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 3
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states: 6
+* Pipeline: 1
+  Pipeline-0: II = 1, D = 3, States = { 3 4 5 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+	2  / true
+2 --> 
+	3  / (!exitcond1_i_i)
+3 --> 
+	6  / (exitcond_i_i)
+	4  / (!exitcond_i_i)
+4 --> 
+	5  / true
+5 --> 
+	3  / true
+6 --> 
+	2  / true
+* FSM state operations: 
+
+ <State 1>: 1.84ns
+ST_1: tmp_user_V (12)  [1/1] 0.00ns
+entry:0  %tmp_user_V = alloca i1
+
+ST_1: cols_read (13)  [1/1] 0.00ns
+entry:1  %cols_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %cols)
+
+ST_1: rows_read (14)  [1/1] 0.00ns
+entry:2  %rows_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %rows)
+
+ST_1: tmp (15)  [1/1] 0.00ns
+entry:3  %tmp = trunc i32 %rows_read to i11
+
+ST_1: tmp_26 (16)  [1/1] 0.00ns
+entry:4  %tmp_26 = trunc i32 %cols_read to i11
+
+ST_1: StgValue_12 (17)  [1/1] 0.00ns
+entry:5  call void (...)* @_ssdm_op_SpecInterface(i8* %img_1_data_stream_1, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_13 (18)  [1/1] 0.00ns
+entry:6  call void (...)* @_ssdm_op_SpecInterface(i8* %img_1_data_stream_0, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_14 (19)  [1/1] 0.00ns
+entry:7  call void (...)* @_ssdm_op_SpecInterface(i11 %tmp_26, [10 x i8]* @ap_stable_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_15 (20)  [1/1] 0.00ns
+entry:8  call void (...)* @_ssdm_op_SpecInterface(i11 %tmp, [10 x i8]* @ap_stable_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_16 (21)  [1/1] 0.00ns
+entry:9  call void (...)* @_ssdm_op_SpecInterface(i16* %video_out_V_data_V, i2* %video_out_V_keep_V, i2* %video_out_V_strb_V, i1* %video_out_V_user_V, i1* %video_out_V_last_V, i1* %video_out_V_id_V, i1* %video_out_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [14 x i8]* @p_str1810, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: r_V (22)  [1/1] 1.84ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:135->mysobel/solution1/top.cpp:209
+entry:10  %r_V = add i11 -1, %tmp_26
+
+ST_1: StgValue_18 (23)  [1/1] 1.57ns
+entry:11  store i1 true, i1* %tmp_user_V
+
+ST_1: StgValue_19 (24)  [1/1] 1.57ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:125->mysobel/solution1/top.cpp:209
+entry:12  br label %.preheader.i.i
+
+
+ <State 2>: 3.48ns
+ST_2: p_i_i (26)  [1/1] 0.00ns
+.preheader.i.i:0  %p_i_i = phi i11 [ %i_V, %2 ], [ 0, %entry ]
+
+ST_2: exitcond1_i_i (27)  [1/1] 2.11ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:125->mysobel/solution1/top.cpp:209
+.preheader.i.i:1  %exitcond1_i_i = icmp eq i11 %p_i_i, %tmp
+
+ST_2: StgValue_22 (28)  [1/1] 0.00ns
+.preheader.i.i:2  call void (...)* @_ssdm_op_SpecLoopTripCount(i64 0, i64 1080, i64 0)
+
+ST_2: i_V (29)  [1/1] 1.84ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:125->mysobel/solution1/top.cpp:209
+.preheader.i.i:3  %i_V = add i11 %p_i_i, 1
+
+ST_2: StgValue_24 (30)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:125->mysobel/solution1/top.cpp:209
+.preheader.i.i:4  br i1 %exitcond1_i_i, label %Mat2AXIvideo.exit, label %0
+
+ST_2: StgValue_25 (32)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:125->mysobel/solution1/top.cpp:209
+:0  call void (...)* @_ssdm_op_SpecLoopName([12 x i8]* @p_str1821) nounwind
+
+ST_2: tmp_i_i (33)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:125->mysobel/solution1/top.cpp:209
+:1  %tmp_i_i = call i32 (...)* @_ssdm_op_SpecRegionBegin([12 x i8]* @p_str1821)
+
+ST_2: StgValue_27 (34)  [1/1] 1.57ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:126->mysobel/solution1/top.cpp:209
+:2  br label %1
+
+ST_2: StgValue_28 (61)  [1/1] 0.00ns
+Mat2AXIvideo.exit:0  ret void
+
+
+ <State 3>: 3.48ns
+ST_3: p_1_i_i (36)  [1/1] 0.00ns
+:0  %p_1_i_i = phi i11 [ 0, %0 ], [ %j_V, %"operator>>.exit.i.i" ]
+
+ST_3: exitcond_i_i (37)  [1/1] 2.11ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:126->mysobel/solution1/top.cpp:209
+:1  %exitcond_i_i = icmp eq i11 %p_1_i_i, %tmp_26
+
+ST_3: StgValue_31 (38)  [1/1] 0.00ns
+:2  call void (...)* @_ssdm_op_SpecLoopTripCount(i64 0, i64 1920, i64 0)
+
+ST_3: j_V (39)  [1/1] 1.84ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:126->mysobel/solution1/top.cpp:209
+:3  %j_V = add i11 %p_1_i_i, 1
+
+ST_3: StgValue_33 (40)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:126->mysobel/solution1/top.cpp:209
+:4  br i1 %exitcond_i_i, label %2, label %"operator>>.exit.i.i"
+
+ST_3: axi_last_V (46)  [1/1] 2.11ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:135->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:4  %axi_last_V = icmp eq i11 %p_1_i_i, %r_V
+
+
+ <State 4>: 4.38ns
+ST_4: tmp_user_V_load (42)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:146->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:0  %tmp_user_V_load = load i1* %tmp_user_V
+
+ST_4: tmp_50_i_i (47)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:617->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:140->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:5  %tmp_50_i_i = call i32 (...)* @_ssdm_op_SpecRegionBegin([13 x i8]* @p_str1837)
+
+ST_4: StgValue_37 (48)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:621->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:140->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:6  call void (...)* @_ssdm_op_SpecProtocol(i32 0, [1 x i8]* @p_str1806) nounwind
+
+ST_4: tmp_29 (49)  [1/1] 4.38ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:624->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:140->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:7  %tmp_29 = call i8 @_ssdm_op_Read.ap_fifo.volatile.i8P(i8* %img_1_data_stream_0)
+
+ST_4: tmp_28 (50)  [1/1] 4.38ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:624->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:140->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:8  %tmp_28 = call i8 @_ssdm_op_Read.ap_fifo.volatile.i8P(i8* %img_1_data_stream_1)
+
+ST_4: empty (51)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:626->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:140->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:9  %empty = call i32 (...)* @_ssdm_op_SpecRegionEnd([13 x i8]* @p_str1837, i32 %tmp_50_i_i)
+
+ST_4: tmp_data_V (52)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_axi_io.h:78->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_axi_io.h:100->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:143->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:10  %tmp_data_V = call i16 @_ssdm_op_BitConcatenate.i16.i8.i8(i8 %tmp_28, i8 %tmp_29)
+
+ST_4: StgValue_42 (53)  [2/2] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:146->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:11  call void @_ssdm_op_Write.axis.volatile.i16P.i2P.i2P.i1P.i1P.i1P.i1P(i16* %video_out_V_data_V, i2* %video_out_V_keep_V, i2* %video_out_V_strb_V, i1* %video_out_V_user_V, i1* %video_out_V_last_V, i1* %video_out_V_id_V, i1* %video_out_V_dest_V, i16 %tmp_data_V, i2 -1, i2 undef, i1 %tmp_user_V_load, i1 %axi_last_V, i1 undef, i1 undef)
+
+ST_4: StgValue_43 (55)  [1/1] 1.57ns
+operator>>.exit.i.i:13  store i1 false, i1* %tmp_user_V
+
+
+ <State 5>: 0.00ns
+ST_5: StgValue_44 (43)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:126->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:1  call void (...)* @_ssdm_op_SpecLoopName([11 x i8]* @p_str1822) nounwind
+
+ST_5: tmp_49_i_i (44)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:126->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:2  %tmp_49_i_i = call i32 (...)* @_ssdm_op_SpecRegionBegin([11 x i8]* @p_str1822)
+
+ST_5: StgValue_46 (45)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:128->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:3  call void (...)* @_ssdm_op_SpecPipeline(i32 1, i32 1, i32 1, i32 0, [1 x i8]* @p_str1806) nounwind
+
+ST_5: StgValue_47 (53)  [1/2] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:146->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:11  call void @_ssdm_op_Write.axis.volatile.i16P.i2P.i2P.i1P.i1P.i1P.i1P(i16* %video_out_V_data_V, i2* %video_out_V_keep_V, i2* %video_out_V_strb_V, i1* %video_out_V_user_V, i1* %video_out_V_last_V, i1* %video_out_V_id_V, i1* %video_out_V_dest_V, i16 %tmp_data_V, i2 -1, i2 undef, i1 %tmp_user_V_load, i1 %axi_last_V, i1 undef, i1 undef)
+
+ST_5: empty_47 (54)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:147->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:12  %empty_47 = call i32 (...)* @_ssdm_op_SpecRegionEnd([11 x i8]* @p_str1822, i32 %tmp_49_i_i)
+
+ST_5: StgValue_49 (56)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:126->mysobel/solution1/top.cpp:209
+operator>>.exit.i.i:14  br label %1
+
+
+ <State 6>: 0.00ns
+ST_6: empty_48 (58)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:148->mysobel/solution1/top.cpp:209
+:0  %empty_48 = call i32 (...)* @_ssdm_op_SpecRegionEnd([12 x i8]* @p_str1821, i32 %tmp_i_i)
+
+ST_6: StgValue_51 (59)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:125->mysobel/solution1/top.cpp:209
+:1  br label %.preheader.i.i
+
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 1.25ns.
+
+ <State 1>: 1.84ns
+The critical path consists of the following:
+	wire read on port 'cols' [13]  (0 ns)
+	'add' operation ('r.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:135->mysobel/solution1/top.cpp:209) [22]  (1.84 ns)
+
+ <State 2>: 3.48ns
+The critical path consists of the following:
+	'icmp' operation ('exitcond1_i_i', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:125->mysobel/solution1/top.cpp:209) [27]  (2.11 ns)
+	blocking operation 1.37 ns on control path)
+
+ <State 3>: 3.48ns
+The critical path consists of the following:
+	'icmp' operation ('exitcond_i_i', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:126->mysobel/solution1/top.cpp:209) [37]  (2.11 ns)
+	blocking operation 1.37 ns on control path)
+
+ <State 4>: 4.38ns
+The critical path consists of the following:
+	fifo read on port 'img_1_data_stream_0' (/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:624->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:656->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:140->mysobel/solution1/top.cpp:209) [49]  (4.38 ns)
+
+ <State 5>: 0ns
+The critical path consists of the following:
+
+ <State 6>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

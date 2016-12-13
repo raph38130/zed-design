@@ -1,0 +1,824 @@
+
+
+================================================================
+== Vivado HLS Report for 'AXIvideo2Mat44'
+================================================================
+* Date:           Sat Dec  3 16:51:17 2016
+
+* Version:        2016.3 (Build 1682563 on Mon Oct 10 19:41:59 MDT 2016)
+* Project:        mysobel
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg484-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|      5.95|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+---------+-----+---------+---------+
+    |    Latency    |    Interval   | Pipeline|
+    | min |   max   | min |   max   |   Type  |
+    +-----+---------+-----+---------+---------+
+    |    3|  2081163|    3|  2081163|   none  |
+    +-----+---------+-----+---------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-----------------------+-----+---------+----------+-----------+-----------+----------+----------+
+        |                       |    Latency    | Iteration|  Initiation Interval  |   Trip   |          |
+        |       Loop Name       | min |   max   |  Latency |  achieved |   target  |   Count  | Pipelined|
+        +-----------------------+-----+---------+----------+-----------+-----------+----------+----------+
+        |- loop_wait_for_start  |    0|        0|         1|          1|          1|         0|    yes   |
+        |- loop_height          |    0|  2081160| 7 ~ 1927 |          -|          -| 0 ~ 1080 |    no    |
+        | + loop_width          |    1|     1921|         2|          1|          1| 0 ~ 1920 |    yes   |
+        | + loop_wait_for_eol   |    1|        1|         2|          1|          1|         0|    yes   |
+        +-----------------------+-----+---------+----------+-----------+-----------+----------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 2
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 1
+  * Pipeline-1: initiation interval (II) = 1, depth = 2
+  * Pipeline-2: initiation interval (II) = 1, depth = 2
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states: 10
+* Pipeline: 3
+  Pipeline-0: II = 1, D = 1, States = { 2 }
+  Pipeline-1: II = 1, D = 2, States = { 5 6 }
+  Pipeline-2: II = 1, D = 2, States = { 8 9 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+	2  / true
+2 --> 
+	3  / (tmp_user_V)
+	2  / (!tmp_user_V)
+3 --> 
+	4  / true
+4 --> 
+	5  / (!exitcond2_i_i_i_i)
+5 --> 
+	6  / true
+6 --> 
+	7  / (exitcond_i_i_i_i)
+	5  / (!exitcond_i_i_i_i)
+7 --> 
+	8  / true
+8 --> 
+	9  / true
+9 --> 
+	10  / (eol_2_i_i_i_i)
+	8  / (!eol_2_i_i_i_i)
+10 --> 
+	4  / true
+* FSM state operations: 
+
+ <State 1>: 4.38ns
+ST_1: c_invert_read (52)  [1/1] 0.00ns
+entry:0  %c_invert_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %c_invert)
+
+ST_1: c_low_thresh_read (53)  [1/1] 0.00ns
+entry:1  %c_low_thresh_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %c_low_thresh)
+
+ST_1: c_high_thresh_read (54)  [1/1] 0.00ns
+entry:2  %c_high_thresh_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %c_high_thresh)
+
+ST_1: C_YR2C1_read (55)  [1/1] 0.00ns
+entry:3  %C_YR2C1_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_YR2C1)
+
+ST_1: C_YR2C0_read (56)  [1/1] 0.00ns
+entry:4  %C_YR2C0_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_YR2C0)
+
+ST_1: C_YR1C2_read (57)  [1/1] 0.00ns
+entry:5  %C_YR1C2_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_YR1C2)
+
+ST_1: C_YR1C1_read (58)  [1/1] 0.00ns
+entry:6  %C_YR1C1_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_YR1C1)
+
+ST_1: C_YR1C0_read (59)  [1/1] 0.00ns
+entry:7  %C_YR1C0_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_YR1C0)
+
+ST_1: C_YR0C2_read (60)  [1/1] 0.00ns
+entry:8  %C_YR0C2_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_YR0C2)
+
+ST_1: C_YR0C1_read (61)  [1/1] 0.00ns
+entry:9  %C_YR0C1_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_YR0C1)
+
+ST_1: C_YR0C0_read (62)  [1/1] 0.00ns
+entry:10  %C_YR0C0_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_YR0C0)
+
+ST_1: C_XR2C2_read (63)  [1/1] 0.00ns
+entry:11  %C_XR2C2_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_XR2C2)
+
+ST_1: C_XR2C1_read (64)  [1/1] 0.00ns
+entry:12  %C_XR2C1_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_XR2C1)
+
+ST_1: C_XR2C0_read (65)  [1/1] 0.00ns
+entry:13  %C_XR2C0_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_XR2C0)
+
+ST_1: C_XR1C2_read (66)  [1/1] 0.00ns
+entry:14  %C_XR1C2_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_XR1C2)
+
+ST_1: C_XR1C1_read (67)  [1/1] 0.00ns
+entry:15  %C_XR1C1_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_XR1C1)
+
+ST_1: C_XR1C0_read (68)  [1/1] 0.00ns
+entry:16  %C_XR1C0_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_XR1C0)
+
+ST_1: C_XR0C2_read (69)  [1/1] 0.00ns
+entry:17  %C_XR0C2_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_XR0C2)
+
+ST_1: C_XR0C1_read (70)  [1/1] 0.00ns
+entry:18  %C_XR0C1_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_XR0C1)
+
+ST_1: C_XR0C0_read (71)  [1/1] 0.00ns
+entry:19  %C_XR0C0_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %C_XR0C0)
+
+ST_1: cols_read (72)  [1/1] 0.00ns
+entry:20  %cols_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %cols)
+
+ST_1: rows_read (73)  [1/1] 0.00ns
+entry:21  %rows_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %rows)
+
+ST_1: tmp (74)  [1/1] 0.00ns
+entry:22  %tmp = trunc i32 %rows_read to i11
+
+ST_1: tmp_30 (75)  [1/1] 0.00ns
+entry:23  %tmp_30 = trunc i32 %cols_read to i11
+
+ST_1: StgValue_35 (76)  [1/1] 0.00ns
+entry:24  call void (...)* @_ssdm_op_SpecInterface(i8* %img_0_data_stream_1, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_36 (77)  [1/1] 0.00ns
+entry:25  call void (...)* @_ssdm_op_SpecInterface(i8* %img_0_data_stream_0, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_37 (78)  [1/1] 0.00ns
+entry:26  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_38 (79)  [1/1] 0.00ns
+entry:27  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_39 (80)  [1/1] 0.00ns
+entry:28  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_40 (81)  [1/1] 0.00ns
+entry:29  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_41 (82)  [1/1] 0.00ns
+entry:30  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_42 (83)  [1/1] 0.00ns
+entry:31  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_43 (84)  [1/1] 0.00ns
+entry:32  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_44 (85)  [1/1] 0.00ns
+entry:33  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_45 (86)  [1/1] 0.00ns
+entry:34  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_46 (87)  [1/1] 0.00ns
+entry:35  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_47 (88)  [1/1] 0.00ns
+entry:36  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_48 (89)  [1/1] 0.00ns
+entry:37  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_49 (90)  [1/1] 0.00ns
+entry:38  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_50 (91)  [1/1] 0.00ns
+entry:39  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_51 (92)  [1/1] 0.00ns
+entry:40  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_52 (93)  [1/1] 0.00ns
+entry:41  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_53 (94)  [1/1] 0.00ns
+entry:42  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_54 (95)  [1/1] 0.00ns
+entry:43  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_55 (96)  [1/1] 0.00ns
+entry:44  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_56 (97)  [1/1] 0.00ns
+entry:45  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_57 (98)  [1/1] 0.00ns
+entry:46  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_58 (99)  [1/1] 0.00ns
+entry:47  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_59 (100)  [1/1] 0.00ns
+entry:48  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_60 (101)  [1/1] 0.00ns
+entry:49  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_61 (102)  [1/1] 0.00ns
+entry:50  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_62 (103)  [1/1] 0.00ns
+entry:51  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_63 (104)  [1/1] 0.00ns
+entry:52  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_64 (105)  [1/1] 0.00ns
+entry:53  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_65 (106)  [1/1] 0.00ns
+entry:54  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_66 (107)  [1/1] 0.00ns
+entry:55  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_67 (108)  [1/1] 0.00ns
+entry:56  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_68 (109)  [1/1] 0.00ns
+entry:57  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_69 (110)  [1/1] 0.00ns
+entry:58  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_70 (111)  [1/1] 0.00ns
+entry:59  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_71 (112)  [1/1] 0.00ns
+entry:60  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_72 (113)  [1/1] 0.00ns
+entry:61  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_73 (114)  [1/1] 0.00ns
+entry:62  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_74 (115)  [1/1] 0.00ns
+entry:63  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_75 (116)  [1/1] 0.00ns
+entry:64  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_76 (117)  [1/1] 0.00ns
+entry:65  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_77 (118)  [1/1] 0.00ns
+entry:66  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_78 (119)  [1/1] 0.00ns
+entry:67  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_79 (120)  [1/1] 0.00ns
+entry:68  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_80 (121)  [1/1] 0.00ns
+entry:69  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_81 (122)  [1/1] 0.00ns
+entry:70  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_82 (123)  [1/1] 0.00ns
+entry:71  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_83 (124)  [1/1] 0.00ns
+entry:72  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_84 (125)  [1/1] 0.00ns
+entry:73  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_85 (126)  [1/1] 0.00ns
+entry:74  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_86 (127)  [1/1] 0.00ns
+entry:75  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_87 (128)  [1/1] 0.00ns
+entry:76  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_88 (129)  [1/1] 0.00ns
+entry:77  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_89 (130)  [1/1] 0.00ns
+entry:78  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_90 (131)  [1/1] 0.00ns
+entry:79  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_91 (132)  [1/1] 0.00ns
+entry:80  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_92 (133)  [1/1] 0.00ns
+entry:81  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_93 (134)  [1/1] 0.00ns
+entry:82  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR0C0_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_94 (135)  [1/1] 4.38ns
+entry:83  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_XR0C0_channel, i32 %C_XR0C0_read)
+
+ST_1: StgValue_95 (136)  [1/1] 0.00ns
+entry:84  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR0C1_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_96 (137)  [1/1] 4.38ns
+entry:85  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_XR0C1_channel, i32 %C_XR0C1_read)
+
+ST_1: StgValue_97 (138)  [1/1] 0.00ns
+entry:86  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR0C2_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_98 (139)  [1/1] 4.38ns
+entry:87  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_XR0C2_channel, i32 %C_XR0C2_read)
+
+ST_1: StgValue_99 (140)  [1/1] 0.00ns
+entry:88  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR1C0_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_100 (141)  [1/1] 4.38ns
+entry:89  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_XR1C0_channel, i32 %C_XR1C0_read)
+
+ST_1: StgValue_101 (142)  [1/1] 0.00ns
+entry:90  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR1C1_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_102 (143)  [1/1] 4.38ns
+entry:91  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_XR1C1_channel, i32 %C_XR1C1_read)
+
+ST_1: StgValue_103 (144)  [1/1] 0.00ns
+entry:92  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR1C2_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_104 (145)  [1/1] 4.38ns
+entry:93  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_XR1C2_channel, i32 %C_XR1C2_read)
+
+ST_1: StgValue_105 (146)  [1/1] 0.00ns
+entry:94  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR2C0_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_106 (147)  [1/1] 4.38ns
+entry:95  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_XR2C0_channel, i32 %C_XR2C0_read)
+
+ST_1: StgValue_107 (148)  [1/1] 0.00ns
+entry:96  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR2C1_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_108 (149)  [1/1] 4.38ns
+entry:97  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_XR2C1_channel, i32 %C_XR2C1_read)
+
+ST_1: StgValue_109 (150)  [1/1] 0.00ns
+entry:98  call void (...)* @_ssdm_op_SpecInterface(i32* %C_XR2C2_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_110 (151)  [1/1] 4.38ns
+entry:99  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_XR2C2_channel, i32 %C_XR2C2_read)
+
+ST_1: StgValue_111 (152)  [1/1] 0.00ns
+entry:100  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR0C0_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_112 (153)  [1/1] 4.38ns
+entry:101  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_YR0C0_channel, i32 %C_YR0C0_read)
+
+ST_1: StgValue_113 (154)  [1/1] 0.00ns
+entry:102  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR0C1_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_114 (155)  [1/1] 4.38ns
+entry:103  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_YR0C1_channel, i32 %C_YR0C1_read)
+
+ST_1: StgValue_115 (156)  [1/1] 0.00ns
+entry:104  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR0C2_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_116 (157)  [1/1] 4.38ns
+entry:105  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_YR0C2_channel, i32 %C_YR0C2_read)
+
+ST_1: StgValue_117 (158)  [1/1] 0.00ns
+entry:106  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR1C0_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_118 (159)  [1/1] 4.38ns
+entry:107  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_YR1C0_channel, i32 %C_YR1C0_read)
+
+ST_1: StgValue_119 (160)  [1/1] 0.00ns
+entry:108  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR1C1_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_120 (161)  [1/1] 4.38ns
+entry:109  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_YR1C1_channel, i32 %C_YR1C1_read)
+
+ST_1: StgValue_121 (162)  [1/1] 0.00ns
+entry:110  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR1C2_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_122 (163)  [1/1] 4.38ns
+entry:111  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_YR1C2_channel, i32 %C_YR1C2_read)
+
+ST_1: StgValue_123 (164)  [1/1] 0.00ns
+entry:112  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR2C0_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_124 (165)  [1/1] 4.38ns
+entry:113  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_YR2C0_channel, i32 %C_YR2C0_read)
+
+ST_1: StgValue_125 (166)  [1/1] 0.00ns
+entry:114  call void (...)* @_ssdm_op_SpecInterface(i32* %C_YR2C1_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_126 (167)  [1/1] 4.38ns
+entry:115  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %C_YR2C1_channel, i32 %C_YR2C1_read)
+
+ST_1: StgValue_127 (168)  [1/1] 0.00ns
+entry:116  call void (...)* @_ssdm_op_SpecInterface(i32* %c_high_thresh_channe, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_128 (169)  [1/1] 4.38ns
+entry:117  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %c_high_thresh_channe, i32 %c_high_thresh_read)
+
+ST_1: StgValue_129 (170)  [1/1] 0.00ns
+entry:118  call void (...)* @_ssdm_op_SpecInterface(i32* %c_low_thresh_channel_1, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_130 (171)  [1/1] 4.38ns
+entry:119  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %c_low_thresh_channel_1, i32 %c_low_thresh_read)
+
+ST_1: StgValue_131 (172)  [1/1] 0.00ns
+entry:120  call void (...)* @_ssdm_op_SpecInterface(i32* %c_invert_channel, [8 x i8]* @ap_fifo_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_132 (173)  [1/1] 4.38ns
+entry:121  call void @_ssdm_op_Write.ap_fifo.i32P(i32* %c_invert_channel, i32 %c_invert_read)
+
+ST_1: StgValue_133 (174)  [1/1] 0.00ns
+entry:122  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_134 (175)  [1/1] 0.00ns
+entry:123  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_135 (176)  [1/1] 0.00ns
+entry:124  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_136 (177)  [1/1] 0.00ns
+entry:125  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_137 (178)  [1/1] 0.00ns
+entry:126  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_138 (179)  [1/1] 0.00ns
+entry:127  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_139 (180)  [1/1] 0.00ns
+entry:128  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_140 (181)  [1/1] 0.00ns
+entry:129  call void (...)* @_ssdm_op_SpecInterface(i11 %tmp_30, [10 x i8]* @ap_stable_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_141 (182)  [1/1] 0.00ns
+entry:130  call void (...)* @_ssdm_op_SpecInterface(i11 %tmp, [10 x i8]* @ap_stable_str, i32 0, i32 0, [1 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str, [1 x i8]* @p_str, [1 x i8]* @p_str, i32 2, i32 2, i32 16, i32 16, [1 x i8]* @p_str, [1 x i8]* @p_str)
+
+ST_1: StgValue_142 (183)  [1/1] 0.00ns
+entry:131  call void (...)* @_ssdm_op_SpecInterface(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V, [5 x i8]* @p_str1807, i32 1, i32 1, [5 x i8]* @p_str1808, i32 0, i32 0, [13 x i8]* @p_str1809, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1806, [1 x i8]* @p_str1806) nounwind
+
+ST_1: StgValue_143 (184)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:63->mysobel/solution1/top.cpp:204
+entry:132  br label %.preheader187.i.i.i.i
+
+
+ <State 2>: 0.00ns
+ST_2: StgValue_144 (186)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:65->mysobel/solution1/top.cpp:204
+.preheader187.i.i.i.i:0  call void (...)* @_ssdm_op_SpecLoopName([20 x i8]* @p_str1826) nounwind
+
+ST_2: tmp_i_i_i_i (187)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:65->mysobel/solution1/top.cpp:204
+.preheader187.i.i.i.i:1  %tmp_i_i_i_i = call i32 (...)* @_ssdm_op_SpecRegionBegin([20 x i8]* @p_str1826)
+
+ST_2: StgValue_146 (188)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:66->mysobel/solution1/top.cpp:204
+.preheader187.i.i.i.i:2  call void (...)* @_ssdm_op_SpecPipeline(i32 1, i32 1, i32 1, i32 0, [1 x i8]* @p_str1806) nounwind
+
+ST_2: StgValue_147 (189)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:67->mysobel/solution1/top.cpp:204
+.preheader187.i.i.i.i:3  call void (...)* @_ssdm_op_SpecLoopTripCount(i32 0, i32 0, i32 0, [1 x i8]* @p_str1806) nounwind
+
+ST_2: empty (190)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:68->mysobel/solution1/top.cpp:204
+.preheader187.i.i.i.i:4  %empty = call { i16, i2, i2, i1, i1, i1, i1 } @_ssdm_op_Read.axis.volatile.i16P.i2P.i2P.i1P.i1P.i1P.i1P(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V)
+
+ST_2: tmp_data_V (191)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:68->mysobel/solution1/top.cpp:204
+.preheader187.i.i.i.i:5  %tmp_data_V = extractvalue { i16, i2, i2, i1, i1, i1, i1 } %empty, 0
+
+ST_2: tmp_user_V (192)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:68->mysobel/solution1/top.cpp:204
+.preheader187.i.i.i.i:6  %tmp_user_V = extractvalue { i16, i2, i2, i1, i1, i1, i1 } %empty, 3
+
+ST_2: tmp_last_V (193)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:68->mysobel/solution1/top.cpp:204
+.preheader187.i.i.i.i:7  %tmp_last_V = extractvalue { i16, i2, i2, i1, i1, i1, i1 } %empty, 4
+
+ST_2: empty_49 (194)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:70->mysobel/solution1/top.cpp:204
+.preheader187.i.i.i.i:8  %empty_49 = call i32 (...)* @_ssdm_op_SpecRegionEnd([20 x i8]* @p_str1826, i32 %tmp_i_i_i_i)
+
+ST_2: StgValue_153 (195)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:65->mysobel/solution1/top.cpp:204
+.preheader187.i.i.i.i:9  br i1 %tmp_user_V, label %.preheader186.i.i.i.i.preheader, label %.preheader187.i.i.i.i
+
+
+ <State 3>: 1.57ns
+ST_3: sof_1_i_i_i_i (197)  [1/1] 0.00ns
+.preheader186.i.i.i.i.preheader:0  %sof_1_i_i_i_i = alloca i1
+
+ST_3: StgValue_155 (198)  [1/1] 1.57ns
+.preheader186.i.i.i.i.preheader:1  store i1 true, i1* %sof_1_i_i_i_i
+
+ST_3: StgValue_156 (199)  [1/1] 1.57ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:71->mysobel/solution1/top.cpp:204
+.preheader186.i.i.i.i.preheader:2  br label %.preheader186.i.i.i.i
+
+
+ <State 4>: 3.48ns
+ST_4: axi_last_V1_i_i_i_i (201)  [1/1] 0.00ns
+.preheader186.i.i.i.i:0  %axi_last_V1_i_i_i_i = phi i1 [ %axi_last_V_3_i_i_i_i, %5 ], [ %tmp_last_V, %.preheader186.i.i.i.i.preheader ]
+
+ST_4: axi_data_V1_i_i_i_i (202)  [1/1] 0.00ns
+.preheader186.i.i.i.i:1  %axi_data_V1_i_i_i_i = phi i16 [ %axi_data_V_3_i_i_i_i, %5 ], [ %tmp_data_V, %.preheader186.i.i.i.i.preheader ]
+
+ST_4: p_i_i_i_i (203)  [1/1] 0.00ns
+.preheader186.i.i.i.i:2  %p_i_i_i_i = phi i11 [ %i_V, %5 ], [ 0, %.preheader186.i.i.i.i.preheader ]
+
+ST_4: exitcond2_i_i_i_i (204)  [1/1] 2.11ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:71->mysobel/solution1/top.cpp:204
+.preheader186.i.i.i.i:3  %exitcond2_i_i_i_i = icmp eq i11 %p_i_i_i_i, %tmp
+
+ST_4: StgValue_161 (205)  [1/1] 0.00ns
+.preheader186.i.i.i.i:4  call void (...)* @_ssdm_op_SpecLoopTripCount(i64 0, i64 1080, i64 0)
+
+ST_4: i_V (206)  [1/1] 1.84ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:71->mysobel/solution1/top.cpp:204
+.preheader186.i.i.i.i:5  %i_V = add i11 %p_i_i_i_i, 1
+
+ST_4: StgValue_163 (207)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:71->mysobel/solution1/top.cpp:204
+.preheader186.i.i.i.i:6  br i1 %exitcond2_i_i_i_i, label %AXIvideo2Mat44.exit, label %0
+
+ST_4: StgValue_164 (209)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:71->mysobel/solution1/top.cpp:204
+:0  call void (...)* @_ssdm_op_SpecLoopName([12 x i8]* @p_str1821) nounwind
+
+ST_4: tmp_51_i_i_i_i (210)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:71->mysobel/solution1/top.cpp:204
+:1  %tmp_51_i_i_i_i = call i32 (...)* @_ssdm_op_SpecRegionBegin([12 x i8]* @p_str1821)
+
+ST_4: StgValue_166 (211)  [1/1] 1.57ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:73->mysobel/solution1/top.cpp:204
+:2  br label %1
+
+ST_4: StgValue_167 (267)  [1/1] 0.00ns
+AXIvideo2Mat44.exit:0  ret void
+
+
+ <State 5>: 3.48ns
+ST_5: p_3_i_i_i_i (215)  [1/1] 0.00ns
+:2  %p_3_i_i_i_i = phi i11 [ 0, %0 ], [ %j_V, %._crit_edge.i.i.i.i ]
+
+ST_5: eol_i_i_i_i (216)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:81->mysobel/solution1/top.cpp:204
+:3  %eol_i_i_i_i = phi i1 [ false, %0 ], [ %axi_last_V_2_i_i_i_i, %._crit_edge.i.i.i.i ]
+
+ST_5: exitcond_i_i_i_i (217)  [1/1] 2.11ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:73->mysobel/solution1/top.cpp:204
+:4  %exitcond_i_i_i_i = icmp eq i11 %p_3_i_i_i_i, %tmp_30
+
+ST_5: j_V (219)  [1/1] 1.84ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:73->mysobel/solution1/top.cpp:204
+:6  %j_V = add i11 %p_3_i_i_i_i, 1
+
+ST_5: sof_1_i_i_i_i_load (222)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:76->mysobel/solution1/top.cpp:204
+:0  %sof_1_i_i_i_i_load = load i1* %sof_1_i_i_i_i
+
+ST_5: brmerge_i_i_i_i (226)  [1/1] 1.37ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:76->mysobel/solution1/top.cpp:204
+:4  %brmerge_i_i_i_i = or i1 %sof_1_i_i_i_i_load, %eol_i_i_i_i
+
+ST_5: empty_50 (229)  [2/2] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:81->mysobel/solution1/top.cpp:204
+:0  %empty_50 = call { i16, i2, i2, i1, i1, i1, i1 } @_ssdm_op_Read.axis.volatile.i16P.i2P.i2P.i1P.i1P.i1P.i1P(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V)
+
+ST_5: StgValue_175 (244)  [1/1] 1.57ns
+._crit_edge.i.i.i.i:10  store i1 false, i1* %sof_1_i_i_i_i
+
+
+ <State 6>: 5.95ns
+ST_6: eol (213)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:100->mysobel/solution1/top.cpp:204
+:0  %eol = phi i1 [ %axi_last_V1_i_i_i_i, %0 ], [ %axi_last_V_2_i_i_i_i, %._crit_edge.i.i.i.i ]
+
+ST_6: axi_data_V_1_i_i_i_i (214)  [1/1] 0.00ns
+:1  %axi_data_V_1_i_i_i_i = phi i16 [ %axi_data_V1_i_i_i_i, %0 ], [ %p_Val2_s, %._crit_edge.i.i.i.i ]
+
+ST_6: StgValue_178 (218)  [1/1] 0.00ns
+:5  call void (...)* @_ssdm_op_SpecLoopTripCount(i64 0, i64 1920, i64 0)
+
+ST_6: StgValue_179 (220)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:73->mysobel/solution1/top.cpp:204
+:7  br i1 %exitcond_i_i_i_i, label %.preheader.i.i.i.i.preheader, label %2
+
+ST_6: StgValue_180 (223)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:73->mysobel/solution1/top.cpp:204
+:1  call void (...)* @_ssdm_op_SpecLoopName([11 x i8]* @p_str1822) nounwind
+
+ST_6: tmp_52_i_i_i_i (224)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:73->mysobel/solution1/top.cpp:204
+:2  %tmp_52_i_i_i_i = call i32 (...)* @_ssdm_op_SpecRegionBegin([11 x i8]* @p_str1822)
+
+ST_6: StgValue_182 (225)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:75->mysobel/solution1/top.cpp:204
+:3  call void (...)* @_ssdm_op_SpecPipeline(i32 1, i32 1, i32 1, i32 0, [1 x i8]* @p_str1806) nounwind
+
+ST_6: StgValue_183 (227)  [1/1] 1.57ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:76->mysobel/solution1/top.cpp:204
+:5  br i1 %brmerge_i_i_i_i, label %._crit_edge.i.i.i.i, label %3
+
+ST_6: empty_50 (229)  [1/2] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:81->mysobel/solution1/top.cpp:204
+:0  %empty_50 = call { i16, i2, i2, i1, i1, i1, i1 } @_ssdm_op_Read.axis.volatile.i16P.i2P.i2P.i1P.i1P.i1P.i1P(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V)
+
+ST_6: tmp_data_V_1 (230)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:81->mysobel/solution1/top.cpp:204
+:1  %tmp_data_V_1 = extractvalue { i16, i2, i2, i1, i1, i1, i1 } %empty_50, 0
+
+ST_6: tmp_last_V_1 (231)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:81->mysobel/solution1/top.cpp:204
+:2  %tmp_last_V_1 = extractvalue { i16, i2, i2, i1, i1, i1, i1 } %empty_50, 4
+
+ST_6: StgValue_187 (232)  [1/1] 1.57ns
+:3  br label %._crit_edge.i.i.i.i
+
+ST_6: axi_last_V_2_i_i_i_i (234)  [1/1] 0.00ns
+._crit_edge.i.i.i.i:0  %axi_last_V_2_i_i_i_i = phi i1 [ %tmp_last_V_1, %3 ], [ %eol, %2 ]
+
+ST_6: p_Val2_s (235)  [1/1] 0.00ns
+._crit_edge.i.i.i.i:1  %p_Val2_s = phi i16 [ %tmp_data_V_1, %3 ], [ %axi_data_V_1_i_i_i_i, %2 ]
+
+ST_6: tmp_31 (236)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_axi_io.h:49->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_axi_io.h:71->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:92->mysobel/solution1/top.cpp:204
+._crit_edge.i.i.i.i:2  %tmp_31 = trunc i16 %p_Val2_s to i8
+
+ST_6: tmp_32 (237)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_axi_io.h:49->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_axi_io.h:71->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:92->mysobel/solution1/top.cpp:204
+._crit_edge.i.i.i.i:3  %tmp_32 = call i8 @_ssdm_op_PartSelect.i8.i16.i32.i32(i16 %p_Val2_s, i32 8, i32 15)
+
+ST_6: tmp_54_i_i_i_i (238)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:641->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:94->mysobel/solution1/top.cpp:204
+._crit_edge.i.i.i.i:4  %tmp_54_i_i_i_i = call i32 (...)* @_ssdm_op_SpecRegionBegin([13 x i8]* @p_str1830)
+
+ST_6: StgValue_193 (239)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:645->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:94->mysobel/solution1/top.cpp:204
+._crit_edge.i.i.i.i:5  call void (...)* @_ssdm_op_SpecProtocol(i32 0, [1 x i8]* @p_str1806) nounwind
+
+ST_6: StgValue_194 (240)  [1/1] 4.38ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:648->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:94->mysobel/solution1/top.cpp:204
+._crit_edge.i.i.i.i:6  call void @_ssdm_op_Write.ap_fifo.volatile.i8P(i8* %img_0_data_stream_0, i8 %tmp_31)
+
+ST_6: StgValue_195 (241)  [1/1] 4.38ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:648->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:94->mysobel/solution1/top.cpp:204
+._crit_edge.i.i.i.i:7  call void @_ssdm_op_Write.ap_fifo.volatile.i8P(i8* %img_0_data_stream_1, i8 %tmp_32)
+
+ST_6: empty_51 (242)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:650->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:94->mysobel/solution1/top.cpp:204
+._crit_edge.i.i.i.i:8  %empty_51 = call i32 (...)* @_ssdm_op_SpecRegionEnd([13 x i8]* @p_str1830, i32 %tmp_54_i_i_i_i)
+
+ST_6: empty_52 (243)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:95->mysobel/solution1/top.cpp:204
+._crit_edge.i.i.i.i:9  %empty_52 = call i32 (...)* @_ssdm_op_SpecRegionEnd([11 x i8]* @p_str1822, i32 %tmp_52_i_i_i_i)
+
+ST_6: StgValue_198 (245)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:73->mysobel/solution1/top.cpp:204
+._crit_edge.i.i.i.i:11  br label %1
+
+
+ <State 7>: 1.57ns
+ST_7: StgValue_199 (247)  [1/1] 1.57ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:96->mysobel/solution1/top.cpp:204
+.preheader.i.i.i.i.preheader:0  br label %.preheader.i.i.i.i
+
+
+ <State 8>: 1.37ns
+ST_8: eol_2_i_i_i_i (251)  [1/1] 0.00ns
+.preheader.i.i.i.i:2  %eol_2_i_i_i_i = phi i1 [ %tmp_last_V_2, %4 ], [ %eol_i_i_i_i, %.preheader.i.i.i.i.preheader ]
+
+ST_8: empty_53 (258)  [2/2] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:100->mysobel/solution1/top.cpp:204
+:4  %empty_53 = call { i16, i2, i2, i1, i1, i1, i1 } @_ssdm_op_Read.axis.volatile.i16P.i2P.i2P.i1P.i1P.i1P.i1P(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V)
+
+
+ <State 9>: 0.00ns
+ST_9: axi_last_V_3_i_i_i_i (249)  [1/1] 0.00ns
+.preheader.i.i.i.i:0  %axi_last_V_3_i_i_i_i = phi i1 [ %tmp_last_V_2, %4 ], [ %eol, %.preheader.i.i.i.i.preheader ]
+
+ST_9: axi_data_V_3_i_i_i_i (250)  [1/1] 0.00ns
+.preheader.i.i.i.i:1  %axi_data_V_3_i_i_i_i = phi i16 [ %tmp_data_V_2, %4 ], [ %axi_data_V_1_i_i_i_i, %.preheader.i.i.i.i.preheader ]
+
+ST_9: StgValue_204 (252)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:96->mysobel/solution1/top.cpp:204
+.preheader.i.i.i.i:3  br i1 %eol_2_i_i_i_i, label %5, label %4
+
+ST_9: StgValue_205 (254)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:96->mysobel/solution1/top.cpp:204
+:0  call void (...)* @_ssdm_op_SpecLoopName([18 x i8]* @p_str1827) nounwind
+
+ST_9: tmp_53_i_i_i_i (255)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:96->mysobel/solution1/top.cpp:204
+:1  %tmp_53_i_i_i_i = call i32 (...)* @_ssdm_op_SpecRegionBegin([18 x i8]* @p_str1827)
+
+ST_9: StgValue_207 (256)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:97->mysobel/solution1/top.cpp:204
+:2  call void (...)* @_ssdm_op_SpecPipeline(i32 1, i32 1, i32 1, i32 0, [1 x i8]* @p_str1806) nounwind
+
+ST_9: StgValue_208 (257)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:98->mysobel/solution1/top.cpp:204
+:3  call void (...)* @_ssdm_op_SpecLoopTripCount(i32 0, i32 0, i32 0, [1 x i8]* @p_str1806) nounwind
+
+ST_9: empty_53 (258)  [1/2] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:100->mysobel/solution1/top.cpp:204
+:4  %empty_53 = call { i16, i2, i2, i1, i1, i1, i1 } @_ssdm_op_Read.axis.volatile.i16P.i2P.i2P.i1P.i1P.i1P.i1P(i16* %video_in_V_data_V, i2* %video_in_V_keep_V, i2* %video_in_V_strb_V, i1* %video_in_V_user_V, i1* %video_in_V_last_V, i1* %video_in_V_id_V, i1* %video_in_V_dest_V)
+
+ST_9: tmp_data_V_2 (259)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:100->mysobel/solution1/top.cpp:204
+:5  %tmp_data_V_2 = extractvalue { i16, i2, i2, i1, i1, i1, i1 } %empty_53, 0
+
+ST_9: tmp_last_V_2 (260)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:100->mysobel/solution1/top.cpp:204
+:6  %tmp_last_V_2 = extractvalue { i16, i2, i2, i1, i1, i1, i1 } %empty_53, 4
+
+ST_9: empty_54 (261)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:103->mysobel/solution1/top.cpp:204
+:7  %empty_54 = call i32 (...)* @_ssdm_op_SpecRegionEnd([18 x i8]* @p_str1827, i32 %tmp_53_i_i_i_i)
+
+ST_9: StgValue_213 (262)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:103->mysobel/solution1/top.cpp:204
+:8  br label %.preheader.i.i.i.i
+
+
+ <State 10>: 0.00ns
+ST_10: empty_55 (264)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:104->mysobel/solution1/top.cpp:204
+:0  %empty_55 = call i32 (...)* @_ssdm_op_SpecRegionEnd([12 x i8]* @p_str1821, i32 %tmp_51_i_i_i_i)
+
+ST_10: StgValue_215 (265)  [1/1] 0.00ns  loc: /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:71->mysobel/solution1/top.cpp:204
+:1  br label %.preheader186.i.i.i.i
+
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 1.25ns.
+
+ <State 1>: 4.38ns
+The critical path consists of the following:
+	wire read on port 'c_invert' [52]  (0 ns)
+	fifo write on port 'c_invert_channel' [173]  (4.38 ns)
+
+ <State 2>: 0ns
+The critical path consists of the following:
+
+ <State 3>: 1.57ns
+The critical path consists of the following:
+	'alloca' operation ('sof_1_i_i_i_i') [197]  (0 ns)
+	'store' operation of constant 1 on local variable 'sof_1_i_i_i_i' [198]  (1.57 ns)
+
+ <State 4>: 3.48ns
+The critical path consists of the following:
+	'icmp' operation ('exitcond2_i_i_i_i', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:71->mysobel/solution1/top.cpp:204) [204]  (2.11 ns)
+	blocking operation 1.37 ns on control path)
+
+ <State 5>: 3.48ns
+The critical path consists of the following:
+	'icmp' operation ('exitcond_i_i_i_i', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:73->mysobel/solution1/top.cpp:204) [217]  (2.11 ns)
+	blocking operation 1.37 ns on control path)
+
+ <State 6>: 5.95ns
+The critical path consists of the following:
+	'phi' operation ('eol', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:100->mysobel/solution1/top.cpp:204) with incoming values : ('tmp.last.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:68->mysobel/solution1/top.cpp:204) ('tmp.last.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:81->mysobel/solution1/top.cpp:204) ('tmp.last.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:100->mysobel/solution1/top.cpp:204) [213]  (0 ns)
+	multiplexor before 'phi' operation ('axi.data.V') with incoming values : ('tmp.data.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:68->mysobel/solution1/top.cpp:204) ('tmp.data.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:81->mysobel/solution1/top.cpp:204) ('tmp.data.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:100->mysobel/solution1/top.cpp:204) [235]  (1.57 ns)
+	'phi' operation ('axi.data.V') with incoming values : ('tmp.data.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:68->mysobel/solution1/top.cpp:204) ('tmp.data.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:81->mysobel/solution1/top.cpp:204) ('tmp.data.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:100->mysobel/solution1/top.cpp:204) [235]  (0 ns)
+	fifo write on port 'img_0_data_stream_0' (/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:648->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_core.h:662->/opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:94->mysobel/solution1/top.cpp:204) [240]  (4.38 ns)
+
+ <State 7>: 1.57ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('axi.last.V') with incoming values : ('tmp.last.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:68->mysobel/solution1/top.cpp:204) ('tmp.last.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:81->mysobel/solution1/top.cpp:204) ('tmp.last.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:100->mysobel/solution1/top.cpp:204) [249]  (1.57 ns)
+
+ <State 8>: 1.37ns
+The critical path consists of the following:
+	'phi' operation ('axi.last.V') with incoming values : ('tmp.last.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:68->mysobel/solution1/top.cpp:204) ('tmp.last.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:81->mysobel/solution1/top.cpp:204) ('tmp.last.V', /opt/Xilinx/Vivado_HLS/2016.3/common/technology/autopilot/hls/hls_video_io.h:100->mysobel/solution1/top.cpp:204) [251]  (0 ns)
+	blocking operation 1.37 ns on control path)
+
+ <State 9>: 0ns
+The critical path consists of the following:
+
+ <State 10>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A
