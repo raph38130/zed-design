@@ -31,21 +31,31 @@
 #include "xparameters.h"
 #include "xil_cache.h"
 #include "xgpio.h"
+#include "xadcps.h"
 #include "gpio_header.h"
 #include "counter.h"
 
-
-
 int main() 
 {
-   print("---Entering counter v0.9---\n\r");
-   while(1) {
-			   GpioOutputExample(XPAR_AXI_GPIO_0_DEVICE_ID,4);
-			   printf("counter %d\n",COUNTER_mReadReg(XPAR_COUNTER_0_S00_AXI_BASEADDR,0));
-		   }
+XAdcPs xadc;
+XAdcPs_Config *cfg=XAdcPs_LookupConfig(XPAR_PS7_XADC_0_DEVICE_ID);
+XAdcPs_CfgInitialize(&xadc,cfg,cfg->BaseAddress);
 
-   print("---Exiting main---\n\r");
-   Xil_DCacheDisable();
-   Xil_ICacheDisable();
-   return 0;
+XGpio gpio;
+XGpio_Initialize(&gpio,XPAR_AXI_GPIO_0_DEVICE_ID);
+XGpio_SetDataDirection(&gpio,2,0);
+
+int leds=0x55;
+print("---Entering counter v0.9---\n\r");
+while(1) {
+	int u		=XAdcPs_GetAdcData(&xadc, XADCPS_CH_TEMP);
+	float t = XAdcPs_RawToTemperature(u);
+	printf("counter %d      Temperature is %f °C\r\n",
+			t,  COUNTER_mReadReg(XPAR_COUNTER_0_S00_AXI_BASEADDR,0));
+    XGpio_DiscreteWrite(&gpio, 2, leds);
+    leds = ~leds;
+    for(int i=0;i<100000000;i++);
+	}
+
+return 0;
 }

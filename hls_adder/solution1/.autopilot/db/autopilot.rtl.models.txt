@@ -1,2 +1,4 @@
+add_mul_32s_34ns_bkb
+add_mul_32s_32s_3cud
 add_AXILiteS_s_axi
 add

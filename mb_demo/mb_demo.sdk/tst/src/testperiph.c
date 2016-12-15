@@ -34,19 +34,18 @@
 #include "gpio_header.h"
 int main() 
 {
-   Xil_ICacheEnable();
-   Xil_DCacheEnable();
-   
+  u32 DataRead=33;
+  XGpio Gpio;
+  XGpio_Initialize(&Gpio, XPAR_AXI_GPIO_0_DEVICE_ID);
+  XGpio_SetDataDirection(&Gpio, 2, 0x0); 		//buttons
+  XGpio_SetDataDirection(&Gpio, 1, 0xFFFFFFFF); //leds
 
-   {
-      int status;
-	 
-      u32 DataRead;
-      
-      GpioOutputExample(XPAR_AXI_GPIO_0_DEVICE_ID,8);
-      status = GpioInputExample(XPAR_AXI_GPIO_0_DEVICE_ID, &DataRead);
+   while(1) {
+      DataRead=XGpio_DiscreteRead(&Gpio, 1) ;
+      //xil_printf("read %d\n",DataRead); NO COM PORT WIRED TO MICROBLAZE
+      XGpio_DiscreteWrite(&Gpio, 2, DataRead);
+      for(int i=0;i<1000000;i++);
    }
-   Xil_DCacheDisable();
-   Xil_ICacheDisable();
+
    return 0;
 }

@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <spirit:vendor>xilinx.com</spirit:vendor>
+  <spirit:library>customized_ip</spirit:library>
+  <spirit:name>design_1_mipi_csi2_rx_subsystem_0_0</spirit:name>
+  <spirit:version>1.0</spirit:version>
+  <spirit:choices>
+    <spirit:choice>
+      <spirit:name>choice_list_11a76661</spirit:name>
+      <spirit:enumeration>2</spirit:enumeration>
+      <spirit:enumeration>8</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_1aaf480e</spirit:name>
+      <spirit:enumeration>46</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_1f1af28c</spirit:name>
+      <spirit:enumeration>128</spirit:enumeration>
+      <spirit:enumeration>256</spirit:enumeration>
+      <spirit:enumeration>512</spirit:enumeration>
+      <spirit:enumeration>1024</spirit:enumeration>
+      <spirit:enumeration>2048</spirit:enumeration>
+      <spirit:enumeration>4096</spirit:enumeration>
+      <spirit:enumeration>8192</spirit:enumeration>
+      <spirit:enumeration>16384</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_2dc23030</spirit:name>
+      <spirit:enumeration>All_Byte</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_31747a7c</spirit:name>
+      <spirit:enumeration>None</spirit:enumeration>
+      <spirit:enumeration>CSI2RX_XLNX</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_6f5507b7</spirit:name>
+      <spirit:enumeration>None</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_71735158</spirit:name>
+      <spirit:enumeration>1</spirit:enumeration>
+      <spirit:enumeration>2</spirit:enumeration>
+      <spirit:enumeration>32</spirit:enumeration>
+      <spirit:enumeration>48</spirit:enumeration>
+      <spirit:enumeration>64</spirit:enumeration>
+      <spirit:enumeration>96</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_79255a07</spirit:name>
+      <spirit:enumeration>NONE</spirit:enumeration>
+      <spirit:enumeration>FIXED</spirit:enumeration>
+      <spirit:enumeration>AUTO</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_8af5a703</spirit:name>
+      <spirit:enumeration>0</spirit:enumeration>
+      <spirit:enumeration>1</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_99ba8646</spirit:name>
+      <spirit:enumeration>32</spirit:enumeration>
+      <spirit:enumeration>64</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_aa031417</spirit:name>
+      <spirit:enumeration>1</spirit:enumeration>
+      <spirit:enumeration>2</spirit:enumeration>
+      <spirit:enumeration>3</spirit:enumeration>
+      <spirit:enumeration>4</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_e6469819</spirit:name>
+      <spirit:enumeration>1</spirit:enumeration>
+      <spirit:enumeration>2</spirit:enumeration>
+      <spirit:enumeration>4</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_ef31c07b</spirit:name>
+      <spirit:enumeration>RAW6</spirit:enumeration>
+      <spirit:enumeration>RAW7</spirit:enumeration>
+      <spirit:enumeration>RAW8</spirit:enumeration>
+      <spirit:enumeration>RAW10</spirit:enumeration>
+      <spirit:enumeration>RAW12</spirit:enumeration>
+      <spirit:enumeration>RAW14</spirit:enumeration>
+      <spirit:enumeration>RGB888</spirit:enumeration>
+      <spirit:enumeration>RGB666</spirit:enumeration>
+      <spirit:enumeration>RGB565</spirit:enumeration>
+      <spirit:enumeration>RGB555</spirit:enumeration>
+      <spirit:enumeration>RGB444</spirit:enumeration>
+      <spirit:enumeration>YUV422_8bit</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_pairs_53749dec</spirit:name>
+      <spirit:enumeration spirit:text="Include Shared Logic in core">1</spirit:enumeration>
+      <spirit:enumeration spirit:text="Include Shared Logic in example design">0</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_pairs_6af75624</spirit:name>
+      <spirit:enumeration spirit:text="0">0</spirit:enumeration>
+      <spirit:enumeration spirit:text="1">1</spirit:enumeration>
+      <spirit:enumeration spirit:text="2">2</spirit:enumeration>
+      <spirit:enumeration spirit:text="3">3</spirit:enumeration>
+      <spirit:enumeration spirit:text="All">4</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_pairs_d9d242ba</spirit:name>
+      <spirit:enumeration spirit:text="TX">MASTER</spirit:enumeration>
+      <spirit:enumeration spirit:text="RX">SLAVE</spirit:enumeration>
+    </spirit:choice>
+  </spirit:choices>
+  <spirit:description>MIPI CSI-2 Rx Subsystem encompasses D-PHY,CSI,CCI(AXI IIC) and other required cores</spirit:description>
+  <spirit:parameters>
+    <spirit:parameter>
+      <spirit:name>C_MIPI_SLV_INT</spirit:name>
+      <spirit:displayName>Internal SLV parameter</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_MIPI_SLV_INT" spirit:choiceRef="choice_list_8af5a703" spirit:order="2">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_CSI_OPT1_REGS</spirit:name>
+      <spirit:displayName>Remove Debug registers</spirit:displayName>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_CSI_OPT1_REGS" spirit:order="3">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_CSI_EN_CRC</spirit:name>
+      <spirit:displayName>Enable CRC</spirit:displayName>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_CSI_EN_CRC" spirit:order="4">true</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_CSI_EN_ACTIVELANES</spirit:name>
+      <spirit:displayName>Enable Active Lanes</spirit:displayName>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_CSI_EN_ACTIVELANES" spirit:order="5">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DPHY_PRESET</spirit:name>
+      <spirit:displayName>PRESET to select different protocols</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DPHY_PRESET" spirit:choiceRef="choice_list_31747a7c" spirit:order="6">CSI2RX_XLNX</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_DPHY_MODE</spirit:name>
+      <spirit:displayName>Data Flow</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_DPHY_MODE" spirit:choiceRef="choice_pairs_d9d242ba" spirit:order="7">SLAVE</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_EN_BG0_PIN0</spirit:name>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_EN_BG0_PIN0" spirit:order="8">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_EN_BG0_PIN6</spirit:name>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_EN_BG0_PIN6" spirit:order="9">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_EN_BG1_PIN0</spirit:name>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_EN_BG1_PIN0" spirit:order="10">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_EN_BG1_PIN6</spirit:name>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_EN_BG1_PIN6" spirit:order="11">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_EN_BG2_PIN0</spirit:name>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_EN_BG2_PIN0" spirit:order="12">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_EN_BG2_PIN6</spirit:name>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_EN_BG2_PIN6" spirit:order="13">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_EN_BG3_PIN0</spirit:name>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_EN_BG3_PIN0" spirit:order="14">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_EN_BG3_PIN6</spirit:name>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_EN_BG3_PIN6" spirit:order="15">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>CMN_PXL_FORMAT</spirit:name>
+      <spirit:displayName>Pixel Format</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.CMN_PXL_FORMAT" spirit:choiceRef="choice_list_ef31c07b" spirit:order="16">RAW8</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>CMN_NUM_LANES</spirit:name>
+      <spirit:displayName>Serial Data Lanes</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.CMN_NUM_LANES" spirit:choiceRef="choice_list_aa031417" spirit:order="17">1</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_DPHY_LANES</spirit:name>
+      <spirit:displayName>Serial Data Lanes</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_DPHY_LANES" spirit:choiceRef="choice_list_aa031417" spirit:order="18">1</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>CMN_VC</spirit:name>
+      <spirit:displayName>Allowed VC</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.CMN_VC" spirit:choiceRef="choice_pairs_6af75624" spirit:order="19">4</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>CMN_NUM_PIXELS</spirit:name>
+      <spirit:displayName>Pixels Per Clock</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.CMN_NUM_PIXELS" spirit:choiceRef="choice_list_e6469819" spirit:order="20">1</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>CMN_INC_IIC</spirit:name>
+      <spirit:displayName>Enable AXI IIC(CCI)</spirit:displayName>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.CMN_INC_IIC" spirit:order="21">true</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>CMN_INC_VFB</spirit:name>
+      <spirit:displayName>Include Video Format Bridge (VFB)</spirit:displayName>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.CMN_INC_VFB" spirit:order="22">true</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>CMN_PROJ_FAMILY</spirit:name>
+      <spirit:displayName>Family selection</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.CMN_PROJ_FAMILY" spirit:choiceRef="choice_list_8af5a703" spirit:order="23">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_HS_LINE_RATE</spirit:name>
+      <spirit:displayName>Line Rate (Mbps)</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_HS_LINE_RATE" spirit:order="24" spirit:minimum="80" spirit:maximum="1500" spirit:rangeType="long">950</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DPY_LINE_RATE</spirit:name>
+      <spirit:displayName>Line Rate (Mbps)</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.DPY_LINE_RATE" spirit:order="25" spirit:minimum="80" spirit:maximum="950" spirit:rangeType="long">950</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DPY_EN_REG_IF</spirit:name>
+      <spirit:displayName>D-PHY Register Interface</spirit:displayName>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.DPY_EN_REG_IF" spirit:order="26">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>CSI_EMB_NON_IMG</spirit:name>
+      <spirit:displayName>Embedded non-image Interface</spirit:displayName>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.CSI_EMB_NON_IMG" spirit:order="27">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>CSI_BUF_DEPTH</spirit:name>
+      <spirit:displayName>Line Buffer Depth</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.CSI_BUF_DEPTH" spirit:choiceRef="choice_list_1f1af28c" spirit:order="28">2048</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>AXIS_TDATA_WIDTH</spirit:name>
+      <spirit:displayName>TDATA Width</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_99ba8646" spirit:order="29">32</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.AXIS_TDATA_WIDTH">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>AXIS_TUSER_WIDTH</spirit:name>
+      <spirit:displayName>TUSER Width</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.AXIS_TUSER_WIDTH" spirit:choiceRef="choice_list_71735158" spirit:order="30">96</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.AXIS_TUSER_WIDTH">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>AXIS_TDEST_WIDTH</spirit:name>
+      <spirit:displayName>TDEST Width</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.AXIS_TDEST_WIDTH" spirit:choiceRef="choice_list_11a76661" spirit:order="31">2</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.AXIS_TDEST_WIDTH">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>HP_IO_BANK_SELECTION</spirit:name>
+      <spirit:displayName>HP IO Bank Selection</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.HP_IO_BANK_SELECTION" spirit:choiceRef="choice_list_1aaf480e" spirit:order="32">46</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>CLK_LANE_IO_LOC</spirit:name>
+      <spirit:displayName>Clock Lane LOC</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.CLK_LANE_IO_LOC" spirit:choiceRef="choice_list_6f5507b7" spirit:order="33">None</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.CLK_LANE_IO_LOC">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_LANE0_IO_LOC</spirit:name>
+      <spirit:displayName>Data Lane0 LOC</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_LANE0_IO_LOC" spirit:choiceRef="choice_list_6f5507b7" spirit:order="34">None</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.DATA_LANE0_IO_LOC">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_LANE1_IO_LOC</spirit:name>
+      <spirit:displayName>Data Lane1 LOC</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_LANE1_IO_LOC" spirit:choiceRef="choice_list_6f5507b7" spirit:order="35">None</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.DATA_LANE1_IO_LOC">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_LANE2_IO_LOC</spirit:name>
+      <spirit:displayName>Data Lane2 LOC</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_LANE2_IO_LOC" spirit:choiceRef="choice_list_6f5507b7" spirit:order="36">None</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.DATA_LANE2_IO_LOC">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_LANE3_IO_LOC</spirit:name>
+      <spirit:displayName>Data Lane3 LOC</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_LANE3_IO_LOC" spirit:choiceRef="choice_list_6f5507b7" spirit:order="37">None</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.DATA_LANE3_IO_LOC">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_LANE0_BYTE</spirit:name>
+      <spirit:displayName>Data Lane 0 Byte</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_LANE0_BYTE" spirit:choiceRef="choice_list_2dc23030" spirit:order="38">All_Byte</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.DATA_LANE0_BYTE">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_LANE1_BYTE</spirit:name>
+      <spirit:displayName>Data Lane 1 Byte</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_LANE1_BYTE" spirit:choiceRef="choice_list_2dc23030" spirit:order="39">All_Byte</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.DATA_LANE1_BYTE">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_LANE2_BYTE</spirit:name>
+      <spirit:displayName>Data Lane 2 Byte</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_LANE2_BYTE" spirit:choiceRef="choice_list_2dc23030" spirit:order="40">All_Byte</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.DATA_LANE2_BYTE">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_LANE3_BYTE</spirit:name>
+      <spirit:displayName>Data Lane 3 Byte</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_LANE3_BYTE" spirit:choiceRef="choice_list_2dc23030" spirit:order="41">All_Byte</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.DATA_LANE3_BYTE">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>CLK_LANE_IO_LOC_NAME</spirit:name>
+      <spirit:displayName>Clock Lane LOC Name</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.CLK_LANE_IO_LOC_NAME" spirit:order="42">None</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.CLK_LANE_IO_LOC_NAME">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_LANE0_IO_LOC_NAME</spirit:name>
+      <spirit:displayName>Data Lane0 LOC Name</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_LANE0_IO_LOC_NAME" spirit:order="43">None</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.DATA_LANE0_IO_LOC_NAME">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_LANE1_IO_LOC_NAME</spirit:name>
+      <spirit:displayName>Data Lane1 LOC Name</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_LANE1_IO_LOC_NAME" spirit:order="44">None</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.DATA_LANE1_IO_LOC_NAME">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_LANE2_IO_LOC_NAME</spirit:name>
+      <spirit:displayName>Data Lane2 LOC Name</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_LANE2_IO_LOC_NAME" spirit:order="45">None</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.DATA_LANE2_IO_LOC_NAME">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_LANE3_IO_LOC_NAME</spirit:name>
+      <spirit:displayName>Data Lane3 LOC Name</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_LANE3_IO_LOC_NAME" spirit:order="46">None</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.DATA_LANE3_IO_LOC_NAME">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>SupportLevel</spirit:name>
+      <spirit:displayName>Shared Logic support level</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.SupportLevel" spirit:choiceRef="choice_pairs_53749dec" spirit:order="47">1</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.SupportLevel">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_CLK_LANE_IO_POSITION</spirit:name>
+      <spirit:displayName>Clock Lane IO Position</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_CLK_LANE_IO_POSITION" spirit:order="48">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_DATA_LANE0_IO_POSITION</spirit:name>
+      <spirit:displayName>Data Lane 0 IO Position</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_DATA_LANE0_IO_POSITION" spirit:order="49">2</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_DATA_LANE1_IO_POSITION</spirit:name>
+      <spirit:displayName>Data Lane 1 IO Position</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_DATA_LANE1_IO_POSITION" spirit:order="50">4</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_DATA_LANE2_IO_POSITION</spirit:name>
+      <spirit:displayName>Data Lane 2 IO Position</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_DATA_LANE2_IO_POSITION" spirit:order="51">6</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_DATA_LANE3_IO_POSITION</spirit:name>
+      <spirit:displayName>Data Lane 3 IO Position</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_DATA_LANE3_IO_POSITION" spirit:order="52">8</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_IS_7SERIES</spirit:name>
+      <spirit:displayName>7-Series family selection</spirit:displayName>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_IS_7SERIES" spirit:order="53">true</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_CAL_MODE</spirit:name>
+      <spirit:displayName>Calibration Mode</spirit:displayName>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_CAL_MODE" spirit:choiceRef="choice_list_79255a07" spirit:order="54">NONE</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_IDLY_TAP</spirit:name>
+      <spirit:displayName>IDELAY Tap Value</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_IDLY_TAP" spirit:order="55" spirit:minimum="1" spirit:maximum="31" spirit:rangeType="long">1</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.C_IDLY_TAP">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Component_Name</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">design_1_mipi_csi2_rx_subsystem_0_0</spirit:value>
+    </spirit:parameter>
+  </spirit:parameters>
+  <spirit:vendorExtensions>
+    <xilinx:coreExtensions>
+      <xilinx:displayName>MIPI CSI-2 Rx Subsystem</xilinx:displayName>
+      <xilinx:coreRevision>0</xilinx:coreRevision>
+    </xilinx:coreExtensions>
+    <xilinx:packagingInfo>
+      <xilinx:xilinxVersion>2016.3</xilinx:xilinxVersion>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="15dd1a25"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="5e1985b8"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="bf66ad54"/>
+    </xilinx:packagingInfo>
+  </spirit:vendorExtensions>
+</spirit:component>

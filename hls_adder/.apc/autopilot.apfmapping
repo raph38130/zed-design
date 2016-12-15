@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
   <source>
-    <originFiles name="top.cpp" path="/home/raph/hls_adder/solution1/top.cpp"/>
+    <originFiles name="top.cpp" path="/home/raph/zed-design/hls_adder/solution1/top.cpp"/>
   </source>
-  <testbench/>
+  <testbench>
+    <originFiles name="tb.cpp" path="/home/raph/zed-design/hls_adder/solution1/tb.cpp"/>
+  </testbench>
 </autopilotfilemapping:AutoPilotFileMapping>

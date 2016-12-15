@@ -1,5 +1,11 @@
 #include "hls_design_meta.h"
 const Port_Property HLS_Design_Meta::port_props[]={
+	Port_Property("ap_clk", 1, hls_in, -1, "", "", 1),
+	Port_Property("ap_rst_n", 1, hls_in, -1, "", "", 1),
+	Port_Property("n", 32, hls_out, 2, "ap_vld", "out_data", 1),
+	Port_Property("n_ap_vld", 1, hls_out, 2, "ap_vld", "out_vld", 1),
+	Port_Property("p", 32, hls_out, 3, "ap_vld", "out_data", 1),
+	Port_Property("p_ap_vld", 1, hls_out, 3, "ap_vld", "out_vld", 1),
 	Port_Property("s_axi_AXILiteS_AWVALID", 1, hls_in, -1, "", "", 1),
 	Port_Property("s_axi_AXILiteS_AWREADY", 1, hls_out, -1, "", "", 1),
 	Port_Property("s_axi_AXILiteS_AWADDR", 6, hls_in, -1, "", "", 1),
@@ -17,8 +23,6 @@ const Port_Property HLS_Design_Meta::port_props[]={
 	Port_Property("s_axi_AXILiteS_BVALID", 1, hls_out, -1, "", "", 1),
 	Port_Property("s_axi_AXILiteS_BREADY", 1, hls_in, -1, "", "", 1),
 	Port_Property("s_axi_AXILiteS_BRESP", 2, hls_out, -1, "", "", 1),
-	Port_Property("ap_clk", 1, hls_in, -1, "", "", 1),
-	Port_Property("ap_rst_n", 1, hls_in, -1, "", "", 1),
 	Port_Property("interrupt", 1, hls_out, -1, "", "", 1),
 };
 const char* HLS_Design_Meta::dut_name = "add";

@@ -195,7 +195,7 @@ int GpioOutputExample(u16 DeviceId, u32 GpioWidth)
 	 /* Set the GPIO outputs to low */
 	 XGpio_DiscreteWrite(&GpioOutput, LED_CHANNEL, 0x0);
 
-	 while(1)
+	 // while(1)
 	 for (LedBit = 0x0; LedBit < GpioWidth; LedBit++)  {
 
 		for (LedLoop = 0; LedLoop < LED_MAX_BLINK; LedLoop++) {
@@ -260,10 +260,10 @@ int GpioInputExample(u16 DeviceId, u32 *DataRead)
 	 }
 
 	 /* Set the direction for all signals to be inputs */
-	 XGpio_SetDataDirection(&GpioInput, LED_CHANNEL, 0xFFFFFFFF);
+	 XGpio_SetDataDirection(&GpioInput, LED_CHANNEL-1, 0xFFFFFFFF);
 
 	 /* Read the state of the data so that it can be  verified */
-	 *DataRead = XGpio_DiscreteRead(&GpioInput, LED_CHANNEL);
+	 *DataRead = XGpio_DiscreteRead(&GpioInput, LED_CHANNEL-1);
 
 	 return XST_SUCCESS;
 

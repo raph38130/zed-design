@@ -44,7 +44,7 @@ module add_AXILiteS_s_axi
 );
 //------------------------Address Info-------------------
 // 0x00 : Control signals
-//        bit 0  - ap_start (Read/Write/SC)
+//        bit 0  - ap_start (Read/Write/COH)
 //        bit 1  - ap_done (Read/COR)
 //        bit 2  - ap_idle (Read)
 //        bit 3  - ap_ready (Read)
@@ -55,9 +55,11 @@ module add_AXILiteS_s_axi
 //        others - reserved
 // 0x08 : IP Interrupt Enable Register (Read/Write)
 //        bit 0  - Channel 0 (ap_done)
+//        bit 1  - Channel 1 (ap_ready)
 //        others - reserved
 // 0x0c : IP Interrupt Status Register (Read/TOW)
 //        bit 0  - Channel 0 (ap_done)
+//        bit 1  - Channel 1 (ap_ready)
 //        others - reserved
 // 0x10 : Data signal of ap_return
 //        bit 31~0 - ap_return[31:0] (Read)
@@ -106,8 +108,8 @@ localparam
     reg                           int_ap_start;
     reg                           int_auto_restart;
     reg                           int_gie;
-    reg                           int_ier;
-    reg                           int_isr;
+    reg  [1:0]                    int_ier;
+    reg  [1:0]                    int_isr;
     reg  [31:0]                   int_ap_return;
     reg  [31:0]                   int_a;
     reg  [31:0]                   int_b;
@@ -247,10 +249,8 @@ always @(posedge ACLK) begin
     else if (ACLK_EN) begin
         if (w_hs && waddr == ADDR_AP_CTRL && WSTRB[0] && WDATA[0])
             int_ap_start <= 1'b1;
-        else if (ap_done & int_auto_restart)
-            int_ap_start <= 1'b1; // auto restart
-        else
-            int_ap_start <= 1'b0; // self clear
+        else if (int_ap_ready)
+            int_ap_start <= int_auto_restart; // clear on handshake/auto restart
     end
 end
 
@@ -292,19 +292,31 @@ always @(posedge ACLK) begin
         int_ier <= 1'b0;
     else if (ACLK_EN) begin
         if (w_hs && waddr == ADDR_IER && WSTRB[0])
-            int_ier <= WDATA[0];
+            int_ier <= WDATA[1:0];
     end
 end
 
-// int_isr
+// int_isr[0]
 always @(posedge ACLK) begin
     if (ARESET)
-        int_isr <= 1'b0;
+        int_isr[0] <= 1'b0;
     else if (ACLK_EN) begin
-        if (int_ier & ap_done)
-            int_isr <= 1'b1;
+        if (int_ier[0] & ap_done)
+            int_isr[0] <= 1'b1;
         else if (w_hs && waddr == ADDR_ISR && WSTRB[0])
-            int_isr <= int_isr ^ WDATA[0]; // toggle on write
+            int_isr[0] <= int_isr[0] ^ WDATA[0]; // toggle on write
+    end
+end
+
+// int_isr[1]
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_isr[1] <= 1'b0;
+    else if (ACLK_EN) begin
+        if (int_ier[1] & ap_ready)
+            int_isr[1] <= 1'b1;
+        else if (w_hs && waddr == ADDR_ISR && WSTRB[0])
+            int_isr[1] <= int_isr[1] ^ WDATA[1]; // toggle on write
     end
 end
 

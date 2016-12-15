@@ -204,10 +204,16 @@ extern "C" {
 #6 "<command line>" 2
 #1 "<built-in>" 2
 #1 "hls_adder/solution1/top.cpp" 2
-int add(int a, int b)
+int add(int a, int b,int* n,int*p)
 {
 _ssdm_op_SpecInterface(b, "s_axilite", 0, 0, "", 0, 0, "", "", "", 0, 0, 0, 0, "", "");
 _ssdm_op_SpecInterface(a, "s_axilite", 0, 0, "", 0, 0, "", "", "", 0, 0, 0, 0, "", "");
 _ssdm_op_SpecInterface(0, "s_axilite", 0, 0, "", 0, 0, "", "", "", 0, 0, 0, 0, "", "");
-return a+b;
+
+int c=a*b,
+  d=a/7,
+  e=a/11;
+*n=c;
+*p=e;
+return a+b+c+d;
 }

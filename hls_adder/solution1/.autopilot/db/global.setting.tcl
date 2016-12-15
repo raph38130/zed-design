@@ -4,9 +4,9 @@ set ClockPeriod "10.000000"
 set ClockList {ap_clk}
 set multiClockList {}
 set PortClockMap {}
-set CombLogicFlag 1
+set CombLogicFlag 0
 set PipelineFlag 0
-set DataflowTaskPipelineFlag  0
+set DataflowTaskPipelineFlag  1
 set TrivialPipelineFlag 0
 set noPortSwitchingFlag 0
 set FloatingPointFlag 0
@@ -43,13 +43,13 @@ set SCTraceOption "all"
 set TargetInfo "xc7z020:clg484:-1"
 set SourceFiles {sc {} c top.cpp}
 set SourceFlags {sc {} c {{}}}
-set DirectiveFile {/home/raph/hls_adder/solution1/solution1.directive}
-set TBFiles {bc {} c {} sc {} cas {} vhdl {} verilog {}}
+set DirectiveFile {/home/raph/zed-design/hls_adder/solution1/solution1.directive}
+set TBFiles {verilog tb.cpp bc tb.cpp vhdl tb.cpp sc tb.cpp cas tb.cpp c {}}
 set SpecLanguage "C"
 set TVInFiles {bc {} c {} sc {} cas {} vhdl {} verilog {}}
 set TVOutFiles {bc {} c {} sc {} cas {} vhdl {} verilog {}}
-set TBTops {bc "" c "" sc "" cas "" vhdl "" verilog ""}
-set TBInstNames {bc "" c "" sc "" cas "" vhdl "" verilog ""}
+set TBTops {verilog {} bc {} vhdl {} sc {} cas {} c {}}
+set TBInstNames {verilog {} bc {} vhdl {} sc {} cas {} c {}}
 set XDCFiles {}
 set ExtraGlobalOptions {"area_timing" 1 "clock_gate" 1 "impl_flow" map "power_gate" 0}
 set PlatformFiles {{DefaultPlatform {xilinx/zynq/zynq xilinx/zynq/zynq_fpv6}}}

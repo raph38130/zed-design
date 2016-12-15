@@ -7,7 +7,7 @@
 
 // AXILiteS
 // 0x00 : Control signals
-//        bit 0  - ap_start (Read/Write/SC)
+//        bit 0  - ap_start (Read/Write/COH)
 //        bit 1  - ap_done (Read/COR)
 //        bit 2  - ap_idle (Read)
 //        bit 3  - ap_ready (Read)
@@ -18,9 +18,11 @@
 //        others - reserved
 // 0x08 : IP Interrupt Enable Register (Read/Write)
 //        bit 0  - Channel 0 (ap_done)
+//        bit 1  - Channel 1 (ap_ready)
 //        others - reserved
 // 0x0c : IP Interrupt Status Register (Read/TOW)
 //        bit 0  - Channel 0 (ap_done)
+//        bit 1  - Channel 1 (ap_ready)
 //        others - reserved
 // 0x10 : Data signal of ap_return
 //        bit 31~0 - ap_return[31:0] (Read)

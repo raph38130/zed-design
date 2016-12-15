@@ -204,10 +204,16 @@ extern "C" {
 #pragma line 6 "<command line>" 2
 #pragma line 1 "<built-in>" 2
 #pragma line 1 "hls_adder/solution1/top.cpp" 2
-int add(int a, int b)
+int add(int a, int b,int* n,int*p)
 {
 #pragma HLS INTERFACE s_axilite port=b
 #pragma HLS INTERFACE s_axilite port=a
 #pragma HLS INTERFACE s_axilite port=return
-return a+b;
+#pragma empty_line
+int c=a*b,
+  d=a/7,
+  e=a/11;
+*n=c;
+*p=e;
+return a+b+c+d;
 }

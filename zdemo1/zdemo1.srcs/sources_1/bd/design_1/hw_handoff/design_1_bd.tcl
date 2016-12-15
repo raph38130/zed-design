@@ -1456,11 +1456,43 @@ CONFIG.PCW_WDT_WDT_IO.VALUE_SRC {DEFAULT} \
   # Create instance: ps7_0_axi_periph, and set properties
   set ps7_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 ps7_0_axi_periph ]
   set_property -dict [ list \
-CONFIG.NUM_MI {2} \
+CONFIG.NUM_MI {3} \
  ] $ps7_0_axi_periph
 
   # Create instance: rst_ps7_0_100M, and set properties
   set rst_ps7_0_100M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_ps7_0_100M ]
+
+  # Create instance: xadc_wiz_0, and set properties
+  set xadc_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xadc_wiz:3.3 xadc_wiz_0 ]
+  set_property -dict [ list \
+CONFIG.ADC_CONVERSION_RATE {1000} \
+CONFIG.CHANNEL_ENABLE_VP_VN {false} \
+CONFIG.DCLK_FREQUENCY {100} \
+CONFIG.ENABLE_RESET {false} \
+CONFIG.ENABLE_VCCDDRO_ALARM {true} \
+CONFIG.ENABLE_VCCPAUX_ALARM {true} \
+CONFIG.ENABLE_VCCPINT_ALARM {true} \
+CONFIG.INTERFACE_SELECTION {Enable_AXI} \
+CONFIG.VCCDDRO_ALARM_LOWER {1.2} \
+ ] $xadc_wiz_0
+
+  # Need to retain value_src of defaults
+  set_property -dict [ list \
+CONFIG.ADC_CONVERSION_RATE.VALUE_SRC {DEFAULT} \
+CONFIG.CHANNEL_ENABLE_VP_VN.VALUE_SRC {DEFAULT} \
+CONFIG.DCLK_FREQUENCY.VALUE_SRC {DEFAULT} \
+CONFIG.ENABLE_RESET.VALUE_SRC {DEFAULT} \
+CONFIG.ENABLE_VCCDDRO_ALARM.VALUE_SRC {DEFAULT} \
+CONFIG.ENABLE_VCCPAUX_ALARM.VALUE_SRC {DEFAULT} \
+CONFIG.ENABLE_VCCPINT_ALARM.VALUE_SRC {DEFAULT} \
+CONFIG.INTERFACE_SELECTION.VALUE_SRC {DEFAULT} \
+CONFIG.VCCDDRO_ALARM_LOWER.VALUE_SRC {DEFAULT} \
+ ] $xadc_wiz_0
+
+  set_property -dict [ list \
+CONFIG.NUM_READ_OUTSTANDING {1} \
+CONFIG.NUM_WRITE_OUTSTANDING {1} \
+ ] [get_bd_intf_pins /xadc_wiz_0/s_axi_lite]
 
   # Create interface connections
   connect_bd_intf_net -intf_net axi_gpio_0_GPIO [get_bd_intf_ports sws_8bits] [get_bd_intf_pins axi_gpio_0/GPIO]
@@ -1470,45 +1502,49 @@ CONFIG.NUM_MI {2} \
   connect_bd_intf_net -intf_net processing_system7_0_M_AXI_GP0 [get_bd_intf_pins processing_system7_0/M_AXI_GP0] [get_bd_intf_pins ps7_0_axi_periph/S00_AXI]
   connect_bd_intf_net -intf_net ps7_0_axi_periph_M00_AXI [get_bd_intf_pins axi_gpio_0/S_AXI] [get_bd_intf_pins ps7_0_axi_periph/M00_AXI]
   connect_bd_intf_net -intf_net ps7_0_axi_periph_M01_AXI [get_bd_intf_pins myip_counter_0/S00_AXI] [get_bd_intf_pins ps7_0_axi_periph/M01_AXI]
+  connect_bd_intf_net -intf_net ps7_0_axi_periph_M02_AXI [get_bd_intf_pins ps7_0_axi_periph/M02_AXI] [get_bd_intf_pins xadc_wiz_0/s_axi_lite]
 
   # Create port connections
   connect_bd_net -net button_1 [get_bd_ports button] [get_bd_pins myip_counter_0/button]
-  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins myip_counter_0/s00_axi_aclk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK] [get_bd_pins rst_ps7_0_100M/slowest_sync_clk]
+  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins myip_counter_0/s00_axi_aclk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/M02_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK] [get_bd_pins rst_ps7_0_100M/slowest_sync_clk] [get_bd_pins xadc_wiz_0/s_axi_aclk]
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_ps7_0_100M/ext_reset_in]
   connect_bd_net -net rst_ps7_0_100M_interconnect_aresetn [get_bd_pins ps7_0_axi_periph/ARESETN] [get_bd_pins rst_ps7_0_100M/interconnect_aresetn]
-  connect_bd_net -net rst_ps7_0_100M_peripheral_aresetn [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins myip_counter_0/s00_axi_aresetn] [get_bd_pins ps7_0_axi_periph/M00_ARESETN] [get_bd_pins ps7_0_axi_periph/M01_ARESETN] [get_bd_pins ps7_0_axi_periph/S00_ARESETN] [get_bd_pins rst_ps7_0_100M/peripheral_aresetn]
+  connect_bd_net -net rst_ps7_0_100M_peripheral_aresetn [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins myip_counter_0/s00_axi_aresetn] [get_bd_pins ps7_0_axi_periph/M00_ARESETN] [get_bd_pins ps7_0_axi_periph/M01_ARESETN] [get_bd_pins ps7_0_axi_periph/M02_ARESETN] [get_bd_pins ps7_0_axi_periph/S00_ARESETN] [get_bd_pins rst_ps7_0_100M/peripheral_aresetn] [get_bd_pins xadc_wiz_0/s_axi_aresetn]
 
   # Create address segments
   create_bd_addr_seg -range 0x00010000 -offset 0x41200000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_gpio_0/S_AXI/Reg] SEG_axi_gpio_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x43C00000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs myip_counter_0/S00_AXI/S00_AXI_reg] SEG_myip_counter_0_S00_AXI_reg
+  create_bd_addr_seg -range 0x00010000 -offset 0x43C10000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs xadc_wiz_0/s_axi_lite/Reg] SEG_xadc_wiz_0_Reg
 
   # Perform GUI Layout
   regenerate_bd_layout -layout_string {
    guistr: "# # String gsaved with Nlview 6.6.5b  2016-09-06 bk=1.3687 VDI=39 GEI=35 GUI=JA:1.6
 #  -string -flagsOSRD
-preplace port DDR -pg 1 -y -230 -defaultsOSRD
-preplace port button -pg 1 -y -50 -defaultsOSRD -right
-preplace port leds_8bits -pg 1 -y -70 -defaultsOSRD
-preplace port sws_8bits -pg 1 -y -90 -defaultsOSRD
-preplace port FIXED_IO -pg 1 -y -210 -defaultsOSRD
-preplace inst axi_gpio_0 -pg 1 -lvl 3 -y -130 -defaultsOSRD
-preplace inst myip_counter_0 -pg 1 -lvl 3 -y 20 -defaultsOSRD
-preplace inst ps7_0_axi_periph -pg 1 -lvl 2 -y -60 -defaultsOSRD
-preplace inst rst_ps7_0_100M -pg 1 -lvl 1 -y 100 -defaultsOSRD
-preplace inst processing_system7_0 -pg 1 -lvl 1 -y -150 -defaultsOSRD
-preplace netloc processing_system7_0_DDR 1 1 3 NJ -230 NJ -230 NJ
-preplace netloc processing_system7_0_M_AXI_GP0 1 1 1 430J
-preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 1 2 460 140 840
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 2 20 -20 430
-preplace netloc ps7_0_axi_periph_M01_AXI 1 2 1 820
-preplace netloc axi_gpio_0_GPIO2 1 3 1 1090J
-preplace netloc processing_system7_0_FIXED_IO 1 1 3 NJ -210 NJ -210 NJ
-preplace netloc axi_gpio_0_GPIO 1 3 1 1100J
-preplace netloc processing_system7_0_FCLK_CLK0 1 0 3 10 -280 450 -280 830
-preplace netloc ps7_0_axi_periph_M00_AXI 1 2 1 820
-preplace netloc button_1 1 2 2 850 -60 1100J
-preplace netloc rst_ps7_0_100M_interconnect_aresetn 1 1 1 440
-levelinfo -pg 1 -10 230 680 980 1200 -top -390 -bot 220
+preplace port DDR -pg 1 -y 460 -defaultsOSRD
+preplace port button -pg 1 -y 650 -defaultsOSRD -right
+preplace port leds_8bits -pg 1 -y 400 -defaultsOSRD
+preplace port sws_8bits -pg 1 -y 380 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -y 480 -defaultsOSRD
+preplace inst xadc_wiz_0 -pg 1 -lvl 3 -y 170 -defaultsOSRD
+preplace inst axi_gpio_0 -pg 1 -lvl 3 -y 390 -defaultsOSRD
+preplace inst myip_counter_0 -pg 1 -lvl 3 -y 570 -defaultsOSRD
+preplace inst ps7_0_axi_periph -pg 1 -lvl 2 -y 290 -defaultsOSRD
+preplace inst rst_ps7_0_100M -pg 1 -lvl 1 -y 340 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 1 -y 540 -defaultsOSRD
+preplace netloc ps7_0_axi_periph_M02_AXI 1 2 1 770
+preplace netloc processing_system7_0_DDR 1 1 3 NJ 460 NJ 460 NJ
+preplace netloc processing_system7_0_M_AXI_GP0 1 1 1 440
+preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 1 2 450 110 780
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 2 30 250 430
+preplace netloc ps7_0_axi_periph_M01_AXI 1 2 1 750
+preplace netloc axi_gpio_0_GPIO2 1 3 1 NJ
+preplace netloc processing_system7_0_FIXED_IO 1 1 3 NJ 480 NJ 480 NJ
+preplace netloc axi_gpio_0_GPIO 1 3 1 NJ
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 3 20 230 460 600 760
+preplace netloc ps7_0_axi_periph_M00_AXI 1 2 1 790
+preplace netloc button_1 1 2 2 790 650 NJ
+preplace netloc rst_ps7_0_100M_interconnect_aresetn 1 1 1 470
+levelinfo -pg 1 0 230 610 950 1120 -top 0 -bot 670
 ",
 }
 

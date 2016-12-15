@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vivado HLS Report for 'add'" level="0">
-<item name = "Date">Sun Nov 20 13:40:24 2016
+<item name = "Date">Wed Dec 14 22:10:01 2016
 </item>
 <item name = "Version">2016.3 (Build 1682563 on Mon Oct 10 19:41:59 MDT 2016)</item>
 <item name = "Project">hls_adder</item>
@@ -15,7 +15,7 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="4">Clock, Target, Estimated, Uncertainty</keys>
-<column name="ap_clk">10.00, 3.44, 1.25</column>
+<column name="ap_clk">10.00, 8.52, 1.25</column>
 </table>
 </item>
 </section>
@@ -24,7 +24,7 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="6">, min, max, min, max, Type</keys>
-<column name="">0, 0, 1, 1, none</column>
+<column name="">7, 7, 8, 8, none</column>
 </table>
 </item>
 <item name = "Detail">

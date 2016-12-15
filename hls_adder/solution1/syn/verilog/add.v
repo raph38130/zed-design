@@ -7,9 +7,15 @@
 
 `timescale 1 ns / 1 ps 
 
-(* CORE_GENERATION_INFO="add,hls_ip_2016_3,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7z020clg484-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=3.440000,HLS_SYN_LAT=0,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=144,HLS_SYN_LUT=264}" *)
+(* CORE_GENERATION_INFO="add,hls_ip_2016_3,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7z020clg484-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=8.520000,HLS_SYN_LAT=7,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=12,HLS_SYN_FF=438,HLS_SYN_LUT=622}" *)
 
 module add (
+        ap_clk,
+        ap_rst_n,
+        n,
+        n_ap_vld,
+        p,
+        p_ap_vld,
         s_axi_AXILiteS_AWVALID,
         s_axi_AXILiteS_AWREADY,
         s_axi_AXILiteS_AWADDR,
@@ -27,19 +33,43 @@ module add (
         s_axi_AXILiteS_BVALID,
         s_axi_AXILiteS_BREADY,
         s_axi_AXILiteS_BRESP,
-        ap_clk,
-        ap_rst_n,
         interrupt
 );
 
+parameter    ap_ST_fsm_state1 = 8'b1;
+parameter    ap_ST_fsm_state2 = 8'b10;
+parameter    ap_ST_fsm_state3 = 8'b100;
+parameter    ap_ST_fsm_state4 = 8'b1000;
+parameter    ap_ST_fsm_state5 = 8'b10000;
+parameter    ap_ST_fsm_state6 = 8'b100000;
+parameter    ap_ST_fsm_state7 = 8'b1000000;
+parameter    ap_ST_fsm_state8 = 8'b10000000;
+parameter    ap_const_lv32_0 = 32'b00000000000000000000000000000000;
 parameter    C_S_AXI_AXILITES_DATA_WIDTH = 32;
 parameter    ap_const_int64_8 = 8;
 parameter    C_S_AXI_AXILITES_ADDR_WIDTH = 6;
 parameter    C_S_AXI_DATA_WIDTH = 32;
+parameter    ap_const_lv32_5 = 32'b101;
+parameter    ap_const_lv32_6 = 32'b110;
+parameter    ap_const_lv65_124924925 = 65'b100100100100100100100100100100101;
+parameter    ap_const_lv32_1F = 32'b11111;
+parameter    ap_const_lv65_1745D1746 = 65'b101110100010111010001011101000110;
+parameter    ap_const_lv32_1 = 32'b1;
+parameter    ap_const_lv32_23 = 32'b100011;
+parameter    ap_const_lv32_40 = 32'b1000000;
+parameter    ap_const_lv32_24 = 32'b100100;
+parameter    ap_const_lv65_0 = 65'b00000000000000000000000000000000000000000000000000000000000000000;
+parameter    ap_const_lv32_7 = 32'b111;
 
 parameter C_S_AXI_AXILITES_WSTRB_WIDTH = (C_S_AXI_AXILITES_DATA_WIDTH / ap_const_int64_8);
 parameter C_S_AXI_WSTRB_WIDTH = (C_S_AXI_DATA_WIDTH / ap_const_int64_8);
 
+input   ap_clk;
+input   ap_rst_n;
+output  [31:0] n;
+output   n_ap_vld;
+output  [31:0] p;
+output   p_ap_vld;
 input   s_axi_AXILiteS_AWVALID;
 output   s_axi_AXILiteS_AWREADY;
 input  [C_S_AXI_AXILITES_ADDR_WIDTH - 1 : 0] s_axi_AXILiteS_AWADDR;
@@ -57,18 +87,64 @@ output  [1:0] s_axi_AXILiteS_RRESP;
 output   s_axi_AXILiteS_BVALID;
 input   s_axi_AXILiteS_BREADY;
 output  [1:0] s_axi_AXILiteS_BRESP;
-input   ap_clk;
-input   ap_rst_n;
 output   interrupt;
 
+reg n_ap_vld;
+reg p_ap_vld;
+
+reg    ap_rst_n_inv;
 wire    ap_start;
-wire    ap_done;
-wire    ap_idle;
-wire    ap_ready;
+reg    ap_done;
+reg    ap_idle;
+(* fsm_encoding = "none" *) reg   [7:0] ap_CS_fsm;
+wire   [0:0] ap_CS_fsm_state1;
+reg    ap_ready;
 wire   [31:0] a;
 wire   [31:0] b;
 wire   [31:0] ap_return;
-reg    ap_rst_n_inv;
+reg  signed [31:0] b_read_reg_221;
+reg  signed [31:0] a_read_reg_227;
+wire  signed [64:0] sext1_cast_fu_72_p1;
+reg   [0:0] tmp_7_reg_239;
+wire   [64:0] grp_fu_76_p2;
+reg   [64:0] mul2_reg_247;
+wire   [0:0] ap_CS_fsm_state6;
+reg   [29:0] tmp_9_reg_252;
+wire   [64:0] grp_fu_90_p2;
+reg   [64:0] mul_reg_257;
+reg   [28:0] tmp_11_reg_262;
+wire   [31:0] tmp2_fu_206_p2;
+reg   [31:0] tmp2_reg_267;
+wire   [0:0] ap_CS_fsm_state7;
+wire   [31:0] grp_fu_96_p2;
+wire  signed [31:0] sext1_cast_fu_72_p0;
+wire  signed [31:0] grp_fu_76_p0;
+wire   [33:0] grp_fu_76_p1;
+wire  signed [31:0] tmp_7_fu_82_p1;
+wire  signed [31:0] grp_fu_90_p0;
+wire   [33:0] grp_fu_90_p1;
+wire   [0:0] ap_CS_fsm_state2;
+wire   [64:0] neg_mul3_fu_121_p2;
+wire   [29:0] tmp_8_fu_126_p4;
+wire  signed [31:0] tmp_fu_136_p1;
+wire  signed [31:0] tmp_1_fu_140_p1;
+wire   [31:0] tmp_3_fu_143_p3;
+wire   [31:0] neg_ti8_fu_150_p2;
+wire   [64:0] neg_mul_fu_163_p2;
+wire   [28:0] tmp_10_fu_168_p4;
+wire  signed [31:0] tmp_4_fu_178_p1;
+wire  signed [31:0] tmp_5_fu_182_p1;
+wire   [31:0] tmp_6_fu_185_p3;
+wire   [31:0] neg_ti_fu_192_p2;
+wire   [31:0] d_fu_156_p3;
+wire   [0:0] ap_CS_fsm_state8;
+wire   [31:0] tmp1_fu_212_p2;
+reg   [7:0] ap_NS_fsm;
+
+// power-on initialization
+initial begin
+#0 ap_CS_fsm = 8'b1;
+end
 
 add_AXILiteS_s_axi #(
     .C_S_AXI_ADDR_WIDTH( C_S_AXI_AXILITES_ADDR_WIDTH ),
@@ -104,16 +180,220 @@ add_AXILiteS_s_axi_U(
     .b(b)
 );
 
-assign ap_done = ap_start;
+add_mul_32s_34ns_bkb #(
+    .ID( 1 ),
+    .NUM_STAGE( 6 ),
+    .din0_WIDTH( 32 ),
+    .din1_WIDTH( 34 ),
+    .dout_WIDTH( 65 ))
+add_mul_32s_34ns_bkb_U1(
+    .clk(ap_clk),
+    .reset(ap_rst_n_inv),
+    .din0(grp_fu_76_p0),
+    .din1(grp_fu_76_p1),
+    .ce(1'b1),
+    .dout(grp_fu_76_p2)
+);
 
-assign ap_idle = 1'b1;
+add_mul_32s_34ns_bkb #(
+    .ID( 1 ),
+    .NUM_STAGE( 6 ),
+    .din0_WIDTH( 32 ),
+    .din1_WIDTH( 34 ),
+    .dout_WIDTH( 65 ))
+add_mul_32s_34ns_bkb_U2(
+    .clk(ap_clk),
+    .reset(ap_rst_n_inv),
+    .din0(grp_fu_90_p0),
+    .din1(grp_fu_90_p1),
+    .ce(1'b1),
+    .dout(grp_fu_90_p2)
+);
 
-assign ap_ready = ap_start;
+add_mul_32s_32s_3cud #(
+    .ID( 1 ),
+    .NUM_STAGE( 6 ),
+    .din0_WIDTH( 32 ),
+    .din1_WIDTH( 32 ),
+    .dout_WIDTH( 32 ))
+add_mul_32s_32s_3cud_U3(
+    .clk(ap_clk),
+    .reset(ap_rst_n_inv),
+    .din0(b_read_reg_221),
+    .din1(a_read_reg_227),
+    .ce(1'b1),
+    .dout(grp_fu_96_p2)
+);
 
-assign ap_return = (b + a);
+always @ (posedge ap_clk) begin
+    if (ap_rst_n_inv == 1'b1) begin
+        ap_CS_fsm <= ap_ST_fsm_state1;
+    end else begin
+        ap_CS_fsm <= ap_NS_fsm;
+    end
+end
+
+always @ (posedge ap_clk) begin
+    if (((ap_CS_fsm_state1 == 1'b1) & ~(ap_start == 1'b0))) begin
+        a_read_reg_227 <= a;
+        b_read_reg_221 <= b;
+        tmp_7_reg_239 <= tmp_7_fu_82_p1[ap_const_lv32_1F];
+    end
+end
+
+always @ (posedge ap_clk) begin
+    if ((1'b1 == ap_CS_fsm_state6)) begin
+        mul2_reg_247 <= grp_fu_76_p2;
+        mul_reg_257 <= grp_fu_90_p2;
+        tmp_11_reg_262 <= {{grp_fu_90_p2[ap_const_lv32_40 : ap_const_lv32_24]}};
+        tmp_9_reg_252 <= {{grp_fu_76_p2[ap_const_lv32_40 : ap_const_lv32_23]}};
+    end
+end
+
+always @ (posedge ap_clk) begin
+    if ((1'b1 == ap_CS_fsm_state7)) begin
+        tmp2_reg_267 <= tmp2_fu_206_p2;
+    end
+end
+
+always @ (*) begin
+    if ((1'b1 == ap_CS_fsm_state8)) begin
+        ap_done = 1'b1;
+    end else begin
+        ap_done = 1'b0;
+    end
+end
+
+always @ (*) begin
+    if (((1'b0 == ap_start) & (ap_CS_fsm_state1 == 1'b1))) begin
+        ap_idle = 1'b1;
+    end else begin
+        ap_idle = 1'b0;
+    end
+end
+
+always @ (*) begin
+    if ((1'b1 == ap_CS_fsm_state8)) begin
+        ap_ready = 1'b1;
+    end else begin
+        ap_ready = 1'b0;
+    end
+end
+
+always @ (*) begin
+    if ((1'b1 == ap_CS_fsm_state7)) begin
+        n_ap_vld = 1'b1;
+    end else begin
+        n_ap_vld = 1'b0;
+    end
+end
+
+always @ (*) begin
+    if ((1'b1 == ap_CS_fsm_state7)) begin
+        p_ap_vld = 1'b1;
+    end else begin
+        p_ap_vld = 1'b0;
+    end
+end
+
+always @ (*) begin
+    case (ap_CS_fsm)
+        ap_ST_fsm_state1 : begin
+            if (~(ap_start == 1'b0)) begin
+                ap_NS_fsm = ap_ST_fsm_state2;
+            end else begin
+                ap_NS_fsm = ap_ST_fsm_state1;
+            end
+        end
+        ap_ST_fsm_state2 : begin
+            ap_NS_fsm = ap_ST_fsm_state3;
+        end
+        ap_ST_fsm_state3 : begin
+            ap_NS_fsm = ap_ST_fsm_state4;
+        end
+        ap_ST_fsm_state4 : begin
+            ap_NS_fsm = ap_ST_fsm_state5;
+        end
+        ap_ST_fsm_state5 : begin
+            ap_NS_fsm = ap_ST_fsm_state6;
+        end
+        ap_ST_fsm_state6 : begin
+            ap_NS_fsm = ap_ST_fsm_state7;
+        end
+        ap_ST_fsm_state7 : begin
+            ap_NS_fsm = ap_ST_fsm_state8;
+        end
+        ap_ST_fsm_state8 : begin
+            ap_NS_fsm = ap_ST_fsm_state1;
+        end
+        default : begin
+            ap_NS_fsm = 'bx;
+        end
+    endcase
+end
+
+assign ap_CS_fsm_state1 = ap_CS_fsm[ap_const_lv32_0];
+
+assign ap_CS_fsm_state2 = ap_CS_fsm[ap_const_lv32_1];
+
+assign ap_CS_fsm_state6 = ap_CS_fsm[ap_const_lv32_5];
+
+assign ap_CS_fsm_state7 = ap_CS_fsm[ap_const_lv32_6];
+
+assign ap_CS_fsm_state8 = ap_CS_fsm[ap_const_lv32_7];
+
+assign ap_return = (tmp2_reg_267 + tmp1_fu_212_p2);
 
 always @ (*) begin
     ap_rst_n_inv = ~ap_rst_n;
 end
+
+assign d_fu_156_p3 = ((tmp_7_reg_239[0:0] === 1'b1) ? neg_ti8_fu_150_p2 : tmp_1_fu_140_p1);
+
+assign grp_fu_76_p0 = sext1_cast_fu_72_p1;
+
+assign grp_fu_76_p1 = ap_const_lv65_124924925;
+
+assign grp_fu_90_p0 = sext1_cast_fu_72_p1;
+
+assign grp_fu_90_p1 = ap_const_lv65_1745D1746;
+
+assign n = grp_fu_96_p2;
+
+assign neg_mul3_fu_121_p2 = (ap_const_lv65_0 - mul2_reg_247);
+
+assign neg_mul_fu_163_p2 = (ap_const_lv65_0 - mul_reg_257);
+
+assign neg_ti8_fu_150_p2 = (ap_const_lv32_0 - tmp_3_fu_143_p3);
+
+assign neg_ti_fu_192_p2 = (ap_const_lv32_0 - tmp_6_fu_185_p3);
+
+assign p = ((tmp_7_reg_239[0:0] === 1'b1) ? neg_ti_fu_192_p2 : tmp_5_fu_182_p1);
+
+assign sext1_cast_fu_72_p0 = a;
+
+assign sext1_cast_fu_72_p1 = sext1_cast_fu_72_p0;
+
+assign tmp1_fu_212_p2 = ($signed(b_read_reg_221) + $signed(a_read_reg_227));
+
+assign tmp2_fu_206_p2 = (grp_fu_96_p2 + d_fu_156_p3);
+
+assign tmp_10_fu_168_p4 = {{neg_mul_fu_163_p2[ap_const_lv32_40 : ap_const_lv32_24]}};
+
+assign tmp_1_fu_140_p1 = $signed(tmp_9_reg_252);
+
+assign tmp_3_fu_143_p3 = ((tmp_7_reg_239[0:0] === 1'b1) ? tmp_fu_136_p1 : tmp_1_fu_140_p1);
+
+assign tmp_4_fu_178_p1 = $signed(tmp_10_fu_168_p4);
+
+assign tmp_5_fu_182_p1 = $signed(tmp_11_reg_262);
+
+assign tmp_6_fu_185_p3 = ((tmp_7_reg_239[0:0] === 1'b1) ? tmp_4_fu_178_p1 : tmp_5_fu_182_p1);
+
+assign tmp_7_fu_82_p1 = a;
+
+assign tmp_8_fu_126_p4 = {{neg_mul3_fu_121_p2[ap_const_lv32_40 : ap_const_lv32_23]}};
+
+assign tmp_fu_136_p1 = $signed(tmp_8_fu_126_p4);
 
 endmodule //add

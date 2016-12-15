@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vivado HLS Report for 'add'" level="0">
-<item name = "Date">Sun Nov 20 13:40:24 2016
+<item name = "Date">Wed Dec 14 22:10:01 2016
 </item>
 <item name = "Version">2016.3 (Build 1682563 on Mon Oct 10 19:41:59 MDT 2016)</item>
 <item name = "Project">hls_adder</item>
@@ -15,7 +15,7 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="4">Clock, Target, Estimated, Uncertainty</keys>
-<column name="ap_clk">10.00, 3.44, 1.25</column>
+<column name="ap_clk">10.00, 8.52, 1.25</column>
 </table>
 </item>
 </section>
@@ -24,7 +24,7 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="6">, min, max, min, max, Type</keys>
-<column name="">0, 0, 1, 1, none</column>
+<column name="">7, 7, 8, 8, none</column>
 </table>
 </item>
 <item name = "Detail">
@@ -47,14 +47,14 @@
 <item name = "Summary"><table name="" hasTotal="1">
 <keys size="5">Name, BRAM_18K, DSP48E, FF, LUT</keys>
 <column name="DSP">-, -, -, -</column>
-<column name="Expression">-, -, 0, 32</column>
+<column name="Expression">-, -, 0, 386</column>
 <column name="FIFO">-, -, -, -</column>
-<column name="Instance">0, -, 144, 232</column>
+<column name="Instance">0, 12, 144, 232</column>
 <column name="Memory">-, -, -, -</column>
-<column name="Multiplexer">-, -, -, -</column>
-<column name="Register">-, -, -, -</column>
+<column name="Multiplexer">-, -, -, 4</column>
+<column name="Register">-, -, 294, -</column>
 <specialColumn name="Available">280, 220, 106400, 53200</specialColumn>
-<specialColumn name="Utilization (%)">0, 0, ~0, ~0</specialColumn>
+<specialColumn name="Utilization (%)">0, 5, ~0, 1</specialColumn>
 </table>
 </item>
 <item name = "Detail">
@@ -62,6 +62,9 @@
 <item name = "Instance"><table name="" hasTotal="1">
 <keys size="6">Instance, Module, BRAM_18K, DSP48E, FF, LUT</keys>
 <column name="add_AXILiteS_s_axi_U">add_AXILiteS_s_axi, 0, 0, 144, 232</column>
+<column name="add_mul_32s_32s_3cud_U3">add_mul_32s_32s_3cud, 0, 4, 0, 0</column>
+<column name="add_mul_32s_34ns_bkb_U1">add_mul_32s_34ns_bkb, 0, 4, 0, 0</column>
+<column name="add_mul_32s_34ns_bkb_U2">add_mul_32s_34ns_bkb, 0, 4, 0, 0</column>
 </table>
 </item>
 <item name = "DSP48"><table name="" hasTotal="0">
@@ -78,15 +81,35 @@
 </item>
 <item name = "Expression"><table name="" hasTotal="1">
 <keys size="7">Variable Name, Operation, DSP48E, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
-<column name="ap_return">+, 0, 0, 32, 32, 32</column>
+<column name="ap_return">+, 0, 0, 16, 32, 32</column>
+<column name="tmp1_fu_212_p2">+, 0, 0, 16, 32, 32</column>
+<column name="tmp2_fu_206_p2">+, 0, 0, 32, 32, 32</column>
+<column name="neg_mul3_fu_121_p2">-, 0, 0, 65, 1, 65</column>
+<column name="neg_mul_fu_163_p2">-, 0, 0, 65, 1, 65</column>
+<column name="neg_ti8_fu_150_p2">-, 0, 0, 32, 1, 32</column>
+<column name="neg_ti_fu_192_p2">-, 0, 0, 32, 1, 32</column>
+<column name="d_fu_156_p3">select, 0, 0, 32, 1, 32</column>
+<column name="p">select, 0, 0, 32, 1, 32</column>
+<column name="tmp_3_fu_143_p3">select, 0, 0, 32, 1, 32</column>
+<column name="tmp_6_fu_185_p3">select, 0, 0, 32, 1, 32</column>
 </table>
 </item>
 <item name = "Multiplexer"><table name="" hasTotal="1">
 <keys size="5">Name, LUT, Input Size, Bits, Total Bits</keys>
+<column name="ap_NS_fsm">4, 9, 1, 9</column>
 </table>
 </item>
 <item name = "Register"><table name="" hasTotal="1">
 <keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
+<column name="a_read_reg_227">32, 0, 32, 0</column>
+<column name="ap_CS_fsm">8, 0, 8, 0</column>
+<column name="b_read_reg_221">32, 0, 32, 0</column>
+<column name="mul2_reg_247">65, 0, 65, 0</column>
+<column name="mul_reg_257">65, 0, 65, 0</column>
+<column name="tmp2_reg_267">32, 0, 32, 0</column>
+<column name="tmp_11_reg_262">29, 0, 29, 0</column>
+<column name="tmp_7_reg_239">1, 0, 1, 0</column>
+<column name="tmp_9_reg_252">30, 0, 30, 0</column>
 </table>
 </item>
 </section>
@@ -116,6 +139,10 @@
 <column name="ap_clk">in, 1, ap_ctrl_hs, add, return value</column>
 <column name="ap_rst_n">in, 1, ap_ctrl_hs, add, return value</column>
 <column name="interrupt">out, 1, ap_ctrl_hs, add, return value</column>
+<column name="n">out, 32, ap_vld, n, pointer</column>
+<column name="n_ap_vld">out, 1, ap_vld, n, pointer</column>
+<column name="p">out, 32, ap_vld, p, pointer</column>
+<column name="p_ap_vld">out, 1, ap_vld, p, pointer</column>
 </table>
 </item>
 </section>

@@ -11,6 +11,8 @@
 #include "systemc.h"
 #include "AESL_pkg.h"
 
+#include "add_mul_32s_34ns_bkb.h"
+#include "add_mul_32s_32s_3cud.h"
 #include "add_AXILiteS_s_axi.h"
 
 namespace ap_rtl {
@@ -18,7 +20,13 @@ namespace ap_rtl {
 template<unsigned int C_S_AXI_AXILITES_ADDR_WIDTH = 6,
          unsigned int C_S_AXI_AXILITES_DATA_WIDTH = 32>
 struct add : public sc_module {
-    // Port declarations 20
+    // Port declarations 24
+    sc_in_clk ap_clk;
+    sc_in< sc_logic > ap_rst_n;
+    sc_out< sc_lv<32> > n;
+    sc_out< sc_logic > n_ap_vld;
+    sc_out< sc_lv<32> > p;
+    sc_out< sc_logic > p_ap_vld;
     sc_in< sc_logic > s_axi_AXILiteS_AWVALID;
     sc_out< sc_logic > s_axi_AXILiteS_AWREADY;
     sc_in< sc_uint<C_S_AXI_AXILITES_ADDR_WIDTH> > s_axi_AXILiteS_AWADDR;
@@ -36,12 +44,8 @@ struct add : public sc_module {
     sc_out< sc_logic > s_axi_AXILiteS_BVALID;
     sc_in< sc_logic > s_axi_AXILiteS_BREADY;
     sc_out< sc_lv<2> > s_axi_AXILiteS_BRESP;
-    sc_in_clk ap_clk;
-    sc_in< sc_logic > ap_rst_n;
     sc_out< sc_logic > interrupt;
     sc_signal< sc_logic > ap_var_for_const0;
-    // Port declarations for the virtual clock. 
-    sc_in_clk ap_virtual_clock;
 
 
     // Module declarations
@@ -55,24 +59,121 @@ struct add : public sc_module {
     ofstream mHdltvinHandle;
     ofstream mHdltvoutHandle;
     add_AXILiteS_s_axi<C_S_AXI_AXILITES_ADDR_WIDTH,C_S_AXI_AXILITES_DATA_WIDTH>* add_AXILiteS_s_axi_U;
+    add_mul_32s_34ns_bkb<1,6,32,34,65>* add_mul_32s_34ns_bkb_U1;
+    add_mul_32s_34ns_bkb<1,6,32,34,65>* add_mul_32s_34ns_bkb_U2;
+    add_mul_32s_32s_3cud<1,6,32,32,32>* add_mul_32s_32s_3cud_U3;
+    sc_signal< sc_logic > ap_rst_n_inv;
     sc_signal< sc_logic > ap_start;
     sc_signal< sc_logic > ap_done;
     sc_signal< sc_logic > ap_idle;
+    sc_signal< sc_lv<8> > ap_CS_fsm;
+    sc_signal< sc_lv<1> > ap_CS_fsm_state1;
     sc_signal< sc_logic > ap_ready;
     sc_signal< sc_lv<32> > a;
     sc_signal< sc_lv<32> > b;
     sc_signal< sc_lv<32> > ap_return;
-    sc_signal< sc_logic > ap_rst_n_inv;
+    sc_signal< sc_lv<32> > b_read_reg_221;
+    sc_signal< sc_lv<32> > a_read_reg_227;
+    sc_signal< sc_lv<65> > sext1_cast_fu_72_p1;
+    sc_signal< sc_lv<1> > tmp_7_reg_239;
+    sc_signal< sc_lv<65> > grp_fu_76_p2;
+    sc_signal< sc_lv<65> > mul2_reg_247;
+    sc_signal< sc_lv<1> > ap_CS_fsm_state6;
+    sc_signal< sc_lv<30> > tmp_9_reg_252;
+    sc_signal< sc_lv<65> > grp_fu_90_p2;
+    sc_signal< sc_lv<65> > mul_reg_257;
+    sc_signal< sc_lv<29> > tmp_11_reg_262;
+    sc_signal< sc_lv<32> > tmp2_fu_206_p2;
+    sc_signal< sc_lv<32> > tmp2_reg_267;
+    sc_signal< sc_lv<1> > ap_CS_fsm_state7;
+    sc_signal< sc_lv<32> > grp_fu_96_p2;
+    sc_signal< sc_lv<32> > sext1_cast_fu_72_p0;
+    sc_signal< sc_lv<32> > grp_fu_76_p0;
+    sc_signal< sc_lv<34> > grp_fu_76_p1;
+    sc_signal< sc_lv<32> > tmp_7_fu_82_p1;
+    sc_signal< sc_lv<32> > grp_fu_90_p0;
+    sc_signal< sc_lv<34> > grp_fu_90_p1;
+    sc_signal< sc_lv<1> > ap_CS_fsm_state2;
+    sc_signal< sc_lv<65> > neg_mul3_fu_121_p2;
+    sc_signal< sc_lv<30> > tmp_8_fu_126_p4;
+    sc_signal< sc_lv<32> > tmp_fu_136_p1;
+    sc_signal< sc_lv<32> > tmp_1_fu_140_p1;
+    sc_signal< sc_lv<32> > tmp_3_fu_143_p3;
+    sc_signal< sc_lv<32> > neg_ti8_fu_150_p2;
+    sc_signal< sc_lv<65> > neg_mul_fu_163_p2;
+    sc_signal< sc_lv<29> > tmp_10_fu_168_p4;
+    sc_signal< sc_lv<32> > tmp_4_fu_178_p1;
+    sc_signal< sc_lv<32> > tmp_5_fu_182_p1;
+    sc_signal< sc_lv<32> > tmp_6_fu_185_p3;
+    sc_signal< sc_lv<32> > neg_ti_fu_192_p2;
+    sc_signal< sc_lv<32> > d_fu_156_p3;
+    sc_signal< sc_lv<1> > ap_CS_fsm_state8;
+    sc_signal< sc_lv<32> > tmp1_fu_212_p2;
+    sc_signal< sc_lv<8> > ap_NS_fsm;
     static const sc_logic ap_const_logic_1;
-    static const int C_S_AXI_DATA_WIDTH;
     static const sc_logic ap_const_logic_0;
+    static const sc_lv<8> ap_ST_fsm_state1;
+    static const sc_lv<8> ap_ST_fsm_state2;
+    static const sc_lv<8> ap_ST_fsm_state3;
+    static const sc_lv<8> ap_ST_fsm_state4;
+    static const sc_lv<8> ap_ST_fsm_state5;
+    static const sc_lv<8> ap_ST_fsm_state6;
+    static const sc_lv<8> ap_ST_fsm_state7;
+    static const sc_lv<8> ap_ST_fsm_state8;
+    static const sc_lv<32> ap_const_lv32_0;
+    static const sc_lv<1> ap_const_lv1_1;
+    static const int C_S_AXI_DATA_WIDTH;
+    static const sc_lv<32> ap_const_lv32_5;
+    static const sc_lv<32> ap_const_lv32_6;
+    static const sc_lv<65> ap_const_lv65_124924925;
+    static const sc_lv<32> ap_const_lv32_1F;
+    static const sc_lv<65> ap_const_lv65_1745D1746;
+    static const sc_lv<32> ap_const_lv32_1;
+    static const sc_lv<32> ap_const_lv32_23;
+    static const sc_lv<32> ap_const_lv32_40;
+    static const sc_lv<32> ap_const_lv32_24;
+    static const sc_lv<65> ap_const_lv65_0;
+    static const sc_lv<32> ap_const_lv32_7;
     // Thread declarations
     void thread_ap_var_for_const0();
+    void thread_ap_clk_no_reset_();
+    void thread_ap_CS_fsm_state1();
+    void thread_ap_CS_fsm_state2();
+    void thread_ap_CS_fsm_state6();
+    void thread_ap_CS_fsm_state7();
+    void thread_ap_CS_fsm_state8();
     void thread_ap_done();
     void thread_ap_idle();
     void thread_ap_ready();
     void thread_ap_return();
     void thread_ap_rst_n_inv();
+    void thread_d_fu_156_p3();
+    void thread_grp_fu_76_p0();
+    void thread_grp_fu_76_p1();
+    void thread_grp_fu_90_p0();
+    void thread_grp_fu_90_p1();
+    void thread_n();
+    void thread_n_ap_vld();
+    void thread_neg_mul3_fu_121_p2();
+    void thread_neg_mul_fu_163_p2();
+    void thread_neg_ti8_fu_150_p2();
+    void thread_neg_ti_fu_192_p2();
+    void thread_p();
+    void thread_p_ap_vld();
+    void thread_sext1_cast_fu_72_p0();
+    void thread_sext1_cast_fu_72_p1();
+    void thread_tmp1_fu_212_p2();
+    void thread_tmp2_fu_206_p2();
+    void thread_tmp_10_fu_168_p4();
+    void thread_tmp_1_fu_140_p1();
+    void thread_tmp_3_fu_143_p3();
+    void thread_tmp_4_fu_178_p1();
+    void thread_tmp_5_fu_182_p1();
+    void thread_tmp_6_fu_185_p3();
+    void thread_tmp_7_fu_82_p1();
+    void thread_tmp_8_fu_126_p4();
+    void thread_tmp_fu_136_p1();
+    void thread_ap_NS_fsm();
     void thread_hdltv_gen();
 };
 

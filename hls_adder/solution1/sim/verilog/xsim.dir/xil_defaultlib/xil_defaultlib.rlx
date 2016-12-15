@@ -1,0 +1,10 @@
+0.6
+2016.3
+Oct 10 2016
+19:19:53
+/home/raph/zed-design/hls_adder/solution1/sim/verilog/AESL_axi_slave_AXILiteS.v,1481748750,systemVerilog,,,,AESL_axi_slave_AXILiteS,/opt/Xilinx/Vivado/2016.3/bin/../data/xsim/ip/xsim_ip.ini,ieee_proposed=./ieee_proposed,,,,,,
+/home/raph/zed-design/hls_adder/solution1/sim/verilog/add.autotb.v,1481748750,systemVerilog,,,,apatb_add_top,/opt/Xilinx/Vivado/2016.3/bin/../data/xsim/ip/xsim_ip.ini,ieee_proposed=./ieee_proposed,,,,,,
+/home/raph/zed-design/hls_adder/solution1/sim/verilog/add.v,1481748737,systemVerilog,,,,add,/opt/Xilinx/Vivado/2016.3/bin/../data/xsim/ip/xsim_ip.ini,ieee_proposed=./ieee_proposed,,,,,,
+/home/raph/zed-design/hls_adder/solution1/sim/verilog/add_AXILiteS_s_axi.v,1481748738,systemVerilog,,,,add_AXILiteS_s_axi,/opt/Xilinx/Vivado/2016.3/bin/../data/xsim/ip/xsim_ip.ini,ieee_proposed=./ieee_proposed,,,,,,
+/home/raph/zed-design/hls_adder/solution1/sim/verilog/add_mul_32s_32s_3cud.v,1481748738,systemVerilog,,,,add_mul_32s_32s_3cud;add_mul_32s_32s_3cud_MulnS_0,/opt/Xilinx/Vivado/2016.3/bin/../data/xsim/ip/xsim_ip.ini,ieee_proposed=./ieee_proposed,,,,,,
+/home/raph/zed-design/hls_adder/solution1/sim/verilog/add_sdiv_32s_32s_bkb.v,1481748738,systemVerilog,,,,add_sdiv_32s_32s_bkb;add_sdiv_32s_32s_bkb_div;add_sdiv_32s_32s_bkb_div_u,/opt/Xilinx/Vivado/2016.3/bin/../data/xsim/ip/xsim_ip.ini,ieee_proposed=./ieee_proposed,,,,,,
